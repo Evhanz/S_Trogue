@@ -35,6 +35,7 @@ class CreateAnexosTable extends Migration {
 	public function down()
 	{
 		//
+        Schema::drop('anexos');
 	}
 
 }

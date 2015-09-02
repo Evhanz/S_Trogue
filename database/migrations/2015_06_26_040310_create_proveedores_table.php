@@ -43,7 +43,7 @@ class CreateProveedoresTable extends Migration {
 	public function down()
 	{
 		//
-        Schema::drop('provedores');
+        Schema::drop('proveedores');
 	}
 
 }

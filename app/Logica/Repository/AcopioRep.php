@@ -19,4 +19,10 @@ class AcopioRep {
 
     }
 
+    public function  getAcopioByProveedorAndFecha($id,$fecha){
+
+        $acopio = Acopio::where('proveedor_id','=',$id)->where('proveedor_id','=',$id);
+
+    }
+
 }

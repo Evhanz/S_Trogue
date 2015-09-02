@@ -13,6 +13,11 @@ class CreateRecursosTable extends Migration {
 	public function up()
 	{
 		//
+        Schema::create('recursos', function(Blueprint $table)
+        {
+            $table->increments('id');
+            $table->timestamps();
+        });
 	}
 
 	/**
@@ -23,6 +28,7 @@ class CreateRecursosTable extends Migration {
 	public function down()
 	{
 		//
+        Schema::drop('recursos');
 	}
 
 }

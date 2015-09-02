@@ -31,6 +31,7 @@ class CreateInsidenciasTable extends Migration {
 	public function down()
 	{
 		//
+        Schema::drop('insidencias');
 	}
 
 }

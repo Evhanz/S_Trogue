@@ -13,6 +13,11 @@ class CreateLetrasTable extends Migration {
 	public function up()
 	{
 		//
+        Schema::create('letras', function(Blueprint $table)
+        {
+            $table->increments('id');
+            $table->timestamps();
+        });
 	}
 
 	/**
@@ -23,6 +28,7 @@ class CreateLetrasTable extends Migration {
 	public function down()
 	{
 		//
+        Schema::drop('letras');
 	}
 
 }

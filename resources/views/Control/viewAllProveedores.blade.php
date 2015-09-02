@@ -3,7 +3,30 @@
 @section('content')
 
 
+    <div class="content">
+        <div class="row">
+            <div class="col-lg-12">
+                <form class="form-inline">
+                    <div class="form-group">
+                        <label for="exampleInputName2">Name</label>
+                        <input type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail2">Email</label>
+                        <input type="email" class="form-control" >
+                    </div>
+                    <div class="form-group" style="text-align: center">
+                        <button type="submit" class="btn btn-success">Buscar</button>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+
     <div class="ui grid" data-styl="block-seccion">
+
 
         <div class="sixteen wide column" style="background-color: #79A4D1;color: #ffffff">
             <h2>Módulo de Control y calidad</h2>

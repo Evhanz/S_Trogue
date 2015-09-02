@@ -13,6 +13,11 @@ class CreatePagoLetrasTable extends Migration {
 	public function up()
 	{
 		//
+        Schema::create('pago_letras', function(Blueprint $table)
+        {
+            $table->increments('id');
+            $table->timestamps();
+        });
 	}
 
 	/**
@@ -23,6 +28,7 @@ class CreatePagoLetrasTable extends Migration {
 	public function down()
 	{
 		//
+        Schema::drop('pago_letras');
 	}
 
 }

@@ -55,6 +55,8 @@ class AcopioController extends Controller{
         $acopio->proveedor_id=$data['hdId'];
 
 
+
+
         if($acopio->save()){
             return \Redirect::route('getAcopioAll')->with(array('confirm' => 'Acopio registrado'));
 

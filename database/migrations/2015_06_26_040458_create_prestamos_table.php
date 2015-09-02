@@ -13,6 +13,11 @@ class CreatePrestamosTable extends Migration {
 	public function up()
 	{
 		//
+        Schema::create('prestamos', function(Blueprint $table)
+        {
+            $table->increments('id');
+            $table->timestamps();
+        });
 	}
 
 	/**
@@ -23,6 +28,7 @@ class CreatePrestamosTable extends Migration {
 	public function down()
 	{
 		//
+        Schema::drop('prestamos');
 	}
 
 }
