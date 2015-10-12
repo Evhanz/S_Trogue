@@ -85,7 +85,7 @@ abstract class AbstractVoter implements VoterInterface
     /**
      * Return an array of supported classes. This will be called by supportsClass
      *
-     * @return array an array of supported classes, i.e. array('Acme\DemoBundle\Entities\Product')
+     * @return array an array of supported classes, i.e. array('Acme\DemoBundle\Model\Product')
      */
     abstract protected function getSupportedClasses();
 

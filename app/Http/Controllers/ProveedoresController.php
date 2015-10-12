@@ -20,12 +20,24 @@ class ProveedoresController extends Controller{
         $this->proveedorRep = $proveedorRep;
         $this->rutaRep = $rutaRep;
 
+
     }
 
     public function index(){
 
         $proveedores = $this->proveedorRep->all();
-        dd($proveedores);
+
+
+    }
+
+
+
+
+    /*return un JSON*/
+    public function getProveedorByID($id)
+    {
+        $proveedor = $this->proveedorRep->find($id);
+        return \Response::json($proveedor);
     }
 
 
@@ -50,6 +62,13 @@ class ProveedoresController extends Controller{
 
     }
 
+    public function getViewUpdateProveedor($id)
+    {
+        $proveedor = $this->proveedorRep->find($id);
+        $rutas = $this->rutaRep->all();
+        return view('Proveedores/viewUpdateProveedor',compact('rutas','proveedor'));
+    }
+
 
     public function  regProveedor(){
 
@@ -62,8 +81,27 @@ class ProveedoresController extends Controller{
             return \Redirect::route('proveedoresAll')->with(array('confirm' => 'Proveedor Registrado'));
         }
         else{
-            return \Redirect::back()->withInput()->withErrors($bandera);
+            return  redirect()->back()->withInput()->withErrors($bandera);
+            //return \Redirect::back()->withInput()->withErrors($bandera);
         }
+    }
+
+
+    public function updateDataProveedor()
+    {
+       $data = \Input::all();
+
+       $bandera = $this->proveedorRep->updateDataProveedor($data);
+
+
+       if ($bandera === 1) {
+
+         return \Redirect::route('proveedoresAll')->with(array('confirm' => 'Proveedor Registrado'));
+          
+       } else {
+            return  redirect()->back()->withInput()->withErrors($bandera);
+       }
+       
     }
 
 }

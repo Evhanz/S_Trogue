@@ -144,6 +144,11 @@ return [
 		'Trogue\Providers\ConfigServiceProvider',
 		'Trogue\Providers\EventServiceProvider',
 		'Trogue\Providers\RouteServiceProvider',
+		/*
+		*Provider HTML Illuminate HTML PARA Forms
+
+		*/
+		'Illuminate\Html\HtmlServiceProvider'
 
 	],
 
@@ -192,6 +197,10 @@ return [
 		'URL'       => 'Illuminate\Support\Facades\URL',
 		'Validator' => 'Illuminate\Support\Facades\Validator',
 		'View'      => 'Illuminate\Support\Facades\View',
+
+		/*Aliases Form & HTML*/
+		'Form'		=>	'Illuminate\Html\FormFacade',
+		'HTML'		=>	'Illuminate\Html\HtmlFacade'
 
 	],
 

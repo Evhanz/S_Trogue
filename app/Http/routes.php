@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', 'WelcomeController@index');
+Route::get('/',['as'=>'home','uses'=>'WelcomeController@index'] );
 
 Route::get('home', 'HomeController@index');
 
@@ -23,13 +23,30 @@ Route::controllers([
 
 
 
-
+/*Modulo de proveedores*/
 Route::get('proveedores', ['as' => 'proveedores']);
 Route::get('proveedores/all', ['as' => 'proveedoresAll', 'uses' => 'ProveedoresController@selectAllProveedores']);
 Route::get('proveedores/getBy/{criterio?}-{dni}', ['as' => 'proveedoresByCriterio', 'uses' => 'ProveedoresController@getProveedoresByCriterio']);
-
 Route::get('proveedores/newProveedor',['as'=>'viewNewProveedor','uses'=>'ProveedoresController@getViewNewProveedor']);
 Route::post('proveedores/regProveedor',['as'=>'regProveedor','uses'=>'ProveedoresController@regProveedor']);
+Route::get('proveedores/updateProveedor/{id}',['as'=>'updateProveedor','uses'=>'ProveedoresController@getViewUpdateProveedor']);
+Route::get('proveedores/getProveedor/{id}',['as'=>'getProveedorByID','uses' => 'ProveedoresController@getProveedorByID']);
+Route::post('proveedores/updateProveedor',['as'=>'updateDataProveedor','uses' => 'ProveedoresController@updateDataProveedor']);
+
+
+
+/*Modulo de rutas*/
+Route::get('rutas',['as'=>'rutas']);
+Route::get('rutas/all',['as'=>'rutasAll','uses'=>'RutasController@selectAllRutas']);
+Route::post('rutas/regRuta',['as'=>'regRuta','uses'=>'RutasController@regRuta']);
+
+
+/*Modulo de Anexos*/
+Route::get('anexos',['as'=>'anexos']);
+Route::get('anexos/all',['as'=>'anexosAll','uses'=>'AnexosController@selectAllRutas']);
+Route::post('anexos/regAnexo',['as'=>'regAnexo','uses'=>'AnexosController@regAnexo']);
+
+
 
 
 
@@ -43,4 +60,13 @@ Route::get('helper/getAnexoByRuta/{id}',['as'=>'get','uses'=>'HelperController@g
 Route::get('Control_Calidad/Acopio/',['as'=>'getAcopio']);
 Route::get('Control_Calidad/Acopio/all',['as'=>'getAcopioAll','uses'=>'AcopioController@index']);
 Route::get('Control_Calidad/Acopio/{anexo}',['as'=>'getAcopioByAnexo','uses'=>'AcopioController@getProveedoresByAnexo']);
+Route::get('Control_Calidad/getAcopioByProveedor/{id}',['as'=>'getAcopioByProveedor','uses'=>'AcopioController@getAcopioByProveedor']);
 Route::post('Control_Calidad/Acopio/reg',['as'=>'regAcopio','uses'=>'AcopioController@regAcopio']);
+Route::post('Control_Calidad/getAcopioByProveedorAndFechas/',['as'=>'getAcopioByProveedorAndFechas','uses' =>'AcopioController@getAcopioByProveedorAndFechas']);
+Route::post('Control_Calidad/getAcopioById/',['as'=>'getAcopioById','uses'=>'AcopioController@getAcopioById']);
+
+
+
+//modulo de insidencias
+Route::get('Control_Calidad/InsidenciaForAcopio/{$id}',['as'=>'a']);
+Route::post('Control_Calidad/RegInsidencia',['as'=>'RegInsidencia','uses'=>'InsidenciaController@RegInsidencia']);

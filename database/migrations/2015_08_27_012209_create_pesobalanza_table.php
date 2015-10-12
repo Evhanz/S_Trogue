@@ -16,6 +16,8 @@ class CreatePesobalanzaTable extends Migration {
         Schema::create('peso_balanza', function(Blueprint $table)
         {
             $table->increments('id');
+            $table->decimal('cantidad',9,2);
+            $table->date('fecha');
             $table->timestamps();
         });
 	}

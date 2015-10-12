@@ -16,6 +16,15 @@ class CreatePagoLetrasTable extends Migration {
         Schema::create('pago_letras', function(Blueprint $table)
         {
             $table->increments('id');
+
+            $table->date('fecha_pago');
+
+            $table->integer('pago_proveedor_id')->unsigned()->index();
+            $table->foreign('pago_proveedor_id')->references('id')->on('pago_proveedor');
+            $table->integer('letra_id')->unsigned()->index();
+            $table->foreign('letra_id')->references('id')->on('letras');
+
+
             $table->timestamps();
         });
 	}

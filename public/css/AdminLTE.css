@@ -2591,7 +2591,8 @@ Component: timeline
 }
 /* skin-black logo */
 .skin-black .logo {
-  background-color: #333;
+  /*se cambio el color*/
+  background-color: #00A65A;
   color: #f9f9f9;
 }
 .skin-black .logo > a {

@@ -16,6 +16,15 @@ class CreateDetalleLiquidacionesTable extends Migration {
         Schema::create('detalle_liquidaciones', function(Blueprint $table)
         {
             $table->increments('id');
+            $table->date('dia');
+            $table->decimal('cantidad',9,2);
+
+            /*relacion*/
+            $table->integer('liquidacion_id')->unsigned()->index();
+            $table->foreign('liquidacion_id')->references('id')->on('liquidaciones');
+
+
+
             $table->timestamps();
         });
 	}

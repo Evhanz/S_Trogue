@@ -63,7 +63,7 @@ class ProveedorRep {
             'name' => 'required',
             'apellidoP' => 'required|min:4',
             'apellidoM' => 'required|min:4',
-            'dni' => 'required|max:8',
+            'dni' => 'required|max:8|unique:proveedores',
             'celular' => 'min:7',
 
         ];
@@ -88,6 +88,55 @@ class ProveedorRep {
         }
 
 
+    }
+
+    public function updateDataProveedor($data){
+
+        $anexos = $data['anexos'];
+        $id = $data['id'];
+
+        $rules=[
+
+            'name' => 'required',
+            'apellidoP' => 'required|min:4',
+            'apellidoM' => 'required|min:4',
+            'dni' => 'required|max:8|unique:proveedores,dni,'.$data['id'],
+            'celular' => 'min:7',
+
+        ];
+
+        $data = array_only($data,array_keys($rules));
+        $validation = \Validator::make($data,$rules);
+
+        $isValid = $validation->passes();
+
+        if($isValid){
+
+            $proveedor = Proveedor::find($id);
+            $proveedor->name = $data['name'];
+            $proveedor->apellidoP = $data['apellidoP'];
+            $proveedor->apellidoM = $data['apellidoM'];
+            $proveedor->dni = $data['dni'];
+            $proveedor->celular = $data['celular'];
+            $proveedor->estado = true;
+            $proveedor->anexo_id = $anexos;
+            $proveedor->save();
+            return 1;
+
+
+        }else
+        {
+            return $validation->messages();
+        }
+
+
+    }
+
+
+    public function getProveedorById($id)
+    {
+        $proveedor =Proveedor::find($id);
+        return $proveedor;
     }
 
 }

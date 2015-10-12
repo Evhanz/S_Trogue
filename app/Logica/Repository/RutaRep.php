@@ -15,4 +15,36 @@ class RutaRep {
     public function all(){
         return Ruta::all();
     }
+
+    public function regRuta($data)
+    {
+
+        $rules=[
+            'descripcion' => 'required|unique:rutas',
+            'observacion' => 'required'
+        ];
+
+        $data = array_only($data,array_keys($rules));
+        $validation = \Validator::make($data,$rules);
+
+        $isValid = $validation->passes();
+
+        if($isValid){
+            $ruta = new Ruta();
+            $ruta->descripcion = $data['descripcion'];
+            $ruta->observacion = $data['observacion'];
+            $ruta->save();
+            return 1;
+
+        }else
+        {
+            return $validation->messages();
+        }
+
+
+
+
+
+
+    }
 }

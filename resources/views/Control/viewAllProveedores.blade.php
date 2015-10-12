@@ -1,166 +1,176 @@
 @extends('layout')
 
+@section('content-header')
+    
+    @if(Session::has('confirm'))
+        <div data-rol="aviso"  style="display:none" id="alert-result" class="alert alert-success alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4>Perfecto!!</h4>
+            <p><i class="fa fa-info-circle"></i>  <strong>{{ Session::get('confirm') }}</strong></p>
+        </div>
+    @endif
+    @if(Session::has('fail'))
+        <div data-rol="aviso" style="display:none" id="alert-result" class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4>Error!!</h4>
+            <p><i class="fa fa-info-circle"></i>  <strong>{{ Session::get('fail') }}</strong></p>
+        </div>
+    @endif
+
+
+    <div style="padding: 5px ;">
+        <div class="bs-callout bs-callout-info" id="callout-type-dl-truncate">
+            <h4>Módulo de Control y calidad </h4>
+        </div>
+    </div>
+@stop
+
+
 @section('content')
 
 
     <div class="content">
         <div class="row">
             <div class="col-lg-12">
-                <form class="form-inline">
-                    <div class="form-group">
-                        <label for="exampleInputName2">Name</label>
-                        <input type="text" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail2">Email</label>
-                        <input type="email" class="form-control" >
-                    </div>
-                    <div class="form-group" style="text-align: center">
-                        <button type="submit" class="btn btn-success">Buscar</button>
-                    </div>
+                <div class="box box-danger" >
+                    <div class="box-header">
+                        <!-- tools box -->
+                            <div class="pull-right box-tools">
+                                <button class="btn btn-danger btn-sm refresh-btn" data-toggle="tooltip" title="Reload"><i class="fa fa-refresh"></i></button>
+                            </div><!-- /. tools -->
+                            <i class="fa fa-cloud"></i>
 
-                </form>
-            </div>
+                            <h3 class="box-title">Lista de Todo los Proveedores</h3>
+                    </div><!-- /.box-header -->
+                    <div class="box-body no-padding">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <form class="form-inline">
+                                    <div class="form-group">
+                                        <label for="">Ruta</label><br>
+                                        <select class="form-control" name="ruta" id="selRuta">
+                                            <option value=" ">Ninguno</option>
+                                            @foreach($rutas as $ruta)
+                                            <option value="{{$ruta->id}}">{{$ruta->descripcion}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Anexo</label><br>
+                                        <select class="form-control" name="anexos" id="selAnexo">
+                                            <option value=" ">Ninguno</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Opciones</label><br>
+                                        <button class="btn btn-success" id="btnBuscar">
+                                            <i class="search icon"></i>
+                                            Buscar
+                                        </button>
+                                    </div>                   
 
-        </div>
-    </div>
-
-    <div class="ui grid" data-styl="block-seccion">
-
-
-        <div class="sixteen wide column" style="background-color: #79A4D1;color: #ffffff">
-            <h2>Módulo de Control y calidad</h2>
-        </div>
-        <div class="sixteen wide column" >
-            @if(Session::has('confirm'))
-
-                <div class="ui success message">
-                    <div class="header">Perfecto!!</div>
-                    <i class="fa fa-info-circle"></i>  <strong>{{ Session::get('confirm') }}</strong>
-                </div>
-
-            @endif
-
-            @if(Session::has('fail'))
-                    <div class="ui error message ">
-                        <div class="header">Error!!</div>
-                        <i class="fa fa-info-circle"></i>  <strong>{{ Session::get('fail') }}</strong>
-                    </div>
-            @endif
-        </div>
-
-        <div class="sixteen wide column">
-            <div class="ui form">
-                <div class="inline fields">
-                    <div class="seven wide field">
-                        <label for="">Ruta</label>
-                        <select class="ui fluid search dropdown" name="ruta" id="selRuta">
-                            <option value=" ">Ninguno</option>
-                            @foreach($rutas as $ruta)
-                                <option value="{{$ruta->id}}">{{$ruta->descripcion}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="three wide field">
-                        <label for="">Anexo</label>
-                        <select class="ui fluid search dropdown" name="anexos" id="selAnexo">
-                            <option value=" ">Ninguno</option>
-                        </select>
-                    </div>
-                    <div class="two wide field">
-                        <button class="ui teal button" id="btnBuscar">
-                            <i class="search icon"></i>
-                            Buscar
-                        </button>
-                    </div>
-
-
-                </div>
-            </div>
-        </div>
-
-
-        <div class="sixteen wide column" data-styl="table">
-
-            <table class="ui table" id="tableReq">
-                <thead >
-                <tr>
-                    <th>Id</th>
-                    <th>Nombre y Apellidos</th>
-                    <th>Anexo</th>
-                    <th>Ruta</th>
-                    <th>Opciones</th>
-                </tr>
-                </thead>
-                <tbody>
-                @foreach ($proveedores as $proveedor)
-                    <tr>
-                        <td>{{ $proveedor->id }}</td>
-                        <td>{{ $proveedor->fullname }}</td>
-                        <td>{{ $proveedor->anexo->descripcion }}</td>
-                        <td>{{ $proveedor->anexo->ruta->descripcion }}</td>
-                        <td>
-                            <div class="ui icon buttons">
-                                <button class="ui blue button" name="regAcopio"
-                                        onclick="regAcopio('{{ $proveedor->id }}','{{ $proveedor->fullname }}')">
-                                    Registrar<i class="edit icon"></i>
-                                </button>
-
-
-                            </div>
-                        </td>
-
-                    </tr>
-                @endforeach
-                </tbody>
-            </table>
-            <div  id="paginador">
-                <!--con el setPath arreglas el roblema con paginacion-->
-                {!! $proveedores->setPath('')->render() !!}
-            </div>
-
-
-
-        </div>
-
-
-
-        <div class="ui modal">
-            <div class="header">Registrar Acopio</div>
-            <div class="content">
-                <p>
-
-                <form class="ui form" id="formulario" action="{{ URL::route('regAcopio') }}"  method="post">
-                    <input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
-                    <h4 class="ui dividing header">Registrar Acopio</h4>
-                    <div class="field">
-                        <label>Proveeedor</label>
-                        <input type="hidden" name="hdId" id="hdId"/>
-                        <input type="text"  name="inProveedor" id="inProveedor" readonly/>
-                    </div>
-                    <div class="field">
-                        <label>Datos</label>
-                        <div class="two fields">
-                            <div class="field">
-                                <input type="date" name="fecha" placeholder="fecha" required="required">
-                            </div>
-                            <div class="field">
-                                <input type="number" name="Cantidad" placeholder="Cantidad" required="required">
+                                </form>
                             </div>
                         </div>
-                    </div>
+                        
+                        <hr>
 
-                    <button  class="ui teal button" tabindex="0" id="btnGuardarAcopio">Guardar</button>
-                </form>
+                        <div class="row" style="padding: 15px;">
+                            <div class="table-responsive">
+                                <table class="table table-hover" id="tableReq">
+                                    <thead >
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>Nombre y Apellidos</th>
+                                            <th>Anexo</th>
+                                            <th>Ruta</th>
+                                            <th colspan="2">Opciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($proveedores as $proveedor)
+                                            <tr>
+                                                <td>{{ $proveedor->id }}</td>
+                                                <td>{{ $proveedor->fullname }}</td>
+                                                <td>{{ $proveedor->anexo->descripcion }}</td>
+                                                <td>{{ $proveedor->anexo->ruta->descripcion }}</td>
+                                                <td>
+                                                    <div class="ui icon buttons">
+                                                        <button class="btn btn-success" name="regAcopio"
+                                                                onclick="regAcopio('{{ $proveedor->id }}','{{ $proveedor->fullname }}')">
+                                                            Registrar<i class="edit icon"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <a href="{{ URL::route('getAcopioByProveedor',$proveedor->id)}}" class="btn btn-info">Ver Acopio</a>
+                                                </td>
 
-
-                </p>
-
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div><!--/.table-responsive -->
+                        </div><!-- /.row - inside box -->
+                    </div><!-- /.box-body -->
+                    <div class="box-footer">
+                        <div  id="paginador">
+                            {!! $proveedores->setPath('')->render() !!}
+                        </div>
+                    </div><!-- /.box-footer -->
+                </div><!-- /.box -->
+                
             </div>
+
         </div>
-
-
     </div>
+
+    
+    
+    
+    <div class="modal fade" id="newAcopio">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h2 class="modal-title">Registrar Acopio</h2>
+          </div>
+          <div class="modal-body">
+            <p>
+                <form id="formRegModal" action="{{ URL::route('regAcopio') }}"  method="post">
+                    
+                    <fieldset>
+                        <legend>Formulario</legend>
+                        <input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
+                        <div class="field">
+                            <label>Proveeedor</label>
+                            <input type="hidden" name="hdId" id="hdId"/>
+                            <input class="form-control" type="text"  name="inProveedor" id="inProveedor" readonly/>
+                        </div>
+                        <div class="form-inline">
+                            <div class="form-group">
+                                <label>Datos</label>
+                                <input class="form-control" type="date" name="fecha" placeholder="fecha" required="required">
+                                
+                            </div>
+                            <div class="form-group">
+                                <label for="">Cantidad</label>
+                                <input class="form-control" type="number" name="Cantidad" placeholder="Cantidad" required="required">
+                            </div>
+                        </div>
+                        
+                    </fieldset>
+
+                   
+                    <hr>
+                    <button  class="btn btn-success" tabindex="0" id="btnGuardarAcopio">Guardar</button>
+                </form>
+            </p>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
 
 
     <script>
@@ -214,12 +224,18 @@
         });
         */
 
+        $( "#formRegModal" ).submit(function( event ) {
+          $('#btnGuardarAcopio').attr("disabled", true);
+        });
+
+        
+
         function regAcopio(id,name){
            $('#hdId ').val(id);
 
            $('#inProveedor').val(name);
 
-            $('.ui.modal').modal('show');
+            $('#newAcopio').modal('show');
 
         }
 

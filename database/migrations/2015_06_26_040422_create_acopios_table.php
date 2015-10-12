@@ -17,7 +17,8 @@ class CreateAcopiosTable extends Migration {
 
             $table->increments('id');
             $table->date('feha');
-            $table->double('cantidad');
+            $table->decimal('cantidad');
+            $table->decimal('cantidad_total',9,2);
             //relaciones
             $table->integer('proveedor_id')->unsigned()->index();
             $table->foreign('proveedor_id')->references('id')->on('proveedores');

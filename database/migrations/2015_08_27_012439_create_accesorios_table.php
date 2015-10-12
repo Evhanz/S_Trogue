@@ -16,6 +16,14 @@ class CreateAccesoriosTable extends Migration {
         Schema::create('accesorios', function(Blueprint $table)
         {
             $table->increments('id');
+
+            $table->string('serie');
+            $table->boolean('estado');
+            $table->string('tipo');
+
+            $table->integer('proveedor_id')->unsigned()->index();
+            $table->foreign('proveedor_id')->references('id')->on('proveedores');
+
             $table->timestamps();
         });
 	}

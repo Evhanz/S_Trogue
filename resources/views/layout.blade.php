@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Symi SRL</title>
+    <title>el Trogue</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- bootstrap 3.0.2 -->
     <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
@@ -26,9 +26,9 @@
 <body class="skin-black">
 <!-- header logo: style can be found in header.less -->
 <header class="header">
-    <a href="../../index.html" class="logo">
+    <a href="{{ URL::route('home')}}" class="logo">
         <!-- Add the class icon to your logo image or logo icon to add the margining -->
-        SYMI SRL
+        El Trogue
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top" role="navigation">
@@ -70,7 +70,7 @@
                                             <img src="{{ asset('img/avatar2.png') }}" class="img-circle" alt="user image"/>
                                         </div>
                                         <h4>
-                                            AdminLTE Design Team
+                                            El Trogue Design Team
                                             <small><i class="fa fa-clock-o"></i> 2 hours</small>
                                         </h4>
                                         <p>Why not buy a new awesome theme?</p>
@@ -233,14 +233,14 @@
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="glyphicon glyphicon-user"></i>
-                        <span>Jane Doe <i class="caret"></i></span>
+                        <span>Evhanz <i class="caret"></i></span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header bg-light-blue">
                             <img src="{{ asset('img/avatar3.png') }}" class="img-circle" alt="User Image" />
                             <p>
-                                Jane Doe - Web Developer
+                                Evhanz - Web Developer
                                 <small>Member since Nov. 2012</small>
                             </p>
                         </li>
@@ -282,7 +282,7 @@
                     <img src="{{ asset('img/avatar3.png')}}" class="img-circle" alt="User Image" />
                 </div>
                 <div class="pull-left info">
-                    <p>Hello, Jane</p>
+                    <p>Hello, Evhanz</p>
 
                     <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                 </div>
@@ -300,7 +300,7 @@
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu">
                 <li>
-                    <a href="#">
+                    <a href="{{ URL::route('home')}}">
                         <i class="fa fa-dashboard"></i> <span>Inicio</span>
                     </a>
                 </li>
@@ -314,8 +314,8 @@
                     <ul class="treeview-menu">
                         <li><a class="item sub" id="linkModProductos" href="{{ URL::route('proveedoresAll')}}">
                                     <i class="fa fa-angle-double-right"></i> Proveedores</a></li>
-                        <li><a href="../charts/flot.html"><i class="fa fa-angle-double-right"></i> Flot</a></li>
-                        <li><a href="../charts/inline.html"><i class="fa fa-angle-double-right"></i> Inline charts</a></li>
+                        <li><a href="{{ URL::route('rutasAll')}}"><i class="fa fa-angle-double-right"></i>Rutas</a></li>
+                        <li><a href="{{ URL::route('anexosAll')}}"><i class="fa fa-angle-double-right"></i> Anexos</a></li>
                     </ul>
                 </li>
                 <li class="treeview">
@@ -332,54 +332,7 @@
                         <li><a href="../UI/timeline.html"><i class="fa fa-angle-double-right"></i> Timeline</a></li>
                     </ul>
                 </li>
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-edit"></i> <span>Forms</span>
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="../forms/general.html"><i class="fa fa-angle-double-right"></i> General Elements</a></li>
-                        <li><a href="../forms/advanced.html"><i class="fa fa-angle-double-right"></i> Advanced Elements</a></li>
-                        <li><a href="../forms/editors.html"><i class="fa fa-angle-double-right"></i> Editors</a></li>
-                    </ul>
-                </li>
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-table"></i> <span>Tables</span>
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="../tables/simple.html"><i class="fa fa-angle-double-right"></i> Simple tables</a></li>
-                        <li><a href="../tables/data.html"><i class="fa fa-angle-double-right"></i> Data tables</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="../calendar.html">
-                        <i class="fa fa-calendar"></i> <span>Calendar</span>
-                        <small class="badge pull-right bg-red">3</small>
-                    </a>
-                </li>
-                <li>
-                    <a href="../mailbox.html">
-                        <i class="fa fa-envelope"></i> <span>Mailbox</span>
-                        <small class="badge pull-right bg-yellow">12</small>
-                    </a>
-                </li>
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-folder"></i> <span>Examples</span>
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="invoice.html"><i class="fa fa-angle-double-right"></i> Invoice</a></li>
-                        <li><a href="login.html"><i class="fa fa-angle-double-right"></i> Login</a></li>
-                        <li><a href="register.html"><i class="fa fa-angle-double-right"></i> Register</a></li>
-                        <li><a href="lockscreen.html"><i class="fa fa-angle-double-right"></i> Lockscreen</a></li>
-                        <li><a href="404.html"><i class="fa fa-angle-double-right"></i> 404 Error</a></li>
-                        <li><a href="500.html"><i class="fa fa-angle-double-right"></i> 500 Error</a></li>
-                        <li class=""><a href="blank.html"><i class="fa fa-angle-double-right"></i> Blank Page</a></li>
-                    </ul>
-                </li>
+
             </ul>
         </section>
         <!-- /.sidebar -->
@@ -424,3 +377,129 @@
 
 </body>
 </html>
+
+<style>
+    #alert-result{
+        position: absolute;
+        right: 25px;
+        top: 50px;
+        width: 300px;
+        z-index: 5;
+    }
+
+    .bs-callout {
+        background-color: white;
+        border-width: 1px 1px 1px 5px;
+        border-style: solid;
+        border-color: #EEE;
+        -moz-border-top-colors: none;
+        -moz-border-right-colors: none;
+        -moz-border-bottom-colors: none;
+        -moz-border-left-colors: none;
+        border-image: none;
+        border-radius: 3px;
+        padding: 20px;
+        
+    }
+    .bs-callout-info {
+        border-left-color: #1B809E;
+    }
+
+    .bs-callout-info h4 {
+        color: #1B809E;
+    }
+    .bs-callout h4 {
+        margin-top: 0px;
+        margin-bottom: 5px;
+    }
+
+    /*Pagination*/
+    
+    #pagination > ul{
+
+        display: inline-block;
+        padding-left: 0px;
+        margin: 20px 0px;
+        border-radius: 4px;
+        
+    }
+
+    #pagination >ul >li{
+        display: inline;
+
+    }
+
+    #pagination > ul > li:first-child > a, .pagination > li:first-child > span {
+    margin-left: 0px;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    }
+    #pagination > ul > li > a, 
+    #pagination > ul > li > span {
+        cursor: pointer;
+        position: relative;
+        float: left;
+        padding: 6px 12px;
+        margin-left: -1px;
+        line-height: 1.42857;
+        color: #337AB7;
+        text-decoration: none;
+        background-color: #FFF;
+        border: 1px solid #DDD;
+    }
+
+    #pagination > ul > .disabled > a,
+    #pagination > ul > .disabled > a:focus, 
+    #pagination > ul > .disabled > a:hover, 
+    #pagination > ul > .disabled > span, 
+    #pagination > ul > .disabled > span:focus, 
+    #pagination > ul > .disabled > span:hover {
+        color: #777;
+        cursor: not-allowed;
+        background-color: #FFF;
+        border-color: #DDD;
+    }
+
+    #pagination > ul > .active > a,
+    #pagination > ul> .active > a:focus,
+    #pagination > ul > .active > a:hover,
+    #pagination > ul > .active > span,
+    #pagination > ul > .active > span:focus,
+    #pagination > ul > .active > span:hover {
+        z-index: 2;
+        color: #FFF;
+        cursor: default;
+        background-color: #337AB7;
+        border-color: #337AB7;
+    }
+
+
+
+
+    /*End - Pagination*/
+
+    /*Modificacion del framework css*/
+
+    /*----- Modal-----*/
+    .modal-header {
+
+        background-color: #39BD9E;
+        color: white;
+    }
+
+    /*------ End ----*/
+
+
+
+</style>
+<script>
+
+    
+
+
+    
+    $("div[data-rol='aviso']").show(2000);
+    //$("div[data-rol='aviso']").hide();
+
+
+</script>
