@@ -11,7 +11,7 @@ use trogue\Repository\AcopioRep;
 use trogue\Repository\AnexoRep;
 use trogue\Repository\ProveedorRep;
 use trogue\Repository\RutaRep;
-use trogue\Entities\Acopio;
+
 
 
 
@@ -115,6 +115,21 @@ class AcopioController extends Controller{
         return \Response::json($acopio);
 
     }
+
+
+
+    public function getPromedioByProveedorID($id)
+    {
+
+
+    }
+
+
+
+
+    /*solo prueba*/
+
+
 
 
 

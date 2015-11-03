@@ -325,11 +325,10 @@
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a class="item sub" href="{{ URL::route('getAcopioAll')}}"><i class="fa fa-angle-double-right" ></i> Registro de  <br>Acopio</a>></li>
-                        <li><a href="../UI/icons.html"><i class="fa fa-angle-double-right"></i> Icons</a></li>
-                        <li><a href="../UI/buttons.html"><i class="fa fa-angle-double-right"></i> Buttons</a></li>
-                        <li><a href="../UI/sliders.html"><i class="fa fa-angle-double-right"></i> Sliders</a></li>
-                        <li><a href="../UI/timeline.html"><i class="fa fa-angle-double-right"></i> Timeline</a></li>
+                        <li><a class="item sub" href="{{ URL::route('getAcopioAll')}}"><i class="fa fa-angle-double-right" ></i> Registro de  <br>Acopio</a></li>
+                        <li><a href="{{ URL::route('getAllLiquidacion')}}"><i class="fa fa-angle-double-right"></i> Liquidacion</a></li>
+                        <li><a href=""><i class="fa fa-angle-double-right"></i> Prestamos</a></li>
+                        <li><a href=""><i class="fa fa-angle-double-right"></i> Pagos</a></li>
                     </ul>
                 </li>
 
@@ -488,6 +487,59 @@
     }
 
     /*------ End ----*/
+
+
+
+    .pagination {
+        display: inline-block;
+        padding-left: 0;
+        margin: 20px 0;
+        border-radius: 4px;
+    }
+    .pagination>li {
+        display: inline;
+    }
+
+    .pagination>li:first-child>a, .pagination>li:first-child>span {
+        margin-left: 0;
+        border-bottom-left-radius: 4px;
+        border-top-left-radius: 4px;
+    }
+    .pagination>.disabled>span, .pagination>.disabled>span:hover, .pagination>.disabled>span:focus, .pagination>.disabled>a, .pagination>.disabled>a:hover, .pagination>.disabled>a:focus {
+        color: #999;
+        cursor: not-allowed;
+        background-color: #fff;
+        border-color: #ddd;
+    }
+    .pagination>li>a, .pagination>li>span {
+        position: relative;
+        float: left;
+        padding: 6px 12px;
+        margin-left: -1px;
+        line-height: 1.428571429;
+        text-decoration: none;
+        background-color: #fff;
+        border: 1px solid #ddd;
+    }
+
+    .pagination>.active>a, .pagination>.active>span, .pagination>.active>a:hover, .pagination>.active>span:hover,
+    .pagination>.active>a:focus, .pagination>.active>span:focus {
+        z-index: 2;
+        color: #fff;
+        cursor: default;
+        background-color: #428bca;
+        border-color: #428bca;
+    }
+    .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0 0 0 0);
+        border: 0;
+    }
 
 
 

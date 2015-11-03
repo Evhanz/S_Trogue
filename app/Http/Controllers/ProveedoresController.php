@@ -9,16 +9,19 @@
 namespace Trogue\Http\Controllers;
 use trogue\Repository\ProveedorRep;
 use trogue\Repository\RutaRep;
+use trogue\Repository\AcopioRep;
 
 
 class ProveedoresController extends Controller{
     protected $proveedorRep;
     protected $rutaRep;
+    protected $acopioRep;
 
-    public function __construct(ProveedorRep $proveedorRep,RutaRep $rutaRep){
+    public function __construct(ProveedorRep $proveedorRep,RutaRep $rutaRep,AcopioRep $acopioRep){
 
         $this->proveedorRep = $proveedorRep;
         $this->rutaRep = $rutaRep;
+        $this->acopioRep = $acopioRep;
 
 
     }
@@ -29,7 +32,6 @@ class ProveedoresController extends Controller{
 
 
     }
-
 
 
 
@@ -103,5 +105,37 @@ class ProveedoresController extends Controller{
        }
        
     }
+
+
+
+
+
+
+    /*------Metodo: getProveedorByDNIService
+     * se traera con este metodo
+    *a un proveedor con su promedio
+     * quincenal para lograr aplicar logica
+     * de negocio en el frontend, teniendo en
+     * cuenta que si se necesita otro metodo mas
+     * limpio agregar otro metodo
+    */
+
+    public function getProveedorByDNIService()
+    {
+        $data = \Input::all();
+
+        $proveedor = $this->proveedorRep->getProveedorByDNI($data['dni']);
+
+        if(isset($proveedor->id)){
+            $proveedor->promedioQuincenal = $this->acopioRep->getPromedioAcopioByIdProveedor($proveedor->id);
+        }
+
+
+        return \Response::json($proveedor);
+    }
+
+
+
+
 
 }

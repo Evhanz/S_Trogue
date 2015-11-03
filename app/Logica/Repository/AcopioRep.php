@@ -37,9 +37,6 @@ class AcopioRep {
 
             return 0;
     	}
-
-        
-
     }
 
 
@@ -65,6 +62,29 @@ class AcopioRep {
         }else{
             return 0;
         }
+
+    }
+
+
+    /*
+     * El acopio es para las ultimos 15 acopio para
+     * sacar el valor promedial para el manejo de la
+     * logica de negocio
+     *
+     * */
+
+    public function getPromedioAcopioByIdProveedor($id)
+    {
+        $acopios = Acopio::where('proveedor_id','=',$id) ->orderBy('feha', 'desc')->take(15)->get();
+        $contador = 0;
+        $suma = 0;
+        foreach($acopios as $acopio){
+            $contador++;
+            $suma += $acopio->cantidad;
+        }
+        $promedio = $suma/$contador;
+
+        return $promedio;
 
     }
 

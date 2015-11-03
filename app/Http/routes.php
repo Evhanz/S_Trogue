@@ -32,6 +32,8 @@ Route::post('proveedores/regProveedor',['as'=>'regProveedor','uses'=>'Proveedore
 Route::get('proveedores/updateProveedor/{id}',['as'=>'updateProveedor','uses'=>'ProveedoresController@getViewUpdateProveedor']);
 Route::get('proveedores/getProveedor/{id}',['as'=>'getProveedorByID','uses' => 'ProveedoresController@getProveedorByID']);
 Route::post('proveedores/updateProveedor',['as'=>'updateDataProveedor','uses' => 'ProveedoresController@updateDataProveedor']);
+/*Service proveedor*/
+Route::post('proveedores/getProveedorByDNI',['as'=>'getProveedorByDNIService','uses'=>'ProveedoresController@getProveedorByDNIService']);
 
 
 
@@ -66,7 +68,27 @@ Route::post('Control_Calidad/getAcopioByProveedorAndFechas/',['as'=>'getAcopioBy
 Route::post('Control_Calidad/getAcopioById/',['as'=>'getAcopioById','uses'=>'AcopioController@getAcopioById']);
 
 
+Route::get('acopio/prueba',['as'=>'prueba','uses'=>'AcopioController@prueba']);
+
+
 
 //modulo de insidencias
 Route::get('Control_Calidad/InsidenciaForAcopio/{$id}',['as'=>'a']);
 Route::post('Control_Calidad/RegInsidencia',['as'=>'RegInsidencia','uses'=>'InsidenciaController@RegInsidencia']);
+
+
+//modulo de liquidacion
+Route::get('liquidacion',['as'=>'modLiquidacion']);
+Route::get('liquidacion/getAllLiquidacion',['as'=>'getAllLiquidacion','uses'=>'LiquidacionController@getAllLiquidacion']);
+Route::post('liquidacion/getAllLiquidacionByParameters',['as'=>'getAllLiquidacionByParameters','uses'=>'LiquidacionController@getAllLiquidacionByParameters']);
+Route::get('liquidacion/viewNewLiquidacion',['as'=>'viewNewLiquidacion','uses'=>'LiquidacionController@viewNewLiquidacion']);
+Route::post('liquidacion/regLiquidacion',['as'=>'regLiquidacion','uses'=>'LiquidacionController@regLiquidacion']);
+
+
+//modulo de prestamos
+Route::get('prestamos',['as'=>'modPrestamos']);
+Route::get('prestamos/getProveedoresForPrestamos',['as'=>'getProveedoresForPrestamos','uses'=>'PrestamosController@getProveedoresForPrestamos']);
+Route::get('prestamos/getPrestamoByProveedor/{id}',['as'=>'getPrestamoByProveedor','uses'=>'PrestamosController@getPrestamoByProveedor']);
+Route::get('prestamos/getViewNewPrestamo',['as'=>'getViewNewPrestamo','uses'=>'PrestamosController@getViewNewPrestamo']);
+
+//modulo de pagos

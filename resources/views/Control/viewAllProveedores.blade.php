@@ -96,7 +96,7 @@
                                                 <td>{{ $proveedor->anexo->ruta->descripcion }}</td>
                                                 <td>
                                                     <div class="ui icon buttons">
-                                                        <button class="btn btn-success" name="regAcopio"
+                                                        <button class="btn btn-success" name="regAcopio{{ $proveedor->id }}"
                                                                 onclick="regAcopio('{{ $proveedor->id }}','{{ $proveedor->fullname }}')">
                                                             Registrar<i class="edit icon"></i>
                                                         </button>
@@ -155,7 +155,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="">Cantidad</label>
-                                <input class="form-control" type="number" name="Cantidad" placeholder="Cantidad" required="required">
+                                <input min="0" step="any" class="form-control" type="number" name="Cantidad" placeholder="Cantidad" required="required">
                             </div>
                         </div>
                         

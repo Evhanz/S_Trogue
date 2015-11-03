@@ -50,7 +50,7 @@
                                     <h2>Detalle de Acopio</h2>
                                 </div>
                             </div>
-                            <div class="row">
+                            <div class="row hidden-print">
                                 <form action="{{ URL::route('getAcopioByProveedorAndFechas') }}" method="post" >
                                     <input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
                                     <input type="hidden" name="id" value="{{ $proveedor->id}}" />
@@ -80,9 +80,10 @@
                                         <thead >
                                         <tr>
                                             <th>Id</th>
-                                            <th>Cantidad</th>
+                                            <th>Cantidad Registrada</th>
+                                            <th>Cantidad Total</th>
                                             <th>Fecha</th>
-                                            <th colspan="2">Opciones</th>
+                                            <th class="hidden-print" colspan="2">Opciones</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -90,9 +91,10 @@
                                             <tr>
                                                 <td data-toggle="collapse" data-target="#detalleAcopio{{ $acopio->id}}" class="accordion-toggle">{{ $acopio->id }}</td>
                                                 <td>{{ $acopio->cantidad }}</td>
+                                                <td>{{ $acopio->cantidad_total }}</td>
                                                 <td>{{ $acopio->feha }}</td>
                                                 <td>
-                                                    <button ng-click="addInsidencia({{$acopio->id}})" class="btn btn-info">Agergar Insidencia</button>
+                                                    <button ng-click="addInsidencia({{$acopio->id}})" class="btn btn-info hidden-print">Agergar Insidencia</button>
                                                 </td>
                                             </tr>
 
@@ -125,6 +127,11 @@
                                                     </table>
                                                 </td>
                                             </tr>
+                                            @else
+                                            <tr class="accordian-body collapse" id="detalleAcopio{{ $acopio->id}}">
+                                                <td>No hay datos</td>
+                                            </tr>
+
                                             @endif
                                         @endforeach
                                         </tbody>
@@ -153,7 +160,7 @@
                     </div>
                     <div class="modal-body">
                         <p>
-                        <form method="post" id="formInsidencia" action="{{ URL::route('RegInsidencia') }}" >
+                        <form name="formAddInsidencia" method="post" id="formInsidencia" action="{{ URL::route('RegInsidencia') }}" >
 
                             <fieldset>
                                 <legend>Formulario</legend>
@@ -174,7 +181,8 @@
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <label for="">Cantidad</label>
-                                        <input class="form-control" ng-model="insidencia.cantidad" type="number" name="CantidadInsidencia" placeholder="Cantidad" required="required">
+                                        <input step="any" class="form-control" ng-model="insidencia.cantidad" type="number" name="CantidadInsidencia"
+                                              min ="0" placeholder="Cantidad" required="required">
                                     </div>
                                     <div class="col-lg-6">
                                         <label for="">Tipo</label>
@@ -196,7 +204,7 @@
 
 
                             <hr>
-                            <a ng-click="enviarInsidencia()" class="btn btn-success" tabindex="0" id="btnGuardarAcopio">Guardar</a>
+                            <a ng-disabled='!formAddInsidencia.$valid' ng-click="enviarInsidencia()" class="btn btn-success" tabindex="0" id="btnGuardarAcopio">Guardar</a>
                         </form>
                         </p>
                     </div>
@@ -283,6 +291,7 @@
             function validar(){
 
                 var bandera = 0;
+
 
                 if( $scope.insidencia.tipo == "descuento" && $scope.insidencia.cantidad > $scope.acopio.cantidad_total ){
 

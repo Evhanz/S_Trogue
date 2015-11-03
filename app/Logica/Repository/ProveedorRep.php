@@ -15,6 +15,14 @@ class ProveedorRep {
         return Proveedor::find($id);
     }
 
+    public function getProveedorByDNI($dni){
+
+       $proveedor = Proveedor::where('dni','like',$dni)->first();
+
+        return $proveedor;
+        
+    }
+
     public function all(){
         return Proveedor::paginate(3);
     }
