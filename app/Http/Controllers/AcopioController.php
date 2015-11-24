@@ -100,6 +100,29 @@ class AcopioController extends Controller{
 
     }
 
+    public function getSumaAcopioByProveedorAndFechas(){
+
+        $data = \Input::all();
+        $id = $data['id'];
+        $fecha_inicio = $data['fecha_inicio'];
+        $fecha_fin=$data['fecha_fin'];
+
+        $acopios = $this->acopioRep->getAcopioByProveedorAndFechas($id,$fecha_inicio, $fecha_fin);
+
+        $suma = 0 ;
+
+        if(count($acopios)>0){
+            foreach($acopios as $item){
+
+                $suma += $item->cantidad_total;
+            }
+        }
+
+
+        return \Response::json($suma);
+    }
+
+
     public function getAcopioById()
     {
         $data = \Input::all();
@@ -128,6 +151,18 @@ class AcopioController extends Controller{
 
 
     /*solo prueba*/
+
+
+
+    /*---------------------------------------*/
+    /*area de servicios*/
+
+    public function getAcopioByDay()
+    {   $hoy = date("Y-m-d");
+        $acopios = $this->acopioRep->getAcopioByDay($hoy);
+
+        return \Response::json($acopios);
+    }
 
 
 

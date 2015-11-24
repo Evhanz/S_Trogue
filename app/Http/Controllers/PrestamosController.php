@@ -27,6 +27,13 @@ class PrestamosController extends Controller{
         $this->recursoRep = $recursoRep;
     }
 
+    public function getAllPrestamos()
+    {
+        $prestamos = $this->prestamoRep->all();
+        return view('Servicio/viewAllPrestamos',compact('prestamos'));
+
+    }
+
     public function getProveedoresForPrestamos(){
 
         $proveedores = $this->proveedorRep->all();
@@ -41,6 +48,24 @@ class PrestamosController extends Controller{
         $recursos = $this->recursoRep->all();
 
         return view('Servicio/viewNewPrestamo',compact('recursos'));
+    }
+
+    public function regPrestamo()
+    {
+        $data  = \Input::all();
+        
+        $bandera =$this->prestamoRep->regPrestamo($data);
+
+        if($bandera === 1){
+
+            $mensaje = 'Registrado';
+
+        }else
+            $mensaje = $bandera;
+
+        return \Response::json($mensaje);
+
+
     }
 
 

@@ -137,7 +137,7 @@ return array_map('realpath', array(
     $basePath.'/vendor/laravel/framework/src/Illuminate/Routing/Matching/SchemeValidator.php',
     $basePath.'/vendor/laravel/framework/src/Illuminate/Routing/Matching/UriValidator.php',
     $basePath.'/vendor/laravel/framework/src/Illuminate/Events/Dispatcher.php',
-    $basePath.'/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Entities.php',
+    $basePath.'/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php',
     $basePath.'/vendor/laravel/framework/src/Illuminate/Database/DatabaseManager.php',
     $basePath.'/vendor/laravel/framework/src/Illuminate/Database/ConnectionResolverInterface.php',
     $basePath.'/vendor/laravel/framework/src/Illuminate/Database/Connectors/ConnectionFactory.php',

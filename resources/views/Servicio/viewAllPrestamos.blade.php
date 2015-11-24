@@ -70,7 +70,7 @@
                                             <i class="fa fa-search"></i>
                                             Buscar
                                         </button>
-                                        <a  class="btn btn-success" id="btnNuevo">
+                                        <a href="{{URL::route('getViewNewPrestamo') }}" class="btn btn-success" id="btnNuevo">
                                             <i class="fa fa-search"></i>
                                             Nuevo Prestamo
                                         </a>

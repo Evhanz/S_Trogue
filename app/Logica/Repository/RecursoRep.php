@@ -20,4 +20,13 @@ class RecursoRep {
         return $recursos;
     }
 
+
+    public function regRecurso($data)
+    {
+        $recurso = new Recurso();
+        $recurso->descripcion = $data['descripcion'];
+        $recurso->save();
+
+    }
+
 }

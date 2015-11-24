@@ -11,7 +11,6 @@
 
 @section('content')
 
-
     <div class="content">
         <div class="row"><!--Mesaje de errores-->
             @if(isset($errors))

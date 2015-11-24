@@ -15,6 +15,7 @@ class ProveedorTest extends TestCase {
      *
      * @return void
      */
+
     public function testBasicExample()
     {
         $anexo = new Anexo();
@@ -27,7 +28,7 @@ class ProveedorTest extends TestCase {
 
     public function testVista()
     {
-        $this->call('get', 'Control_Calidad/RegInsidencia');
+        $this->call('GET', 'Control_Calidad/RegInsidencia');
 
         $this->assertViewHas('Control/viewAllProveedores');
     }

@@ -183,8 +183,6 @@
 
 
 
-
-
     <script src="{{ asset('js/plugins/angular/angular.min.js')}}"></script>
     <script>
 

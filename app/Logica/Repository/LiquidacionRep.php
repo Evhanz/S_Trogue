@@ -26,7 +26,7 @@ class LiquidacionRep {
 
     public function getLiquidacionByNumero($numero)
     {
-        $liquidacion = Liquidacion::where('numero','like',$numero)->paginate(10);
+        $liquidacion = Liquidacion::where('numero','like',$numero)->first();
         return $liquidacion;
     }
 
@@ -100,6 +100,8 @@ class LiquidacionRep {
         return $liquidaciones;
 
     }
+
+
 
 
 }

@@ -7,12 +7,19 @@
  */
 
 namespace trogue\Repository;
+use trogue\Entities\Prestamo;
 use trogue\Entities\Proveedor;
+use trogue\Entities\VentaTerceros;
 
 class ProveedorRep {
 
     public function find($id){
         return Proveedor::find($id);
+    }
+
+    public function allFunction()
+    {
+        return Proveedor::all();
     }
 
     public function getProveedorByDNI($dni){
@@ -146,5 +153,38 @@ class ProveedorRep {
         $proveedor =Proveedor::find($id);
         return $proveedor;
     }
+
+    public function getProveedorByPrestamos($id){
+
+        $proveedor = Proveedor::find($id);
+
+        //luego traemos a todos los prestamos y venta a terceros del proveedor
+
+        $prestamos = Prestamo::where('proveedor_id','like',$id)
+                        ->where('estado','like','deuda')
+                        ->with(array('letras'=>function($query){
+                            $query->where('estado','like',0);
+                        },'recurso'))
+                        ->get();
+
+        $venta_terceros = VentaTerceros::where('proveedor_id','like',$id)
+                            ->where('estado','like',0)
+                            ->with('origen')
+                            ->get();
+
+
+        $proveedor->descuentos = $prestamos;
+        $proveedor->venta_terceros = $venta_terceros;
+
+
+
+
+
+        return $proveedor;
+
+    }
+
+
+
 
 }

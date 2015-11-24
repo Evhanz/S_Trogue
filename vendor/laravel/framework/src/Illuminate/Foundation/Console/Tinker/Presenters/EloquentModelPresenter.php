@@ -19,7 +19,7 @@ class EloquentModelPresenter extends ObjectPresenter {
 	}
 
 	/**
-	 * Get an array of Entities object properties.
+	 * Get an array of Model object properties.
 	 *
 	 * @param  object  $value
 	 * @param  \ReflectionClass  $class

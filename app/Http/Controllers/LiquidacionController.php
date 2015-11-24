@@ -12,13 +12,14 @@ use trogue\Repository\LiquidacionRep;
 use trogue\Repository\RutaRep;
 
 
-class LiquidacionController extends Controller {
+class LiquidacionController extends Controller
+{
 
 
     protected $rutaRep;
     protected $liquidacionRep;
 
-    public function __construct(RutaRep $rutaRep,LiquidacionRep $liquidacionRep)
+    public function __construct(RutaRep $rutaRep, LiquidacionRep $liquidacionRep)
     {
         $this->rutaRep = $rutaRep;
         $this->liquidacionRep = $liquidacionRep;
@@ -30,12 +31,13 @@ class LiquidacionController extends Controller {
         dd('hola');
     }
 
-    public  function viewNewLiquidacion(){
+    public function viewNewLiquidacion()
+    {
 
         $rutas = $this->rutaRep->all();
 
-        return view('Servicio/viewNewLiquidacion',compact('rutas'));
-        
+        return view('Servicio/viewNewLiquidacion', compact('rutas'));
+
     }
 
 
@@ -43,27 +45,28 @@ class LiquidacionController extends Controller {
     {
         $data = \Input::all();
 
-        try{
+        try {
 
             $this->liquidacionRep->regLiquidacion($data);
 
-            $mensaje = ['message'=>'correcto'];
+            $mensaje = ['message' => 'correcto'];
 
             return \Response::json($mensaje);
 
-        }catch (\Exception $e){
+        } catch (\Exception $e) {
 
-            return response()->json([ 'error'=> 500, 'message'=> 'Error'.$e ], 500);
+            return response()->json(['error' => 500, 'message' => 'Error' . $e], 500);
 
         }
 
     }
 
 
-    public function getAllLiquidacion(){
+    public function getAllLiquidacion()
+    {
 
         $liquidaciones = $this->liquidacionRep->getAllLiquidacion();
-        return view('Servicio/viewLiquidacion',compact('liquidaciones'));
+        return view('Servicio/viewLiquidacion', compact('liquidaciones'));
 
     }
 
@@ -73,23 +76,31 @@ class LiquidacionController extends Controller {
         $data = \Input::all();
 
 
-        if(strlen($data['numero'])>0 ){
+        if (strlen($data['numero']) > 0) {
 
             $liquidaciones = $this->liquidacionRep->getLiquidacionByNumero($data['numero']);
 
-        }
-
-        else if(strlen($data['numero'])==0 && strlen($data['fecha_inicio'])==0 && strlen($data['fecha_fin'])==0){
+        } else if (strlen($data['numero']) == 0 && strlen($data['fecha_inicio']) == 0 && strlen($data['fecha_fin']) == 0) {
             $liquidaciones = $this->liquidacionRep->getAllLiquidacion();
 
-        }
-
-        else{
-            $liquidaciones = $this->liquidacionRep->getLiquidacionByFechas($data['fecha_inicio'],$data['fecha_fin']);
+        } else {
+            $liquidaciones = $this->liquidacionRep->getLiquidacionByFechas($data['fecha_inicio'], $data['fecha_fin']);
 
         }
 
-        return view('Servicio/viewLiquidacion',compact('liquidaciones'));
+        return view('Servicio/viewLiquidacion', compact('liquidaciones'));
+
+    }
+
+
+    /*Esto es para service*/
+    public function getLiquidacionByNumber()
+    {
+        $data = \Input::all();
+
+        $liquidacion = $this->liquidacionRep->getLiquidacionByNumero($data['numero_liqui']);
+
+        return \Response::json($liquidacion);
 
     }
 

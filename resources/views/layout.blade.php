@@ -300,14 +300,14 @@
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu">
                 <li>
-                    <a href="{{ URL::route('home')}}">
-                        <i class="fa fa-dashboard"></i> <span>Inicio</span>
+                    <a  href="{{ URL::route('home')}}">
+                        <i style="color:#2196F3;" class="fa fa-dashboard"></i> <span>Inicio</span>
                     </a>
                 </li>
 
                 <li class="treeview">
                     <a href="#">
-                        <i class="fa fa-bar-chart-o"></i>
+                        <i style="color:#CDDC39;" class="fa fa-users"></i>
                         <span>Proveedores</span>
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
@@ -320,14 +320,41 @@
                 </li>
                 <li class="treeview">
                     <a href="#">
-                        <i class="fa fa-laptop"></i>
+                        <i style="color:#FF9800;" class="fa fa-tasks"></i>
                         <span>Control y Calidad</span>
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
                         <li><a class="item sub" href="{{ URL::route('getAcopioAll')}}"><i class="fa fa-angle-double-right" ></i> Registro de  <br>Acopio</a></li>
+
+                    </ul>
+                </li>
+
+                <li class="treeview">
+                    <a href="#">
+                        <i style="color:#F44336;" class="fa fa-money"></i>
+                        <span>Servicio</span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
                         <li><a href="{{ URL::route('getAllLiquidacion')}}"><i class="fa fa-angle-double-right"></i> Liquidacion</a></li>
-                        <li><a href=""><i class="fa fa-angle-double-right"></i> Prestamos</a></li>
+                        <li><a href="{{ URL::route('getAllPrestamos') }}"><i class="fa fa-angle-double-right"></i> Prestamos</a></li>
+                        <li><a href="{{ URL::route('getvieModRecursos') }}"><i class="fa fa-angle-double-right"></i> Recursos</a></li>
+                        <li><a href="{{ URL::route('getAllVentaTerceros') }}"><i class="fa fa-angle-double-right"></i> Venta a Terceros</a></li>
+                        <li><a href=""><i class="fa fa-angle-double-right"></i> Pagos</a></li>
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="#">
+                        <i  class="fa fa-bar-chart-o"></i>
+                        <span>Reportes</span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{ URL::route('getAllLiquidacion')}}"><i class="fa fa-angle-double-right"></i> Liquidacion</a></li>
+                        <li><a href="{{ URL::route('getAllPrestamos') }}"><i class="fa fa-angle-double-right"></i> Prestamos</a></li>
+                        <li><a href="{{ URL::route('getvieModRecursos') }}"><i class="fa fa-angle-double-right"></i> Recursos</a></li>
+                        <li><a href="{{ URL::route('getAllVentaTerceros') }}"><i class="fa fa-angle-double-right"></i> Venta a Terceros</a></li>
                         <li><a href=""><i class="fa fa-angle-double-right"></i> Pagos</a></li>
                     </ul>
                 </li>

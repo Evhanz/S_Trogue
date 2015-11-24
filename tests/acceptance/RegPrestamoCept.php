@@ -6,12 +6,11 @@
  * Time: 7:28 PM
  */
 
+
 $I = new AcceptanceTester($scenario);
 
 //when
-$I->amOnPage('public/prestamos/getViewNewPrestamo');
-$I->see('Formulario de Registro');
-//And
-$I->click('regAcopio1');
-//Then
-$I->see('Registrar Acopio','h2');
+$I->wantTo('Probar el registro de prestamos');
+$I->amOnPage('prestamos/getViewNewPrestamo');
+$I->see('Formulario de Registro','h3');
+$I->fillField('dniProveedor[dni]','47085011');

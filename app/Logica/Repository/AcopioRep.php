@@ -88,4 +88,22 @@ class AcopioRep {
 
     }
 
+
+    public function getAcopioByDay($day)
+    {
+
+
+        $acopios = Acopio::where('feha','=',$day)->get();
+
+        $suma = 0;
+
+        foreach($acopios as $acopio){
+            $suma+=$acopio->cantidad_total;
+
+        }
+        return $suma;
+
+
+    }
+
 }

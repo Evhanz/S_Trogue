@@ -353,7 +353,7 @@ abstract class Model implements ArrayAccess, Arrayable, Jsonable, JsonSerializab
 	}
 
 	/**
-	 * Register an observer with the Entities.
+	 * Register an observer with the Model.
 	 *
 	 * @param  object|string  $class
 	 * @return void

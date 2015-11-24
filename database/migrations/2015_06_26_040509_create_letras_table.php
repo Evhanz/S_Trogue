@@ -17,10 +17,12 @@ class CreateLetrasTable extends Migration {
         {
             $table->increments('id');
 
-            $table->decimal('cantidad',9,2);
+            $table->decimal('monto_inicial',9,2);
             $table->date('fecha_vencimiento');
             $table->string('observacion')->nullable();
             $table->boolean('estado');
+            $table->decimal('interes',9,2);
+            $table->integer('n_letra')->nullable();
 
             $table->integer('prestamo_id')->unsigned()->index();
             $table->foreign('prestamo_id')->references('id')->on('prestamos');

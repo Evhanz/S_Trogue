@@ -24,7 +24,7 @@ class ModelMakeCommand extends GeneratorCommand {
 	 *
 	 * @var string
 	 */
-	protected $type = 'Entities';
+	protected $type = 'Model';
 
 	/**
 	 * Execute the console command.

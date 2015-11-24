@@ -43,19 +43,18 @@
                     </div><!-- /.box-header -->
                     <div class="box-body no-padding">
                         <form class="ui form" id="formulario"  name="formLiquidacion"
-                              ng-submit="enviarData()"  method="post">
+                             ng-submit="enviarData()"  method="post">
                             <input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <label>DNI Proveedor</label><br/>
-                                    <input  style="height: 34px;" ng-model="dniProveedor" type="number" id="dniProveedor" name="dniProveedor" ng-change="nameProveedor = ''" required>
-                                    <a class="btn btn-info" ng-click="searchDNI()">:::</a>
-                                    <input value="a" style="height: 34px;width: 250px" ng-model="nameProveedor" type="text" id="dniProveedor" name="dniProveedor" disabled>
+                                    <label for="dniProveedor">DNI Proveedor</label><br/>
+                                    <input  style="height: 34px;"  type="number" id="dniProveedor" name="dniProveedor" ng-model="dniProveedor" ng-change="nameProveedor = ''" required>
+                                    <a id="searchDNI" class="btn btn-info" ng-click="searchDNI()">:::</a>
+                                    <input value="a" style="height: 34px;width: 350px" ng-model="nameProveedor" type="text" id="nameProveedor" name="nameProveedor" disabled>
                                 </div>
                                 <div class="col-lg-3">
                                     <label>Promedio Quincenal:</label>
                                     <input step="any" class="form-control" type="text"  ng-model="promedio_quincenal" name="promedio_quincenal" required disabled>
-
                                 </div>
                                 <div class="col-lg-2">
                                     <label for="">Recurso</label>
@@ -86,9 +85,13 @@
 
                                         
                                 </div>
-                                <div class="col-lg-4">
-                                    <label for="">Cantidad</label>
-                                    <input ng-change="sacarInteres()" step="any" min="0" class="form-control" ng-model="cantidad" type="number" id="cantidad" name="cantidad" required>
+                                <div class="col-lg-2">
+                                    <label for="">Cantidad S/.</label>
+                                    <input  step="any" min="0" class="form-control" ng-model="cantidad" type="number" id="cantidad" name="cantidad" required>
+                                </div>
+                                <div class="col-lg-2">
+                                    <label for="tasa">Tasa %</label>
+                                    <input type="number" name="tasa" id="tasa" min="0" ng-change="sacarInteres()" ng-model="tasa" required/>
                                 </div>
                                 <div class="col-lg-4">
                                     <label for="">Interes </label>
@@ -128,16 +131,25 @@
                             <div class="row">
                                 <div class="col-lg-12" ng-repeat="letra in letras">
 
-                                    <div class="col-lg-3">
-                                        <label for="">Letra Número: @{{ $index }}</label>
+                                    <div class="col-lg-1">
+                                        <label for="">Letra: @{{ $index }}</label>
                                     </div>
 
                                     <div class="col-lg-3">
-                                        <label for="">Monto</label>
+                                        <label for="">Monto Inicial</label><br/>
                                         <input  ng-model="letra.monto" required="true" disabled/>
                                     </div>
                                     <div class="col-lg-3">
-                                        <label for="">Fecha</label>
+                                        <label for="">Interes</label><br/>
+                                        <input  ng-model="letra.interes" required="true" disabled/>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <label for="">Total</label><br/>
+                                        <input  ng-model="letra.total" required="true" disabled/>
+                                    </div>
+
+                                    <div class="col-lg-3">
+                                        <label for="">Fecha</label><br/>
                                         <input type="date" ng-model="letra.fecha" required="true"/>
                                     </div>
 
@@ -145,61 +157,6 @@
 
                             </div><!--./detalle de letra-->
                             <br/>
-                            <!-- Agregar Documento Adjunto-->
-
-                            <div style="width: 100%; background-color: #4CAF50;overflow: hidden;color: #ffffff">
-                                <div class="row">
-                                    <div class="col-lg-4">
-                                        <h3>Documento Adjunto</h3>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <!-- Resultados -->
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div >
-                                        <label>
-                                            <strong>Agregar documento</strong>
-                                            <input class="css-checkbox" ng-model="addDocumento" id="checkAddDocumento" type="checkbox">
-
-                                        </label>
-                                    </div>
-
-                                </div>
-
-                                <div id="formComprobante" style="">
-                                    <div class="col-lg-3">
-                                        Tipo <br/>
-                                        <select class="form-control" name="documentoTipo" id="documentoTipo" ng-disabled="!addDocumento" ng-model="documento.tipo">
-                                            <option value="boleta">Boleta</option>
-                                            <option value="factura">Factura</option>
-                                            <option value="ticket">Ticket</option>
-                                            <option value="otro">Otro</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="col-lg-3">
-                                        Código <br/>
-                                        <input class="form-control" type="text" name="codigo" ng-model="documento.codigo" ng-disabled="!addDocumento"/>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        Monto <br/>
-                                        <input class="form-control" type="text" name="montoDocumento" ng-model="documento.monto" ng-disabled="!addDocumento"/>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        Descripcion <br/>
-                                        <textarea class="form-control"  name="descripcion_documento" ng-model="documento.descripcion" ng-disabled="!addDocumento">
-                                        </textarea>
-                                    </div>
-
-                                </div>
-
-
-
-                            </div>
-
 
                             <div class="row">
                                 <div class="col-lg-12">
@@ -227,11 +184,7 @@
 
             var token = $('input[name="_token"]').attr('value');
             $scope.letras = [];
-
-
-            $scope.cambio = function(){
-                alert('Hol');
-            };
+            $scope.idProveedor = 0;
 
             $scope.searchDNI = function (){
 
@@ -241,11 +194,13 @@
                         })
                         .success(function(data){
 
-                            if(data.id !=1 || data.id ==null){
-                               alert('No existe Proveedor con ese DNI');
+                            if(data.id <1 || data.id ==null){
+                                alert('No existe Proveedor con ese DNI');
+
                             }else{
                                 $scope.nameProveedor = data.name +", " + data.apellidoP+" "+data.apellidoM;
                                 $scope.promedio_quincenal = data.promedioQuincenal;
+                                $scope.idProveedor = data.id;
 
                             }
                             console.log(data);
@@ -259,7 +214,8 @@
 
             $scope.sacarInteres = function(){
 
-                $scope.interes = parseFloat($scope.cantidad) *0.02;
+                $scope.interes = parseFloat($scope.cantidad) *($scope.tasa/100);
+
 
             };
 
@@ -270,10 +226,52 @@
 
                 for(var i= 0;i<$scope.num_letras;i++){
 
-                    var letra = {monto:monto_letra+$scope.interes};
+                    var letra = {monto:monto_letra,
+                        interes:$scope.interes,
+                        n_letra:i+1,
+                        total:$scope.interes+monto_letra};
                     $scope.letras.push(letra);
                 }
             };
+
+            $scope.enviarData = function(){
+                $('#btnGuardar').attr("disabled", true);
+                var token = $('input[name="_token"]').attr('value');
+
+                $http.post('{{ URL::route('regPrestamo') }}',
+                        {_token : token,
+                            descripcion:$scope.descripcion,
+                            cantidad:$scope.cantidad,
+                            prioridad:$scope.prioridad,
+                            tasa:$scope.tasa,
+                            interes:$scope.interes,
+                            proveedor_id:$scope.idProveedor,
+                            recurso_id:$scope.recurso,
+                            n_letras: $scope.num_letras,
+                            letras:$scope.letras
+                        })
+                        .success(function(data){
+
+                            if(data=='Registrado'){
+                                alert('Prestamo Registrado Correctamente');
+                                $('#btnGuardar').attr("disabled", false);
+                                $window.location.href = '{{ URL::route('home') }}';
+
+                            }else{
+                                alert('Se encuentra Errores en el envio , revisar la consola ');
+                                $('#btnGuardar').attr("disabled", false);
+                                console.log(data);
+
+                            }
+                            console.log(data);
+
+                        }).error(function(data) {
+                            console.log(data);
+                            alert('Error revise la consola');
+                            $('#btnGuardar').attr("disabled", false);
+
+                        });
+            }
 
 
 

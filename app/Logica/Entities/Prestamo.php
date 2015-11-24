@@ -7,7 +7,7 @@
  */
 
 namespace trogue\Entities;
-
+use Illuminate\Database\Eloquent\Model;
 
 class Prestamo extends Model{
 
@@ -21,6 +21,11 @@ class Prestamo extends Model{
     public function recurso(){
         //$this->belongsTo('entitie', 'local_key', 'parent_key');
         return $this->belongsTo('trogue\Entities\Recurso','recurso_id','id');
+    }
+
+    public function letras(){
+        // return $this->hasMany('Content', 'parent_id', 'id');
+        return $this->hasMany('trogue\Entities\Letra','prestamo_id','id');
     }
 
 

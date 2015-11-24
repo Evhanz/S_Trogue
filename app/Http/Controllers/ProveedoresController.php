@@ -95,7 +95,6 @@ class ProveedoresController extends Controller{
 
        $bandera = $this->proveedorRep->updateDataProveedor($data);
 
-
        if ($bandera === 1) {
 
          return \Redirect::route('proveedoresAll')->with(array('confirm' => 'Proveedor Registrado'));
@@ -129,6 +128,23 @@ class ProveedoresController extends Controller{
         if(isset($proveedor->id)){
             $proveedor->promedioQuincenal = $this->acopioRep->getPromedioAcopioByIdProveedor($proveedor->id);
         }
+
+
+        return \Response::json($proveedor);
+    }
+
+    /*------Metodo: ServiceGetWithPrestamosAndLetras
+    * se traera con este metodo
+     * a un proveedor con sus prestamos y letras habiles
+   */
+
+    public function ServiceGetWithPrestamosAndLetras()
+    {
+        $data = \Input::all();
+
+        $proveedor = $this->proveedorRep->getProveedorByDNI($data['dni']);
+
+        $proveedor = $this->proveedorRep->getProveedorByPrestamos($proveedor->id);
 
 
         return \Response::json($proveedor);
