@@ -41,7 +41,7 @@
                         <h3 class="box-title">Formulario de Registro</h3>
 
                     </div><!-- /.box-header -->
-                    <div class="box-body no-padding">
+                    <div class="box-body">
                         <form class="ui form" id="formulario" action="{{ URL::route('regProveedor') }}" method="post">
                             <input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
                             <div class="row">

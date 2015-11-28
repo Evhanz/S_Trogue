@@ -30,11 +30,36 @@ class RutasController extends Controller{
         $bandera = $this->rutaRep->regRuta($data);
 
         if($bandera === 1){
-            return \Redirect::route('rutasAll')->with(array('confirm' => 'Profesion Registrada'));
+            return \Redirect::route('rutasAll')->with(array('confirm' => 'Ruta Registrada'));
 
         }else{
             return \Redirect::route('rutasAll')->with(array('fail' => $bandera));
         }
+
+    }
+
+
+    public function updateRuta()
+    {
+        $data = \Input::all();
+
+
+        $bandera = $this->rutaRep->updateRuta($data);
+
+        if($bandera === 1){
+            return \Redirect::route('rutasAll')->with(array('confirm' => 'Ruta Editada'));
+
+        }else{
+            return \Redirect::route('rutasAll')->with(array('fail' => $bandera));
+        }
+
+    }
+
+    public function getRutaById($id)
+    {
+
+        $ruta = $this->rutaRep->find($id);
+        return \Response::json($ruta);
 
     }
 

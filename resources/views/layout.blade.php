@@ -557,6 +557,13 @@
         background-color: #428bca;
         border-color: #428bca;
     }
+
+
+
+
+
+
+
     .sr-only {
         position: absolute;
         width: 1px;
@@ -567,6 +574,21 @@
         clip: rect(0 0 0 0);
         border: 0;
     }
+
+    .head-table{
+
+        background-color: #1289B7;
+
+    }
+
+    .head-table > tr >th{
+        color:white;
+
+
+    }
+
+
+
 
 
 

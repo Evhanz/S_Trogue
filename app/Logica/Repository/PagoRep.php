@@ -103,7 +103,7 @@ class PagoRep {
 
         //luego actualizamos la venta a terceros
         $venta_tercero = VentaTerceros::find($pago_venta_terceros['id']);
-        $venta_tercero->estado = 1;
+        $venta_tercero->estado = 1;/* 1 significa pagado*/
         $venta_tercero->save();
 
     }

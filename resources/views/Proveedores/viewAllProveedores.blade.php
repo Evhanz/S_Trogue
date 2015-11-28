@@ -21,7 +21,7 @@
 
     <div style="padding: 5px ;">
         <div class="bs-callout bs-callout-info" id="callout-type-dl-truncate">
-            <h4>Módulo del Proveedores </h4>
+            <h4><i class="fa fa-users" style="color: #17CAAE "></i> Módulo del Proveedores </h4>
         </div>
     </div>
 
@@ -33,43 +33,52 @@
     <div class="content">
         <div class="row">
             <div class="col-lg-12">
-                 <div class="box box-danger" >
+                 <div class="box box-primary" >
                     <div class="box-header">
                         <!-- tools box -->
                             <div class="pull-right box-tools">
                                 <button class="btn btn-danger btn-sm refresh-btn" data-toggle="tooltip" title="Reload"><i class="fa fa-refresh"></i></button>
                             </div><!-- /. tools -->
-                            <i class="fa fa-cloud"></i>
-
                             <h3 class="box-title">Lista de Todo los Proveedores</h3>
                     </div><!-- /.box-header -->
-                    <div class="box-body no-padding">
+                    <div class="box-body ">
                         <div class="row">
                             <div class="col-lg-12">
-                                <form class="form-inline">
-                                    <div class="form-group">
-                                        <label>Criterio</label>
-                                            <input id="txtCriterio" value="{{{ $criterio or ''}}}" type="text" class="form-control" placeholder="First Name"  onKeyUp="this.value=this.value.toUpperCase();">
+
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading">
+
+                                        Filtro
+
                                     </div>
-                                    <div class="form-group">
-                                        <label>DNI</label>
-                                        <input id="txtDNI"  class="form-control" type="text" placeholder="DNI" value="{{{ $dni or ''}}}" pattern="[0-9]{13,16}">
-                                    </div>
-                                    <div class="form-group" style="float:right;">
-                                        <button  class="btn btn-info" id="btnBuscar">
-                                            <i class="fa fa-search"></i>
+                                    <div class="panel-body">
+
+                                        <form class="form-inline">
+                                            <div class="form-group">
+                                                <label>Criterio</label>
+                                                <input id="txtCriterio" value="{{{ $criterio or ''}}}" type="text" class="form-control" placeholder="Ingrese Nombre o Apellido"  onKeyUp="this.value=this.value.toUpperCase();">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>DNI</label>
+                                                <input id="txtDNI"  class="form-control" type="text" placeholder="DNI" value="{{{ $dni or ''}}}" pattern="[0-9]{13,16}">
+                                            </div>
+                                            <div class="form-group" style="float:right;">
+                                                <button  class="btn btn-info" id="btnBuscar">
+                                                    <i class="fa fa-search"></i>
                                                     Buscar
-                                        </button>
-                                        <button id="btnNuevo" class="btn btn-success"><i class="fa fa-user-plus"></i>Nuevo</button>
+                                                </button>
+                                                <button id="btnNuevo" class="btn btn-success"><i class="fa fa-plus-circle"></i>  Nuevo</button>
+                                            </div>
+                                        </form>
                                     </div>
-                                       
-                                </form>
+                                </div>
+
                             </div>
                         </div>
                         <div class="row" style="padding: 15px;">
                             <div class="table-responsive">
-                                <table class="table table-hover" id="tableReq">
-                                    <thead>
+                                <table class="table  table-bordered table-hover" id="tableReq">
+                                    <thead class="head-table">
                                         <tr>
                                             <th>Id</th>
                                             <th>Nombre y Apellidos</th>
@@ -88,7 +97,7 @@
                                             <td>{{ $proveedor->anexo->ruta->descripcion }}</td>
                                             <td>
                                                 <a href="{{ URL::route('updateProveedor',$proveedor->id) }}" class="btn btn-warning">
-                                                    Editar<i class="edit icon"></i>
+                                                    Editar  <i class="fa fa-pencil-square-o"></i>
                                                 </a>
                                                 
                                             </td>

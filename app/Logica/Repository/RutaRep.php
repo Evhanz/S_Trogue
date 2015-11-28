@@ -16,6 +16,12 @@ class RutaRep {
         return Ruta::all();
     }
 
+    public function find($id){
+
+        return Ruta::find($id);
+
+    }
+
     public function regRuta($data)
     {
 
@@ -41,10 +47,22 @@ class RutaRep {
             return $validation->messages();
         }
 
+    }
 
 
+    public function updateRuta($data)
+    {
+        try{
+            $ruta = Ruta::find($data['id']);
+            $ruta->descripcion = $data['descripcion'];
+            $ruta->observacion = $data['observacion'];
+            $ruta->save();
+            return 1;
+        }
+        catch(\Exception $e){
 
+            return $e;
 
-
+        }
     }
 }

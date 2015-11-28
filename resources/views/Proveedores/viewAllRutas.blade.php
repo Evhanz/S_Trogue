@@ -30,6 +30,7 @@
 
 @section('content')
 
+
     <div class="content">
         <div class="row">
             <div class="col-lg-12">
@@ -70,7 +71,7 @@
                                             <td>{{ $ruta->descripcion }}</td>
                                             <td>{{ $ruta->observacion }}</td>
                                             <td>
-                                                <button class="btn btn-warning">
+                                                <button  class="btn btn-warning" onclick="modalEdit('{{$ruta->id}}','{{ $ruta->descripcion}}','{{$ruta->observacion}}')">
                                                     Editar<i class="edit icon"></i>
                                                 </button>
                                                 
@@ -101,7 +102,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h2 class="modal-title">Registrar Acopio</h2>
+                    <h2 class="modal-title">Registrar Ruta</h2>
                 </div>
                 <div class="modal-body">
                     <p>
@@ -135,6 +136,47 @@
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 
+    <!--Modal para editar ruta-->
+    <div class="modal fade" id="updateRuta">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h2 class="modal-title">Actualizar Ruta</h2>
+                </div>
+                <div class="modal-body">
+                    <p>
+                    <form id="formRegModal" action="{{ URL::route('updateRuta') }}"  method="post">
+
+                        <fieldset>
+                            <legend>Formulario</legend>
+                            <input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
+                            <input type="hidden" name="id"  />
+
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <label for="">Descripción</label>
+                                    <input id="rutaDescripcion" name="descripcion" class="form-control" type="text" required/>
+                                </div>
+                                <div class="col-lg-6">
+                                    <label for="">Observación</label>
+                                    <input id="rutaObservacion" name="observacion" class="form-control" type="text" required/>
+
+                                </div>
+                            </div>
+
+                        </fieldset>
+
+
+                        <hr>
+                        <button  class="btn btn-success" tabindex="0" id="btnGuardarAcopio">Guardar</button>
+                    </form>
+                    </p>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
     <script>
 
         $("#btnNuevo").click(function(){
@@ -142,6 +184,23 @@
             $('#newRuta').modal('show')
 
         });
+
+
+        function modalEdit(idRuta,descripcion,observacion){
+
+            $('#updateRuta').modal('show');
+
+            $().val();
+
+
+
+
+
+
+        }
+
+
+
 
 
     </script>

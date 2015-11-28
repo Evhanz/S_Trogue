@@ -41,6 +41,8 @@ Route::post('proveedores/getProveedorByDNI',['as'=>'getProveedorByDNIService','u
 Route::get('rutas',['as'=>'rutas']);
 Route::get('rutas/all',['as'=>'rutasAll','uses'=>'RutasController@selectAllRutas']);
 Route::post('rutas/regRuta',['as'=>'regRuta','uses'=>'RutasController@regRuta']);
+Route::post('rutas/updateRuta',['as'=>'updateRuta','uses'=>'RutasController@updateRuta']);
+Route::get('rutas/getRutaById/{id}',['as'=>'getRutaById','uses'=>'RutasController@getRutaById']);
 
 
 /*Modulo de Anexos*/
