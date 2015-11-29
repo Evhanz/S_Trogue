@@ -32,6 +32,8 @@ Route::post('proveedores/regProveedor',['as'=>'regProveedor','uses'=>'Proveedore
 Route::get('proveedores/updateProveedor/{id}',['as'=>'updateProveedor','uses'=>'ProveedoresController@getViewUpdateProveedor']);
 Route::get('proveedores/getProveedor/{id}',['as'=>'getProveedorByID','uses' => 'ProveedoresController@getProveedorByID']);
 Route::post('proveedores/updateProveedor',['as'=>'updateDataProveedor','uses' => 'ProveedoresController@updateDataProveedor']);
+Route::get('proveedores/deteleProveedor/{id}',['as'=>'deteleProveedor','uses'=>'ProveedoresController@deteleProveedor']);
+
 /*Service proveedor*/
 Route::post('proveedores/getProveedorByDNI',['as'=>'getProveedorByDNIService','uses'=>'ProveedoresController@getProveedorByDNIService']);
 
@@ -43,12 +45,16 @@ Route::get('rutas/all',['as'=>'rutasAll','uses'=>'RutasController@selectAllRutas
 Route::post('rutas/regRuta',['as'=>'regRuta','uses'=>'RutasController@regRuta']);
 Route::post('rutas/updateRuta',['as'=>'updateRuta','uses'=>'RutasController@updateRuta']);
 Route::get('rutas/getRutaById/{id}',['as'=>'getRutaById','uses'=>'RutasController@getRutaById']);
+Route::get('rutas/deleteRuta/{id}',['as'=>'deleteRuta','uses'=>'RutasController@deleteRuta']);
+
 
 
 /*Modulo de Anexos*/
 Route::get('anexos',['as'=>'anexos']);
 Route::get('anexos/all',['as'=>'anexosAll','uses'=>'AnexosController@selectAllRutas']);
 Route::post('anexos/regAnexo',['as'=>'regAnexo','uses'=>'AnexosController@regAnexo']);
+Route::post('anexos/updateAnexo',['as'=>'updateAnexo','uses'=>'AnexosController@updateAnexo']);
+Route::get('anexos/deleteAnexo/{id}',['as'=>'deleteAnexo','uses'=>'AnexosController@deleteAnexo']);
 
 
 //para los helper
@@ -57,6 +63,7 @@ Route::get('helper/getAnexoByRuta/{id}',['as'=>'get','uses'=>'HelperController@g
 
 
 //para el acopio
+Route::get('Control_Calidad',['as'=>'modControlCalidad']);
 Route::get('Control_Calidad/Acopio/',['as'=>'getAcopio']);
 Route::get('Control_Calidad/Acopio/all',['as'=>'getAcopioAll','uses'=>'AcopioController@index']);
 Route::get('Control_Calidad/Acopio/{anexo}',['as'=>'getAcopioByAnexo','uses'=>'AcopioController@getProveedoresByAnexo']);
@@ -64,8 +71,9 @@ Route::get('Control_Calidad/getAcopioByProveedor/{id}',['as'=>'getAcopioByProvee
 Route::post('Control_Calidad/Acopio/reg',['as'=>'regAcopio','uses'=>'AcopioController@regAcopio']);
 Route::post('Control_Calidad/getAcopioByProveedorAndFechas/',['as'=>'getAcopioByProveedorAndFechas','uses' =>'AcopioController@getAcopioByProveedorAndFechas']);
 Route::post('Control_Calidad/getAcopioById/',['as'=>'getAcopioById','uses'=>'AcopioController@getAcopioById']);
-//return suma Json
+//return suma Json de los acopios
 Route::post('Control_Calidad/getSumaAcopioByProveedorAndFechas/',['as'=>'getSumaAcopioByProveedorAndFechas','uses' =>'AcopioController@getSumaAcopioByProveedorAndFechas']);
+Route::post('Control_Calidad/updateAcopio',['as'=>'updateAcopio','uses'=>'AcopioController@updateAcopio']);
 
 
 
@@ -77,6 +85,14 @@ Route::get('acopio/prueba',['as'=>'prueba','uses'=>'AcopioController@prueba']);
 //modulo de insidencias
 Route::get('Control_Calidad/InsidenciaForAcopio/{$id}',['as'=>'a']);
 Route::post('Control_Calidad/RegInsidencia',['as'=>'RegInsidencia','uses'=>'InsidenciaController@RegInsidencia']);
+Route::post('Control_Calidad/UpdateInsidencia',['as'=>'UpdateInsidencia','uses'=>'InsidenciaController@UpdateInsidencia']);
+Route::post('Control_Calidad/getInsidenciaByAcopio',['as'=>'getInsidenciaByAcopio'
+    ,'uses'=>'InsidenciaController@getInsidenciaByAcopio']);
+Route::get('Control_Calidad/deleteInsidencia/{id}',['as'=>'deleteInsidencia'
+    ,'uses'=>'InsidenciaController@deleteInsidencia']);
+
+
+
 
 
 //modulo de liquidacion

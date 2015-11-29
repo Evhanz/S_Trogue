@@ -32,7 +32,7 @@
     <div class="content">
         <div class="row">
             <div class="col-lg-12">
-                <div class="box box-danger" >
+                <div class="box box-primary" >
                     <div class="box-header">
                         <!-- tools box -->
                             <div class="pull-right box-tools">
@@ -42,42 +42,54 @@
 
                             <h3 class="box-title">Lista de Todo los Proveedores</h3>
                     </div><!-- /.box-header -->
-                    <div class="box-body no-padding">
+                    <div class="box-body ">
                         <div class="row">
                             <div class="col-lg-12">
-                                <form class="form-inline">
-                                    <div class="form-group">
-                                        <label for="">Ruta</label><br>
-                                        <select class="form-control" name="ruta" id="selRuta">
-                                            <option value=" ">Ninguno</option>
-                                            @foreach($rutas as $ruta)
-                                            <option value="{{$ruta->id}}">{{$ruta->descripcion}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="">Anexo</label><br>
-                                        <select class="form-control" name="anexos" id="selAnexo">
-                                            <option value=" ">Ninguno</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="">Opciones</label><br>
-                                        <button class="btn btn-success" id="btnBuscar">
-                                            <i class="search icon"></i>
-                                            Buscar
-                                        </button>
-                                    </div>                   
 
-                                </form>
+                                <div class="panel panel-modControlCalidad">
+                                    <div class="panel-heading">
+
+                                        Filtro
+
+                                    </div>
+                                    <div class="panel-body">
+                                        <form class="form-inline">
+                                            <div class="form-group">
+                                                <label for="">Ruta</label><br>
+                                                <select class="form-control" name="ruta" id="selRuta">
+                                                    <option value=" ">Ninguno</option>
+                                                    @foreach($rutas as $ruta)
+                                                        <option value="{{$ruta->id}}">{{$ruta->descripcion}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="">Anexo</label><br>
+                                                <select class="form-control" name="anexos" id="selAnexo">
+                                                    <option value=" ">Ninguno</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="">Opciones</label><br>
+                                                <button class="btn btn-success" id="btnBuscar">
+                                                    <i class="search icon"></i>
+                                                    Buscar
+                                                </button>
+                                            </div>
+
+                                        </form>
+
+                                    </div>
+                                </div>
+
+
                             </div>
                         </div>
-                        
-                        <hr>
+
 
                         <div class="row" style="padding: 15px;">
                             <div class="table-responsive">
-                                <table class="table table-hover" id="tableReq">
+                                <table class="table table-hover" id="tableReq" data-tabl="modControlCalidad">
                                     <thead >
                                         <tr>
                                             <th>Id</th>

@@ -33,11 +33,43 @@ class AnexosController extends Controller{
         $bandera = $this->anexoRep->regAnexo($data);
 
         if($bandera === 1){
-            return \Redirect::route('anexosAll')->with(array('confirm' => 'Profesion Registrada'));
+            return \Redirect::route('anexosAll')->with(array('confirm' => 'Anexo Registrado'));
 
         }else{
             return \Redirect::route('anexosAll')->with(array('fail' => $bandera));
         }
+    }
+
+    public function updateAnexo()
+    {
+        $data = \Input::all();
+
+        $bandera = $this->anexoRep->updateAnexo($data);
+
+        if($bandera === 1){
+            return \Redirect::route('anexosAll')->with(array('confirm' => 'Anexo Actualizado'));
+
+        }else{
+            return \Redirect::route('anexosAll')->with(array('fail' => $bandera));
+        }
+
+    }
+
+    public function deleteAnexo($id)
+    {
+        try{
+
+            $this->anexoRep->deletAnexo($id);
+            return \Redirect::route('anexosAll')->with(array('confirm' => 'Anexo Eliminado'));
+
+        }catch (\Exception $e){
+
+
+            return \Redirect::route('anexosAll')->
+            with(array('fail' => 'El Anexo no puede eliminarse,puede tener datos asociados'));
+
+        }
+
     }
 
 

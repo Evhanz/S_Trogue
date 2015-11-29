@@ -65,6 +65,23 @@ class AcopioRep {
 
     }
 
+    public function updateAcopio($data)
+    {
+
+        $acopio = Acopio::find($data['idUpdateAcopio']);
+        $acopio->feha=$data['fecha'];
+        $acopio->cantidad=$data['cantidad'];
+        $acopio->cantidad_total=$data['cantidad'];
+
+        if($acopio->save()){
+            return 1;
+
+        }else{
+            return 0;
+        }
+
+    }
+
 
     /*
      * El acopio es para las ultimos 15 acopio para

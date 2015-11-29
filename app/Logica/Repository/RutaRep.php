@@ -65,4 +65,15 @@ class RutaRep {
 
         }
     }
+
+
+    public function deleteRuta($id)
+    {
+
+        $ruta = Ruta::find($id);
+
+        $ruta->delete();
+
+    }
+    
 }

@@ -63,6 +63,26 @@ class RutasController extends Controller{
 
     }
 
+    public  function deleteRuta($id){
+
+        try{
+
+            $this->rutaRep->deleteRuta($id);
+            return \Redirect::route('rutasAll')->with(array('confirm' => 'Ruta Eliminada'));
+
+        }catch (\Exception $e){
+
+
+
+            return \Redirect::route('rutasAll')->
+            with(array('fail' => 'La ruta no puede eliminarse,puede tener datos asociados'));
+
+        }
+
+
+
+    }
+
 
 
 

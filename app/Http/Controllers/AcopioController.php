@@ -67,10 +67,28 @@ class AcopioController extends Controller{
              return \Redirect::route('getAcopioAll')->with(array('fail' => 'El Acopio ya a sido ingresado en ese dia'));
         }
 
+    }
 
-           
+
+    public function updateAcopio()
+    {
+        $data = \Input::all();
+
+        $bandera = $this->acopioRep->updateAcopio($data);
+
+        if($bandera == 1){
+
+            return redirect()->back()->with(array('confirm' => 'Acopio actualizda correctamente'));
+
+        }else{
+
+            return redirect()->back()->with(array('fail' => 'Acopio no puede actualizarse'));
+
+        }
+
 
     }
+    
 
     public function getAcopioByProveedor($idProveedor)
     {

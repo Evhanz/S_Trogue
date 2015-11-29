@@ -105,6 +105,24 @@ class ProveedoresController extends Controller{
        
     }
 
+    public function deteleProveedor($id)
+    {
+
+        try{
+
+            $this->proveedorRep->deleteProveedor($id);
+            return \Redirect::route('proveedoresAll')->with(array('confirm' => 'Proveedor Eliminado'));
+
+        }catch (\Exception $e){
+
+
+
+            return \Redirect::route('proveedoresAll')->
+            with(array('fail' => 'El proveedor no puede eliminarse,puede tener datos asociados'));
+
+        }
+    }
+
 
 
 

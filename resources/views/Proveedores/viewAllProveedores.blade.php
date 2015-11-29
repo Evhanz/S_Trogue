@@ -77,7 +77,7 @@
                         </div>
                         <div class="row" style="padding: 15px;">
                             <div class="table-responsive">
-                                <table class="table  table-bordered table-hover" id="tableReq">
+                                <table class="table  table-bordered table-hover" id="tableReq" data-tabl="modProveedor">
                                     <thead class="head-table">
                                         <tr>
                                             <th>Id</th>
@@ -102,7 +102,7 @@
                                                 
                                             </td>
                                             <td>
-                                                <button class="btn btn-danger">
+                                                <button class="btn btn-danger" onclick="viewModal('{{ $proveedor->id }}','{{ $proveedor->fullname }}')">
                                                     Eliminar<i class="remove icon"></i>
                                                 </button>
                                             </td>
@@ -123,6 +123,34 @@
             </div>
         </div>
     </div><!-- /.content-->
+
+
+    <div class="modal fade" id="modalDelete">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h2 class="modal-title">Eliminar Proveedor</h2>
+                </div>
+                <div class="modal-body">
+                    <p class="bg-danger">
+                       <strong>Está seguro de eliminar a:</strong>  ?
+                        <input id="idProveedor" type="hidden"/>
+                        <input class="form-control" id="proveedor" type="text" readonly/>
+                    </p>
+                    <p>
+                        <button id="btnsi" onclick="deleteSi()" type="button" class="btn btn-primary btn-lg">Si</button>
+                    </p>
+
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+
+
+
+
 
     <script>
 
@@ -172,6 +200,22 @@
 
 
         });
+
+
+        function viewModal(id,proveedor){
+
+            $('#modalDelete').modal('show');
+
+            $('#idProveedor').val(id);
+            $('#proveedor').val(proveedor);
+
+        }
+
+
+        function deleteSi(){
+            var id = $('#idProveedor').val();
+            location.href='{{ URL::route('proveedores') }}/deteleProveedor/'+id;
+        }
 
 
 

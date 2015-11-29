@@ -34,17 +34,17 @@
     <div class="content">
         <div class="row">
             <div class="col-lg-12">
-                 <div class="box box-danger" >
+                 <div class="box box-primary" >
                     <div class="box-header">
                         <!-- tools box -->
                             <div class="pull-right box-tools">
                                 <button class="btn btn-danger btn-sm refresh-btn" data-toggle="tooltip" title="Reload"><i class="fa fa-refresh"></i></button>
                             </div><!-- /. tools -->
-                            <i class="fa fa-cloud"></i>
+                            <i class="fa fa-bus"></i>
 
-                            <h3 class="box-title">Lista de Todo los Rutas</h3>
+                            <h3 class="box-title">Lista de todas las Rutas</h3>
                     </div><!-- /.box-header -->
-                    <div class="box-body no-padding">
+                    <div class="box-body ">
 						<div class="row">
 							<div class="col-lg-12">
 								<button id="btnNuevo" style="float:right" class="btn btn-success btn-lg">Nuevo</button>
@@ -54,11 +54,12 @@
 
                         <div class="row" style="padding: 15px;">
                             <div class="table-responsive">
-                                <table class="table table-hover" id="tableReq">
+                                <table class="table  table-bordered table-hover" data-tabl="modProveedor" id="tableReq">
                                     <thead>
                                         <tr>
                                             <th>Id</th>
                                             <th>Descripcion</th>
+                                            <th>Anexo</th>
                                             <th>Observacion</th>
                                             <th colspan="2">Opciones</th>
 
@@ -69,6 +70,7 @@
                                         <tr>
                                             <td>{{ $ruta->id }}</td>
                                             <td>{{ $ruta->descripcion }}</td>
+                                            <td>{{$ruta-}}</td>
                                             <td>{{ $ruta->observacion }}</td>
                                             <td>
                                                 <button  class="btn btn-warning" onclick="modalEdit('{{$ruta->id}}','{{ $ruta->descripcion}}','{{$ruta->observacion}}')">
@@ -77,7 +79,7 @@
                                                 
                                             </td>
                                             <td>
-                                                <button class="btn btn-danger">
+                                                <button class="btn btn-danger" onclick="modalDelete('{{$ruta->id}}','{{ $ruta->descripcion}}')">
                                                     Eliminar<i class="remove icon"></i>
                                                 </button>
                                             </td>
@@ -136,6 +138,9 @@
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 
+
+
+
     <!--Modal para editar ruta-->
     <div class="modal fade" id="updateRuta">
         <div class="modal-dialog">
@@ -151,7 +156,7 @@
                         <fieldset>
                             <legend>Formulario</legend>
                             <input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
-                            <input type="hidden" name="id"  />
+                            <input type="hidden" name="id"  id="idRuta" />
 
                             <div class="row">
                                 <div class="col-lg-6">
@@ -177,6 +182,29 @@
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 
+    <!--Modal para eliminar ruta-->
+    <div class="modal fade" id="modalDelete">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h2 class="modal-title">Eliminar Ruta</h2>
+                </div>
+                <div class="modal-body">
+                    <p class="bg-danger">
+                        <strong>Está seguro de eliminar la ruta</strong>  ?
+                        <input id="idDelRuta" type="hidden"/>
+                        <input class="form-control" id="ruta" type="text" readonly/>
+                    </p>
+                    <p>
+                        <button id="btnsi" onclick="deleteSi()" type="button" class="btn btn-primary btn-lg">Si</button>
+                    </p>
+
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
     <script>
 
         $("#btnNuevo").click(function(){
@@ -190,14 +218,29 @@
 
             $('#updateRuta').modal('show');
 
-            $().val();
-
-
-
-
+            $('#rutaDescripcion').val(descripcion);
+            $('#rutaObservacion').val(observacion);
+            $('#idRuta').val(idRuta);
 
 
         }
+
+
+        function modalDelete(id,ruta){
+
+            $('#modalDelete').modal('show');
+
+            $('#idDelRuta').val(id);
+            $('#ruta').val(ruta);
+
+        }
+
+
+        function deleteSi(){
+            var id = $('#idDelRuta').val();
+            location.href='{{ URL::route('rutas') }}/deleteRuta/'+id;
+        }
+
 
 
 

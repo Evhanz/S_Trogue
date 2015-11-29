@@ -54,4 +54,43 @@ class AnexoRep {
         }
     }
 
+    public function updateAnexo($data){
+        $idAnexo = $data['idAnexo'];
+
+        $rules=[
+            'descripcion' => 'required|unique:anexos,descripcion,'.$idAnexo,
+            'observacion' => 'required',
+            'ruta' => 'required'
+        ];
+
+        $data = array_only($data,array_keys($rules));
+        $validation = \Validator::make($data,$rules);
+
+        $isValid = $validation->passes();
+
+        if($isValid){
+            $anexo = Anexo::find($idAnexo);
+            $anexo->descripcion = $data['descripcion'];
+            $anexo->observacion = $data['observacion'];
+            $anexo->ruta_id = $data['ruta'];
+            $anexo->save();
+            return 1;
+
+        }else
+        {
+            return $validation->messages();
+        }
+        
+    }
+
+    public function deletAnexo($id)
+    {
+
+        $anexo = Anexo::find($id);
+
+        $anexo->delete();
+
+    }
+    
+
 }

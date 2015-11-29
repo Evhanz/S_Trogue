@@ -13,4 +13,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Ruta extends Model{
 
+
+    public function ruta(){
+        //$this->belongsTo('entitie', 'local_key', 'parent_key');
+        return $this->belongsTo('trogue\Entities\Ruta','ruta_id','id');
+    }
+
+
+
 }

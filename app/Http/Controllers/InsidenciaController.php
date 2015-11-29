@@ -49,13 +49,78 @@ class InsidenciaController extends Controller{
 
             $proveedor = $this->proveedorRep->getProveedorById($data['hdIdProveedor']);
 
-            return view('Control/getAcopioByProveedor',compact('proveedor', 'acopios','good'))->with(array('confirm' => 'Insidencia  Registrada'));
+            return redirect()->back()->with(array('confirm' => 'Insidencia  Agregada','proveedor'=>$proveedor,'acopios'=>$acopios));
+
         }else{
             $bad = true;
             $acopios = $this->acopioRep->getAllByProveedor($data['hdIdProveedor']);
             $proveedor = $this->proveedorRep->getProveedorById($data['hdIdProveedor']);
-            return view('Control/getAcopioByProveedor',compact('proveedor', 'acopios','bad'))->with(array('fail' => 'Insidencia  Registrada'));
+
+            return redirect()->back()->with(array('fail' => 'Insidencia  no puede ser agregada','proveedor'=>$proveedor,'acopios'=>$acopios));
         }
+    }
+
+
+    public function UpdateInsidencia()
+    {
+        $data = \Input::all();
+
+        if($data['seltipo'] == "descuento" ){
+
+            $res = $this->insidenciaRep->upDescuentoInsidencia($data);
+
+        }else{
+            $res = $this->insidenciaRep->upObservacionInsidencia($data);
+
+        }
+
+        if($res == 1){
+
+            $good = true;
+            $acopios = $this->acopioRep->getAcopioByProveedorAndFechas($data['hdUpIdProveedor'],$data['hdUpFechaAcopio'],$data['hdUpFechaAcopio']);
+
+            $proveedor = $this->proveedorRep->getProveedorById($data['hdUpIdProveedor']);
+
+            return redirect()->back()->with(array('confirm' => 'Insidencia actualizda correctamente','proveedor'=>$proveedor,'acopios'=>$acopios));
+        }else{
+            $bad = true;
+            $acopios = $this->acopioRep->getAllByProveedor($data['hdUpIdProveedor']);
+            $proveedor = $this->proveedorRep->getProveedorById($data['hdUpIdProveedor']);
+            return redirect()->back()->with(array('fail' => 'Insidencia  no puede ser actualizada','proveedor'=>$proveedor,'acopios'=>$acopios));
+           // return view('Control/getAcopioByProveedor',compact('proveedor', 'acopios','bad'))->with(array('fail' => 'Insidencia  No Actualizada'));
+
+        }
+    }
+
+    public function getInsidenciaByAcopio()
+    {
+        $data = \Input::all();
+
+
+        $insidencia = $this->insidenciaRep->getInsidenciaByAcopio($data);
+
+
+        return \Response::json($insidencia);
+
+
+
+    }
+
+    public function deleteInsidencia($id)
+    {
+
+        try{
+
+            $this->insidenciaRep->deleteInsidencia($id);
+            return redirect()->back()->with(array('confirm' => 'Insidencia  Eliminada'));
+
+        }catch (\Exception $e){
+
+            return redirect()->back()->with(array('fail' => 'El valor contiene dependencias'));
+
+        }
+
+
     }
 
     

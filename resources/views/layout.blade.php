@@ -7,7 +7,7 @@
     <!-- bootstrap 3.0.2 -->
     <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
     <!-- font Awesome -->
-    <link href="{{asset('css/font-awesome.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('css/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css" />
     <!-- Ionicons -->
     <link href="{{asset('css/ionicons.min.css')}}" rel="stylesheet" type="text/css" />
     <!-- Theme style -->
@@ -301,13 +301,13 @@
             <ul class="sidebar-menu">
                 <li>
                     <a  href="{{ URL::route('home')}}">
-                        <i style="color:#2196F3;" class="fa fa-dashboard"></i> <span>Inicio</span>
+                        <i  class="fa fa-dashboard"></i> <span>Inicio</span>
                     </a>
                 </li>
 
                 <li class="treeview">
                     <a href="#">
-                        <i style="color:#CDDC39;" class="fa fa-users"></i>
+                        <i style="color:#21B981;" class="fa fa-users"></i>
                         <span>Proveedores</span>
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
@@ -320,7 +320,7 @@
                 </li>
                 <li class="treeview">
                     <a href="#">
-                        <i style="color:#FF9800;" class="fa fa-tasks"></i>
+                        <i style="color:#236B92;" class="fa fa-tasks"></i>
                         <span>Control y Calidad</span>
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
@@ -559,8 +559,15 @@
     }
 
 
+    .panel-modControlCalidad {
+        border-color: rgb(228, 228, 228);
+    }
 
-
+    .panel-modControlCalidad>.panel-heading {
+        color: #fff;
+        background-color: #95A0A6;
+        border-color: #95A0A6;
+    }
 
 
 
@@ -587,7 +594,30 @@
 
     }
 
+    table[data-tabl='ruta'] {
 
+    }
+    table[data-tabl='modProveedor'] > thead{
+
+        background-color: #608F94;
+        color: white;
+
+    }
+
+
+    table[data-tabl='modControlCalidad'] > thead{
+
+        background-color: #236B92;
+        color: white;
+
+    }
+
+    table[data-tabl='detailAcopio'] > thead{
+
+        background-color: #E46969;
+        color: white;
+
+    }
 
 
 

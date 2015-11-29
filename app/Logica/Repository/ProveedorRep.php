@@ -22,6 +22,13 @@ class ProveedorRep {
         return Proveedor::all();
     }
 
+    public function deleteProveedor($id){
+
+        $proveedor = Proveedor::find($id);
+
+        $proveedor->delete();
+    }
+
     public function getProveedorByDNI($dni){
 
        $proveedor = Proveedor::where('dni','like',$dni)->first();
