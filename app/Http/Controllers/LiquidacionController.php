@@ -40,6 +40,18 @@ class LiquidacionController extends Controller
 
     }
 
+    public function getViewEditLiquidacion($id)
+    {
+
+        $rutas = $this->rutaRep->all();
+
+        return view('Servicio/viewUpLiquidacion', compact('rutas','id'));
+
+    }
+
+
+
+
 
     public function regLiquidacion()
     {
@@ -88,9 +100,42 @@ class LiquidacionController extends Controller
 
         }
 
+
+
         return view('Servicio/viewLiquidacion', compact('liquidaciones'));
 
     }
+
+
+    public function getLiquidacionById()
+    {
+        $data = \Input::all();
+
+        $liquidacion = $this->liquidacionRep->getLiquidacionById($data['id']);
+
+        return \Response::json($liquidacion);
+
+    }
+
+    public function upLiquidacion(){
+        $data = \Input::all();
+
+
+        try {
+
+            $this->liquidacionRep->upLiquidacion($data);
+
+            $mensaje = ['message' => 'correcto'];
+
+            return \Response::json($mensaje);
+
+        } catch (\Exception $e) {
+
+            return response()->json(['error' => 500, 'message' => 'Error' . $e], 500);
+
+        }
+    }
+
 
 
     /*Esto es para service*/
@@ -102,6 +147,31 @@ class LiquidacionController extends Controller
 
         return \Response::json($liquidacion);
 
+    }
+
+
+    public function deleteLiquidacion($id)
+    {
+
+        try{
+
+            $this->liquidacionRep->deleteLiquidacion($id);
+            return redirect()->back()->with(array('confirm' => 'Liquidacion eliminadad correctamente'));
+
+        }catch (\Exception $e){
+
+            return redirect()->back()->with(array('fail' => 'No es posible eliminar , revise las dependencias'));
+
+        }
+
+
+    }
+
+    public function getAllLiquidacionMain(){
+
+        $liquidacion = $this->liquidacionRep->getAllLiquidacionMain();
+
+        return \Response::json($liquidacion);
     }
 
 }

@@ -18,6 +18,17 @@ class Liquidacion extends Model{
         return $this->belongsTo('trogue\Entities\Ruta','ruta_id','id');
     }
 
+    public function detalle_descuento(){
+
+        return $this->hasMany('trogue\Entities\DetalleDescuentoLiquidacion','liquidacion_id','id');
+    }
+    public function detalle_liquidacion(){
+
+        return $this->hasMany('trogue\Entities\DetalleLiquidacion','liquidacion_id','id');
+    }
+
+
+
 
 
 }

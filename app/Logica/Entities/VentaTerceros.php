@@ -19,4 +19,10 @@ class VentaTerceros extends Model{
         return $this->belongsTo('trogue\Entities\Recurso','origen_id','id');
     }
 
+    public function proveedor()
+    {
+        //$this->belongsTo('entitie', 'local_key', 'parent_key');
+        return $this->belongsTo('trogue\Entities\Proveedor','proveedor_id','id');
+    }
+
 }

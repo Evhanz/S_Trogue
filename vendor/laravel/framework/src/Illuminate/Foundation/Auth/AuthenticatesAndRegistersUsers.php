@@ -59,7 +59,8 @@ trait AuthenticatesAndRegistersUsers {
 	 */
 	public function getLogin()
 	{
-		return view('auth.login');
+        //return view('auth.login');
+        return view('admin.login');
 	}
 
 	/**
@@ -107,7 +108,8 @@ trait AuthenticatesAndRegistersUsers {
 	{
 		$this->auth->logout();
 
-		return redirect(property_exists($this, 'redirectAfterLogout') ? $this->redirectAfterLogout : '/');
+		//return redirect(property_exists($this, 'redirectAfterLogout') ? $this->redirectAfterLogout : '/');
+        return view('admin.login');
 	}
 
 	/**
@@ -132,7 +134,9 @@ trait AuthenticatesAndRegistersUsers {
 	 */
 	public function loginPath()
 	{
-		return property_exists($this, 'loginPath') ? $this->loginPath : '/auth/login';
+		//return property_exists($this, 'loginPath') ? $this->loginPath : '/auth/login';
+        //return view('admin/login');
+        return property_exists($this, 'loginPath') ? $this->loginPath : '/auth/login';
 	}
 
 }

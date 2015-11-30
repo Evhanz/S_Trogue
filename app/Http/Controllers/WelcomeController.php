@@ -31,7 +31,8 @@ class WelcomeController extends Controller {
 	public function index()
 	{
 		//return view('welcome');
-        return view('main/main');
+        //return view('main/main');
+        return view('admin/login');
 	}
 
 }

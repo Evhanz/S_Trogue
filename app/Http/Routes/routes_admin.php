@@ -1,39 +1,5 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the controller to call when that URI is requested.
-|
-*/
-
-Route::get('/',['as'=>'home','uses'=>'WelcomeController@index'] );
-
-Route::get('home', 'HomeController@index');
-
-Route::controllers([
-	'auth' => 'Auth\AuthController',
-	'password' => 'Auth\PasswordController',
-]);
-
-
-/*Mi login*/
-
-
-Route::get('usuarios/newUsuario',['as'=>'viewNewUsuario','uses'=>'UsuarioController@viewNewUsuario']);
-Route::get('usuarios/firstUser',['as'=>'firstUser','uses'=>'UsuarioController@registerUser']);
-Route::post('usuarios/loginUser',['as'=>'loginUser','uses'=>'UsuarioController@login']);
-Route::get('usuarios/outLogin',['as'=>'outLogin','uses'=>'UsuarioController@outLogin']);
-
-
-/**/
-
-Route::get('help/token',['as'=>'getToken','uses'=>'HelperController@token']);
-
 /*Modulo de proveedores*/
 Route::get('proveedores', ['as' => 'proveedores']);
 Route::get('proveedores/all', ['middleware' => 'auth','as' => 'proveedoresAll', 'uses' => 'ProveedoresController@selectAllProveedores']);
@@ -45,9 +11,6 @@ Route::get('proveedores/getProveedor/{id}',['as'=>'getProveedorByID','uses' => '
 Route::post('proveedores/updateProveedor',['as'=>'updateDataProveedor','uses' => 'ProveedoresController@updateDataProveedor']);
 Route::get('proveedores/deteleProveedor/{id}',['as'=>'deteleProveedor','uses'=>'ProveedoresController@deteleProveedor']);
 
-/*Service proveedor*/
-Route::post('proveedores/getProveedorByDNI',['as'=>'getProveedorByDNIService','uses'=>'ProveedoresController@getProveedorByDNIService']);
-
 
 /*Modulo de rutas*/
 Route::get('rutas',['as'=>'rutas']);
@@ -57,18 +20,12 @@ Route::post('rutas/updateRuta',['as'=>'updateRuta','uses'=>'RutasController@upda
 Route::get('rutas/getRutaById/{id}',['as'=>'getRutaById','uses'=>'RutasController@getRutaById']);
 Route::get('rutas/deleteRuta/{id}',['as'=>'deleteRuta','uses'=>'RutasController@deleteRuta']);
 
-
 /*Modulo de Anexos*/
 Route::get('anexos',['as'=>'anexos']);
 Route::get('anexos/all',['as'=>'anexosAll','uses'=>'AnexosController@selectAllRutas']);
 Route::post('anexos/regAnexo',['as'=>'regAnexo','uses'=>'AnexosController@regAnexo']);
 Route::post('anexos/updateAnexo',['as'=>'updateAnexo','uses'=>'AnexosController@updateAnexo']);
 Route::get('anexos/deleteAnexo/{id}',['as'=>'deleteAnexo','uses'=>'AnexosController@deleteAnexo']);
-
-
-//para los helper
-Route::get('helper/getAnexoByRuta/',['as'=>'getAnexos']);
-Route::get('helper/getAnexoByRuta/{id}',['as'=>'get','uses'=>'HelperController@getAnexoByRuta']);
 
 
 //para el acopio
@@ -81,18 +38,6 @@ Route::get('Control_Calidad/getAcopioByProveedor/{id}',['as'=>'getAcopioByProvee
 Route::post('Control_Calidad/Acopio/reg',['as'=>'regAcopio','uses'=>'AcopioController@regAcopio']);
 Route::post('Control_Calidad/getAcopioByProveedorAndFechas/',['as'=>'getAcopioByProveedorAndFechas','uses' =>'AcopioController@getAcopioByProveedorAndFechas']);
 Route::post('Control_Calidad/getAcopioById/',['as'=>'getAcopioById','uses'=>'AcopioController@getAcopioById']);
-//return suma Json de los acopios
-Route::post('Control_Calidad/getSumaAcopioByProveedorAndFechas/',['as'=>'getSumaAcopioByProveedorAndFechas','uses' =>'AcopioController@getSumaAcopioByProveedorAndFechas']);
-Route::post('Control_Calidad/updateAcopio',['as'=>'updateAcopio','uses'=>'AcopioController@updateAcopio']);
-
-
-
-
-Route::get('acopio/prueba',['as'=>'prueba','uses'=>'AcopioController@prueba']);
-
-
-Route::get('acopio/getUltimosACopios',['as'=>'getUltimosACopios','uses'=>'AcopioController@getUltimosACopios']);
-
 
 
 //modulo de insidencias
@@ -103,9 +48,6 @@ Route::post('Control_Calidad/getInsidenciaByAcopio',['as'=>'getInsidenciaByAcopi
     ,'uses'=>'InsidenciaController@getInsidenciaByAcopio']);
 Route::get('Control_Calidad/deleteInsidencia/{id}',['as'=>'deleteInsidencia'
     ,'uses'=>'InsidenciaController@deleteInsidencia']);
-
-Route::get('Control_Calidad/getInsidencias/main',['as'=>'getInsidencias'
-    ,'uses'=>'InsidenciaController@getInsidencias']);
 
 
 //modulo de liquidacion
@@ -119,7 +61,6 @@ Route::get('liquidacion/getViewEditLiquidacion/{id}',['as'=>'getViewEditLiquidac
 Route::post('liquidacion/upLiquidacion',['as'=>'upLiquidacion','uses'=>'LiquidacionController@upLiquidacion']);
 Route::get('liquidacion/deleteLiquidacion/{id}',['as'=>'deleteLiquidacion','uses'=>'LiquidacionController@deleteLiquidacion']);
 
-Route::get('liquidacion/getAllLiquidacionMain',['as'=>'getAllLiquidacionMain','uses'=>'LiquidacionController@getAllLiquidacionMain']);
 
 
 
@@ -135,11 +76,6 @@ Route::get('prestamos/getViewUpPrestamo/{id}',['as'=>'getViewUpPrestamo','uses'=
 Route::post('prestamos/getPrestamoById',['as'=>'getPrestamoById','uses'=>'PrestamosController@getPrestamoById']);
 Route::post('prestamos/updatePrestamo',['as'=>'updatePrestamo','uses'=>'PrestamosController@updatePrestamo']);
 Route::get('prestamos/deletePrestamo/{id}',['as'=>'deletePrestamo','uses'=>'PrestamosController@deletePrestamo']);
-
-
-//Letras
-
-Route::get('Letras/vencidasByProveedores',['as'=>'vencidasByProveedores','uses'=>'LetrasController@vencidasByProveedores']);
 
 
 
@@ -163,13 +99,3 @@ Route::get('pagos/viewAllPagos',['as'=>'viewAllPagos','uses'=>'PagoController@vi
 Route::get('pagos/viewNewPago',['as'=>'viewNewPago','uses'=>'PagoController@viewNewPago']);
 Route::post('pagos/RegPago',['as'=>'RegPago','uses'=>'PagoController@RegPago']);
 
-
-/*Api*/
-Route::post('api/proveedor/getWithPrestamosAndLetras',['as'=>'ApigetWithPrestamosAndLetras', 'uses' => 'ProveedoresController@ServiceGetWithPrestamosAndLetras']);
-Route::post('api/acopio/now',['as'=>'ApiGetAcopioByDay','uses'=>'AcopioController@getAcopioByDay']);
-Route::post('api/liquidacion/getLiquidacionByNumber',['as'=>'ApiGetLiquidacionByNumber','uses'=>'LiquidacionController@getLiquidacionByNumber']);
-Route::get('api/helper/getDataCore',['as'=>'getDataCore','uses'=>'HelperController@getDataCore']);
-
-
-/*solo apra pruebas*/
-Route::post('sync/reqDataSyncPesoBalanza',['as'=>'reqDataSyncPesoBalanza','uses'=>'HelperController@reqDataSyncPesoBalanza']);

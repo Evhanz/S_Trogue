@@ -12,6 +12,11 @@ use trogue\Entities\VentaTerceros;
 
 class VentaTercerosRep {
 
+
+    public function all(){
+        return VentaTerceros::all();
+    }
+
     public function regVentaTerceros($data)
     {
         $venta_terceros = new VentaTerceros();

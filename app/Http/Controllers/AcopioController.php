@@ -88,6 +88,24 @@ class AcopioController extends Controller{
 
 
     }
+
+
+    public function deleteAcopio($id)
+    {
+
+        try{
+
+            $this->acopioRep->deleteAcopio($id);
+            return redirect()->back()->with(array('confirm' => 'Acopio borrado'));
+
+        }catch(\Exception $e){
+
+            return redirect()->back()->with(array('fail' => 'Acopio no puede borrarse '));
+
+        }
+
+
+    }
     
 
     public function getAcopioByProveedor($idProveedor)
@@ -180,6 +198,15 @@ class AcopioController extends Controller{
         $acopios = $this->acopioRep->getAcopioByDay($hoy);
 
         return \Response::json($acopios);
+    }
+
+
+    public function getUltimosACopios()
+    {
+        $res = $this->acopioRep->getUltimosACopios();
+
+        return \Response::json($res);
+
     }
 
 

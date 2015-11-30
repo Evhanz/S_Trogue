@@ -16,8 +16,8 @@ Route::get('/',['as'=>'home','uses'=>'WelcomeController@index'] );
 Route::get('home', 'HomeController@index');
 
 Route::controllers([
-	'auth' => 'Auth\AuthController',
-	'password' => 'Auth\PasswordController',
+    'auth' => 'Auth\AuthController',
+    'password' => 'Auth\PasswordController',
 ]);
 
 
@@ -58,6 +58,10 @@ Route::get('rutas/getRutaById/{id}',['as'=>'getRutaById','uses'=>'RutasControlle
 Route::get('rutas/deleteRuta/{id}',['as'=>'deleteRuta','uses'=>'RutasController@deleteRuta']);
 
 
+include('Routes/routes_admin.php');
+
+
+
 /*Modulo de Anexos*/
 Route::get('anexos',['as'=>'anexos']);
 Route::get('anexos/all',['as'=>'anexosAll','uses'=>'AnexosController@selectAllRutas']);
@@ -91,9 +95,6 @@ Route::post('Control_Calidad/updateAcopio',['as'=>'updateAcopio','uses'=>'Acopio
 Route::get('acopio/prueba',['as'=>'prueba','uses'=>'AcopioController@prueba']);
 
 
-Route::get('acopio/getUltimosACopios',['as'=>'getUltimosACopios','uses'=>'AcopioController@getUltimosACopios']);
-
-
 
 //modulo de insidencias
 Route::get('Control_Calidad/InsidenciaForAcopio/{$id}',['as'=>'a']);
@@ -104,8 +105,8 @@ Route::post('Control_Calidad/getInsidenciaByAcopio',['as'=>'getInsidenciaByAcopi
 Route::get('Control_Calidad/deleteInsidencia/{id}',['as'=>'deleteInsidencia'
     ,'uses'=>'InsidenciaController@deleteInsidencia']);
 
-Route::get('Control_Calidad/getInsidencias/main',['as'=>'getInsidencias'
-    ,'uses'=>'InsidenciaController@getInsidencias']);
+
+
 
 
 //modulo de liquidacion
@@ -119,7 +120,6 @@ Route::get('liquidacion/getViewEditLiquidacion/{id}',['as'=>'getViewEditLiquidac
 Route::post('liquidacion/upLiquidacion',['as'=>'upLiquidacion','uses'=>'LiquidacionController@upLiquidacion']);
 Route::get('liquidacion/deleteLiquidacion/{id}',['as'=>'deleteLiquidacion','uses'=>'LiquidacionController@deleteLiquidacion']);
 
-Route::get('liquidacion/getAllLiquidacionMain',['as'=>'getAllLiquidacionMain','uses'=>'LiquidacionController@getAllLiquidacionMain']);
 
 
 
@@ -135,11 +135,6 @@ Route::get('prestamos/getViewUpPrestamo/{id}',['as'=>'getViewUpPrestamo','uses'=
 Route::post('prestamos/getPrestamoById',['as'=>'getPrestamoById','uses'=>'PrestamosController@getPrestamoById']);
 Route::post('prestamos/updatePrestamo',['as'=>'updatePrestamo','uses'=>'PrestamosController@updatePrestamo']);
 Route::get('prestamos/deletePrestamo/{id}',['as'=>'deletePrestamo','uses'=>'PrestamosController@deletePrestamo']);
-
-
-//Letras
-
-Route::get('Letras/vencidasByProveedores',['as'=>'vencidasByProveedores','uses'=>'LetrasController@vencidasByProveedores']);
 
 
 

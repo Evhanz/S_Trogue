@@ -41,38 +41,61 @@
                         </div><!-- /. tools -->
                         <i class="fa fa-cloud"></i>
 
-                        <h3 class="box-title">Lista de los Venta a Terceros</h3>
+                        <h3 class="box-title">Lista todos los pagos</h3>
                     </div><!-- /.box-header -->
-                    <div class="box-body no-padding">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <form class="form-inline">
-                                    <div class="form-group">
-                                        <label for="">Ruta</label><br>
-                                        <select class="form-control" name="ruta" id="selRuta">
-                                            <option value=" ">Ninguno</option>
-                                            @foreach($rutas as $ruta)
-                                                <option value="{{$ruta->id}}">{{$ruta->descripcion}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="">Anexo</label><br>
-                                        <select class="form-control" name="anexos" id="selAnexo">
-                                            <option value=" ">Ninguno</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="">Opciones</label><br>
-                                        <button class="btn btn-success" id="btnBuscar">
-                                            <i class="search icon"></i>
-                                            Buscar
-                                        </button>
-                                    </div>
+                    <div class="box-body ">
 
-                                </form>
+                        <div class="panel panel-modControlCalidad">
+
+                            <div class="panel-heading">
+                                Filtros
                             </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <form class="form-inline" method="post" action="{{URL::route('getPrestamosByParams')}}" >
+                                            <input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
+                                            <div class="form-group">
+                                                <label>DNI</label>
+                                                <input name="dni" id="txtDNI" min="1"  class="form-control" type="number" placeholder="DNI"  pattern="[0-9]{13,16}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Estado</label><br/>
+                                                <select class="form-control" name="estado">
+                                                    <option value="deuda">deuda</option>
+                                                    <option value="pagada">pagada</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Fecha Inicio</label>
+                                                <input name="fecha_inicio"  class="form-control" type="date" >
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Fecha Fin</label>
+                                                <input name="fecha_fin"   class="form-control" type="date" >
+                                            </div>
+
+
+                                            <div class="form-group">
+                                                <button  class="btn btn-info" id="btnBuscar">
+                                                    <i class="fa fa-search"></i>
+                                                    Buscar
+                                                </button>
+                                                <a href="{{URL::route('getViewNewPrestamo') }}" class="btn btn-success" id="btnNuevo">
+                                                    <i class="fa fa-plus-circle"></i>
+                                                    Nuevo Pago
+                                                </a>
+                                            </div>
+
+                                        </form>
+                                    </div>
+                                </div>
+
+                            </div>
+
                         </div>
+
+
                         <div class="row" style="padding: 15px;">
                             <div class="table-responsive">
                                 <table class="table table-hover" id="tableReq">

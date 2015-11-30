@@ -59,7 +59,6 @@
                                         <tr>
                                             <th>Id</th>
                                             <th>Descripcion</th>
-                                            <th>Anexo</th>
                                             <th>Observacion</th>
                                             <th colspan="2">Opciones</th>
 
@@ -70,7 +69,6 @@
                                         <tr>
                                             <td>{{ $ruta->id }}</td>
                                             <td>{{ $ruta->descripcion }}</td>
-                                            <td>{{$ruta-}}</td>
                                             <td>{{ $ruta->observacion }}</td>
                                             <td>
                                                 <button  class="btn btn-warning" onclick="modalEdit('{{$ruta->id}}','{{ $ruta->descripcion}}','{{$ruta->observacion}}')">

@@ -45,7 +45,7 @@
 
 
                         <form class="ui form" id="formulario"  name="formLiquidacion"
-                             ng-submit="enviarData()"  method="post">
+                              ng-submit="enviarData()"  method="post">
 
                             <div class="panel panel-modControlCalidad">
                                 <div class="panel-heading">
@@ -195,6 +195,12 @@
             $scope.letras = [];
             $scope.idProveedor = 0;
 
+            var idPrestamo = '{{$id}}';
+
+            fillInitData(idPrestamo);
+
+
+
             $scope.searchDNI = function (){
 
                 $http.post('{{ URL::route('getProveedorByDNIService') }}',
@@ -246,8 +252,9 @@
             $scope.enviarData = function(){
                 $('#btnGuardar').attr("disabled", true);
                 var token = $('input[name="_token"]').attr('value');
+                var idPrestamo = '{{$id}}';
 
-                $http.post('{{ URL::route('regPrestamo') }}',
+                $http.post('{{ URL::route('updatePrestamo') }}',
                         {_token : token,
                             descripcion:$scope.descripcion,
                             cantidad:$scope.cantidad,
@@ -257,7 +264,8 @@
                             proveedor_id:$scope.idProveedor,
                             recurso_id:$scope.recurso,
                             n_letras: $scope.num_letras,
-                            letras:$scope.letras
+                            letras:$scope.letras,
+                            idPrestamo:idPrestamo
                         })
                         .success(function(data){
 
@@ -280,6 +288,56 @@
                             $('#btnGuardar').attr("disabled", false);
 
                         });
+            };
+
+
+            function fillInitData(id){
+
+                $http.post('{{ URL::route('getPrestamoById') }}',
+                        {_token : token,
+                            id:id
+                        })
+                        .success(function(data){
+
+                            console.log(data);
+
+                            $scope.descripcion = data.descripcion;
+                            $scope.cantidad= parseFloat(data.cantidad) ;
+                            $scope.tasa = parseInt(data.tasa);
+                            $scope.interes = parseFloat(data.interes);
+                            $scope.idProveedor = parseFloat(data.proveedor_id) ;
+                            $scope.num_letras = parseFloat(data.n_letras);
+                            $scope.dniProveedor = parseInt(data.proveedor.dni);
+
+                            angular.forEach(data.letras,function(item){
+
+                                var fec = new Date(item.fecha_vencimiento);
+                                fec.setDate(fec.getDate()+1);
+
+                                var letra = {
+                                    monto: parseFloat(item.monto_inicial),
+                                    interes:parseFloat(item.interes),
+                                    total:parseFloat(item.monto_inicial)+parseFloat(item.interes),
+                                    fecha:fec
+                                };
+
+                                $scope.letras.push(letra);
+
+
+
+                            });
+
+                            $scope.searchDNI();
+
+
+
+
+                        }).error(function(data) {
+                            console.log(data);
+
+
+                        });
+
             }
 
 

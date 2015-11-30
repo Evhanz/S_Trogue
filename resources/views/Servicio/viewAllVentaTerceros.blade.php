@@ -43,53 +43,80 @@
 
                         <h3 class="box-title">Lista de los Venta a Terceros</h3>
                     </div><!-- /.box-header -->
-                    <div class="box-body no-padding">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <form class="form-inline">
-                                    <div class="form-group">
-                                        <label>DNI</label>
-                                        <input id="txtDNI"  class="form-control" type="text" placeholder="DNI"  pattern="[0-9]{13,16}">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Estado</label>
-                                        <input id="txtDNI"  class="form-control" type="text" >
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Fecha Inicio</label>
-                                        <input id="txtDNI"  class="form-control" type="text" >
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Fecha Fin</label>
-                                        <input id="txtDNI"  class="form-control" type="text" >
-                                    </div>
+                    <div class="box-body ">
 
-                                    <div class="form-group">
-                                        <button  class="btn btn-info" id="btnBuscar">
-                                            <i class="fa fa-search"></i>
-                                            Buscar
-                                        </button>
-                                        <a href="{{URL::route('getViewNewVentaTerceros')}}" class="btn btn-success" id="btnNuevo">
-                                            <i class="fa fa-plus-circle"></i>
-                                            Nueva Venta a Terceros
-                                        </a>
-                                    </div>
-                                </form>
+                        <div class="panel panel-modControlCalidad">
+                            <div class="panel-heading">
+                                Filtro
                             </div>
+
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <form class="form-inline">
+                                            <div class="form-group">
+                                                <label>DNI</label>
+                                                <input id="txtDNI"  class="form-control" type="number" placeholder="DNI"  pattern="[0-9]{13,16}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Estado</label>
+                                                <input id="txtDNI"  class="form-control" type="text" >
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Fecha Inicio</label>
+                                                <input name="fecha_inicio" class="form-control" type="date" >
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Fecha Fin</label>
+                                                <input name="fecha_fin"  class="form-control" type="date" >
+                                            </div>
+
+                                            <div class="form-group">
+                                                <button  class="btn btn-info" id="btnBuscar">
+                                                    <i class="fa fa-search"></i>
+                                                    Buscar
+                                                </button>
+                                                <a href="{{URL::route('getViewNewVentaTerceros')}}" class="btn btn-success" id="btnNuevo">
+                                                    <i class="fa fa-plus-circle"></i>
+                                                    Nueva Venta a Terceros
+                                                </a>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
+
                         <div class="row" style="padding: 15px;">
                             <div class="table-responsive">
-                                <table class="table table-hover" id="tableReq">
+                                <table class="table table-hover" id="tableReq" data-tabl="modServicio">
                                     <thead>
                                     <tr>
                                         <th>Id</th>
-                                        <th>Nombre y Apellidos</th>
-                                        <th>Anexo</th>
-                                        <th>Ruta</th>
+                                        <th>Descripcion</th>
+                                        <th>Origen</th>
+                                        <th>Proveedor</th>
+                                        <th>Estado</th>
                                         <th colspan="2">Opciones</th>
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    @foreach($ventaTerceros as $venta)
+                                        <tr>
+                                            <td>{{$venta->id}}</td>
+                                            <td>{{$venta->descripcion}}</td>
+                                            <td>{{$venta->origen->descripcion}}</td>
+                                            <td>{{$venta->proveedor->fullname}}</td>
+                                            @if($venta->estado == 1)
+                                               <td><span class="label label-success">pagado</span></td>
+                                            @else
+                                               <td><span class="label label-danger">deuda</span></td>
+                                            @endif
+
+                                        </tr>
+
+                                    @endforeach
 
                                     </tbody>
                                 </table>

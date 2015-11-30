@@ -191,4 +191,12 @@ class InsidenciaRep {
     }
 
 
+    public function getInsidencias()
+    {
+
+        return Insidencia::with('acopio.proveedor')->take(5)->get();
+
+    }
+
+
 }

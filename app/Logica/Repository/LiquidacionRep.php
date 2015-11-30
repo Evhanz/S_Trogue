@@ -101,6 +101,106 @@ class LiquidacionRep {
 
     }
 
+    public function getLiquidacionById($id)
+    {
+
+        $liquidacion = Liquidacion::where('id','like',$id)->with('detalle_descuento','detalle_liquidacion')->first();
+
+        return $liquidacion;
+    }
+
+    public function upLiquidacion($data){
+
+        DB::transaction(function() use ($data)
+        {
+            $liquidacion = $data['liquidacion'];
+            $detalle_liquidacion = $data['detalle_acopio'];
+            $detalle_descuento = $data['detalle_descuento'];
+
+            $liqui = Liquidacion::find($liquidacion['id']);
+            $liqui->numero = $liquidacion['codigo_liquidacion'];
+            $liqui->precio_ref = $liquidacion['valor_litro'];
+            $liqui->solidos = $liquidacion['numeroSolidos'];
+            $liqui->fecha_inicio = $liquidacion['fecha_inicio'];
+            $liqui->fecha_fin = $liquidacion['fecha_fin'];
+            $liqui->descuentos = $liquidacion['descuentos'];
+            $liqui->litros = $liquidacion['litros'];
+            $liqui->pago_neto = $liquidacion['pago_neto'];
+            $liqui->ruta_id = $liquidacion['ruta'];
+
+            $liqui->save();
+
+            $this->deleteDetalle($liquidacion['id']);
+
+
+            if(count($detalle_liquidacion)>0){
+
+                foreach($detalle_liquidacion as $detalle){
+
+                    $detalleLiquidacion = new DetalleLiquidacion();
+                    $detalleLiquidacion->cantidad = $detalle['cantidad'];
+                    $detalleLiquidacion->dia = $detalle['fechaView'];
+                    $detalleLiquidacion->liquidacion_id = $liqui->id;
+                    $detalleLiquidacion->save();
+                }
+
+            }
+
+
+            if(count($detalle_descuento)>0){
+
+                foreach($detalle_descuento as $detalle){
+
+                    $detalle_descuento = new DetalleDescuentoLiquidacion();
+                    $detalle_descuento->descripcion = $detalle['descripcion'];
+                    $detalle_descuento->fecha = $detalle['fecha'];
+                    $detalle_descuento->monto = $detalle['monto'];
+                    $detalle_descuento->liquidacion_id = $liqui->id;
+                    $detalle_descuento->save();
+                }
+
+            }
+
+
+
+        });
+
+        return 0;
+
+
+
+
+    }
+
+
+    public function deleteDetalle($idLiquidacion){
+
+        $rowsAcopio = DetalleLiquidacion::where('liquidacion_id','like',$idLiquidacion)->delete();
+
+        $rowsAcopio = DetalleDescuentoLiquidacion::where('liquidacion_id','like',$idLiquidacion)->delete();
+
+    }
+
+
+    public function deleteLiquidacion($id)
+    {
+        DB::transaction(function() use ($id)
+        {
+
+            $liquidacion = Liquidacion::find($id);
+            $this->deleteDetalle($liquidacion->id);
+            $liquidacion->delete();
+
+        });
+
+    }
+
+
+    public function getAllLiquidacionMain()
+    {
+        return Liquidacion::take(5)->get();
+    }
+
 
 
 

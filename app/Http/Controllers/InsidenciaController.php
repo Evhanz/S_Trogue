@@ -123,6 +123,16 @@ class InsidenciaController extends Controller{
 
     }
 
+    public function getInsidencias()
+    {
+
+        $insidencias = $this->insidenciaRep->getInsidencias();
+
+        return \Response::json($insidencias);
+
+
+    }
+
     
 
 

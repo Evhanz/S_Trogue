@@ -21,6 +21,12 @@ class PagoController extends Controller{
 
     }
 
+    public function viewAllPagos(){
+
+        return view('Servicio/viewAllPagos');
+
+    }
+
 
     public function viewNewPago()
     {

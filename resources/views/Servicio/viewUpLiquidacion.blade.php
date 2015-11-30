@@ -69,7 +69,7 @@
                                         </div>
                                         <div class="col-lg-4">
                                             <label for="">Fecha de Inicio:</label>
-                                            <input class="form-control" type="date" ng-model="fecha_inicio" name="fecha_inicio" ng-change="validarFecha" required>
+                                            <input class="form-control" type="date" ng-model="fecha_inicio" name="fecha_inicio" ng-change="changFecha()" required>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -88,7 +88,7 @@
                                         </div>
                                         <div class="col-lg-4">
                                             <label for="">Fecha Fin</label>
-                                            <input class="form-control" type="date" ng-model="fecha_fin" name="fecha_fin" ng-change="validarFecha" required>
+                                            <input class="form-control" type="date" ng-model="fecha_fin" name="fecha_fin" ng-change="changFecha()" required>
 
                                         </div>
                                     </div>
@@ -210,7 +210,7 @@
                                     <br>
                                     <button ng-disabled='!formLiquidacion.$valid' class="btn btn-success" id="btnGuardar" >
 
-                                       <span style="font-size: 30px"><i class="fa fa-save"></i> Guardar</span>
+                                        <span style="font-size: 30px"><i class="fa fa-save"></i> Guardar</span>
                                     </button>
                                 </div>
                             </div>
@@ -232,22 +232,40 @@
 
             var token = $('input[name="_token"]').attr('value');
 
+            var idLiquidacion = '{{$id}}';
+
+            var tempAcopio =[];
+
+            var hito = 0;
+
             $scope.DetalleAcopio =[];
             $scope.DetalleDescuento = [];
             $scope.descuento_total = 0;
 
 
+            /*Primero traemos a la liquidacion*/
+            getLiquidacionInitData();
+
+
+
             /*declaraciones de inicio*/
 
+
+
             $scope.$watch('fecha_fin',function(){
+
+                if(hito!=0){
                 var bandera = validarfechas();
                 if(bandera ==1){
 
                     //lamaremos a la funcion que llena todos los detalles
                     fillFieldsDetalleAcopio();
                 }
+                }
 
             });
+
+
 
             $scope.$watch('pago_neto',function(){
                 var pago = $scope.pago_neto-$scope.descuento_total;
@@ -262,6 +280,13 @@
                 $scope.pago_total = pago.toFixed(2);
 
             });
+
+
+            $scope.changFecha = function(){
+
+                hito=1;
+
+            };
 
 
             $scope.addDetailDescuento = function (){
@@ -316,6 +341,8 @@
 
                 var token = $('input[name="_token"]').attr('value');
                 var liquidacion = {};
+
+                liquidacion.id = idLiquidacion;
                 liquidacion.codigo_liquidacion = $scope.numeroLiquidacion;
                 liquidacion.numeroSolidos = $scope.numeroSolidos;
                 liquidacion.fecha_inicio = $scope.fecha_inicio;
@@ -326,7 +353,7 @@
                 liquidacion.litros = $scope.total_acopio;
                 liquidacion.pago_neto = $scope.pago_neto;
 
-                $http.post('{{URL::route('regLiquidacion') }}',{
+                $http.post('{{URL::route('upLiquidacion') }}',{
 
                     token : token,
                     liquidacion : liquidacion,
@@ -335,9 +362,9 @@
 
                 }).success(function(data){
 
-                    alert('Liquidacion Registrada Correctamente');
+                    alert('Liquidacion Actualizada Correctamente');
                     $('#btnGuardar').attr("disabled", false);
-                    $window.location.href = '{{ URL::route('home') }}';
+                    $window.location.href = '{{ URL::route('getAllLiquidacion') }}';
                     //console.log(data);
 
                 }).error(function(data){
@@ -408,6 +435,92 @@
                 }
 
             }
+
+
+            function getLiquidacionInitData(){
+
+                $http.post('{{URL::route('getLiquidacionById') }}',{
+
+                    token : token,
+                    id:idLiquidacion
+
+
+                }).success(function(data){
+
+                    console.log(data);
+
+
+                    data.fecha_inicio = new Date(data.fecha_inicio);
+
+                    data.fecha_inicio.setDate( data.fecha_inicio.getDate()+1);
+
+                    data.fecha_fin = new Date(data.fecha_fin);
+                    data.fecha_fin.setDate( data.fecha_fin.getDate()+1);
+
+
+
+                    data.precio_ref = parseFloat(data.precio_ref);
+
+                    $scope.numeroLiquidacion = data.numero  ;
+                    $scope.numeroSolidos = data.solidos;
+                    $scope.fecha_inicio = data.fecha_inicio;
+                    $scope.fecha_fin = data.fecha_fin;
+                    $scope.valor_litro = data.precio_ref;
+                    $scope.descuento_total = data.descuentos;
+                    $scope.litros = data.litros;
+                    $scope.pago_neto = data.pago_neto;
+                    //$scope.ruta = parseFloat( data.ruta_id);
+
+
+                    $('#selRuta').val(data.ruta_id);
+
+                    angular.forEach(data.detalle_liquidacion, function(item) {
+
+                        var fech = new Date(item.fecha);
+                       fech.setDate(fech.getDate()+1);
+
+                        var detalle_acopio ={
+                            fechaView:item.dia,
+                            cantidad: parseFloat( item.cantidad)
+                        } ;
+
+                        $scope.DetalleAcopio.push(detalle_acopio);
+
+                    });
+
+                    angular.forEach(data.detalle_descuento, function(item) {
+
+                        item.fecha = new Date( item.fecha);
+
+                        item.fecha.setDate(  item.fecha.getDate()+1);
+
+                        var descuento = {
+                            fecha : item.fecha,
+                            monto: parseFloat(item.monto),
+                            descripcion:item.descripcion
+
+
+                        };
+
+                        $scope.DetalleDescuento.push(descuento);
+
+                        $scope.cambioAcopio();
+
+
+
+                    });
+
+
+                }).error(function(data){
+                    console.log(data);
+
+                });
+
+
+
+            }
+
+
 
 
 

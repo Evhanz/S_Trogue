@@ -130,12 +130,24 @@
 
                                                 <td>
                                                     <div class="btn-group">
-                                                        <button ng-click="editAcopio({{$acopio->id}})" class="btn btn-warning hidden-print">
-                                                            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                                                        </button>
-                                                        <button ng-click="deleteAcopio({{$acopio->id}})" class="btn btn-danger hidden-print">
-                                                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                                                        </button>
+
+                                                        @if(count($acopio->insidencias)>0 )
+                                                            <button ng-click="editAcopio({{$acopio->id}})" class="btn btn-warning hidden-print" disabled>
+                                                                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                                                            </button>
+                                                            <button ng-click="deleteAcopio({{$acopio->id}})" class="btn btn-danger hidden-print" disabled>
+                                                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                                            </button>
+                                                        @else
+                                                            <button ng-click="editAcopio({{$acopio->id}})" class="btn btn-warning hidden-print">
+                                                                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                                                            </button>
+                                                            <button ng-click="deleteAcopio({{$acopio->id}})" class="btn btn-danger hidden-print">
+                                                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                                            </button>
+
+                                                        @endif
+
                                                     </div>
 
                                                 </td>
@@ -572,6 +584,20 @@
 
             };
 
+            $scope.deleteAcopio = function(id){
+
+
+                $('#idObject').val(id);
+                $('#typeObject').val("acopio");
+
+                $('#modalDelete').modal('show');
+
+
+            };
+
+
+
+
             $scope.deleteSi =function(){
 
                 var id = $('#idObject').val();
@@ -581,6 +607,12 @@
                 if(tipo == 'insidencia'){
 
                     location.href='{{ URL::route('modControlCalidad') }}/deleteInsidencia/'+id;
+
+                }
+
+                if(tipo == 'acopio'){
+
+                    location.href='{{ URL::route('modControlCalidad') }}/deleteAcopio/'+id;
 
                 }
 

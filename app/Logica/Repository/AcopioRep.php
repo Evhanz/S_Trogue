@@ -8,6 +8,7 @@
 
 namespace trogue\Repository;
 use trogue\Entities\Acopio;
+use trogue\Entities\PesoBalanza;
 
 
 class AcopioRep {
@@ -83,6 +84,14 @@ class AcopioRep {
     }
 
 
+    public function deleteAcopio($id)
+    {
+
+        $acopio = Acopio::find($id);
+        $acopio->delete();
+    }
+
+
     /*
      * El acopio es para las ultimos 15 acopio para
      * sacar el valor promedial para el manejo de la
@@ -122,5 +131,47 @@ class AcopioRep {
 
 
     }
+
+
+    public function getBalanzaGloria($day)
+    {
+
+        try{
+
+        $peso = PesoBalanza::where('fecha','=',$day)->firstOrFail();
+
+        return $peso->cantidad;
+        }catch (\Exception $e){
+            return 0;
+        }
+
+
+    }
+
+    public function getUltimosACopios()
+    {
+
+        $res = array();
+
+        for($i=0;$i<15;$i++){
+
+            $fecha = date('Y-m-j');
+            $nuevafecha = strtotime ( '-'.$i.' day' , strtotime ( $fecha ) ) ;
+            $nuevafecha = date ( 'Y-m-j' , $nuevafecha );
+
+            $suma = $this->getAcopioByDay($nuevafecha);
+
+            $peso = $this->getBalanzaGloria($nuevafecha);
+
+            $acopio_sum = ['fecha'=>$nuevafecha,'monto'=>$suma,'gloria'=>$peso];
+
+            array_push($res, $acopio_sum);
+
+        }
+
+        return $res;
+
+    }
+
 
 }

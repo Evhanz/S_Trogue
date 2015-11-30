@@ -32,7 +32,7 @@
     <div class="content">
         <div class="row">
             <div class="col-lg-12">
-                <div class="box box-danger" >
+                <div class="box box-primary" >
                     <div class="box-header">
                         <!-- tools box -->
                         <div class="pull-right box-tools">
@@ -42,51 +42,66 @@
 
                         <h3 class="box-title">Lista de Todo los Liquidacion</h3>
                     </div><!-- /.box-header -->
-                    <div class="box-body no-padding">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <form class="form-inline" method="post" action="{{ URL::route('getAllLiquidacionByParameters') }}">
-                                    <input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
-                                    <div class="form-group">
-                                        <label for="">Fecha de Inicio</label><br>
-                                        <input type="date" name="fecha_inicio"/>
+                    <div class="box-body">
 
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="">Fecha Fin</label><br>
-                                        <input type="date" name="fecha_fin"/>
+                        <div class="panel panel-modControlCalidad">
+                            <div class="panel-heading">
 
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="">Numero</label><br>
-                                        <input type="text" name="numero"/>
+                                Filtro
 
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="">Opciones</label><br>
-                                        <button class="btn btn-success" id="btnBuscar">
-                                            <i class="search icon"></i>
-                                            Buscar
-                                        </button>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for=""> </label><br>
-                                        <a href="{{ URL::route('viewNewLiquidacion') }}" class="btn btn-info" id="btnNuevo">
-                                            <i class="search icon"></i>
-                                            nuevo
-                                        </a>
-                                    </div>
-
-                                </form>
                             </div>
+
+                            <div class="panel-body">
+
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <form class="form-inline" method="post" action="{{ URL::route('getAllLiquidacionByParameters') }}">
+                                            <input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
+                                            <div class="form-group">
+                                                <label for="">Fecha de Inicio</label><br>
+                                                <input type="date" name="fecha_inicio"/>
+
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="">Fecha Fin</label><br>
+                                                <input type="date" name="fecha_fin"/>
+
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="">Numero</label><br>
+                                                <input type="text" name="numero"/>
+
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="">Opciones</label><br>
+                                                <button class="btn btn-success" id="btnBuscar">
+                                                    <i class="search icon"></i>
+                                                    Buscar
+                                                </button>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for=""> </label><br>
+                                                <a href="{{ URL::route('viewNewLiquidacion') }}" class="btn btn-info" id="btnNuevo">
+                                                    <i class="search icon"></i>
+                                                    nuevo
+                                                </a>
+                                            </div>
+
+                                        </form>
+                                    </div>
+                                </div>
+
+                            </div>
+
                         </div>
+
 
                         <hr>
 
                         <div class="row" style="padding: 15px;">
                             <div class="table-responsive">
-                                <table class="table table-hover" id="tableReq">
+                                <table class="table table-hover" id="tableReq" data-tabl="modServicio">
                                     <thead >
                                     <tr>
                                         <th>Id</th>
@@ -100,33 +115,30 @@
                                     </thead>
                                     <tbody>
 
-                                    @if(!count($liquidaciones))
-                                        <tr>
-                                            <td colspan="7">No se encuentran datos que mostrar</td>
-                                        </tr>
-                                    @endif
-                                    @foreach($liquidaciones as $liquidacion)
-                                        
-                                        <tr>
-                                            <td>{{$liquidacion->id}}</td>
-                                            <td>{{$liquidacion->numero}}</td>
-                                            <td>{{$liquidacion->ruta->descripcion}}</td>
-                                            <td>{{$liquidacion->precio_ref}}</td>
-                                            <td>{{$liquidacion->litros}}</td>
-                                            <td>{{$liquidacion->descuentos}}</td>
-                                            <td>
-                                                <a class="btn btn-warning" href="">
-                                                    editar
-                                                </a>
-                                            </td>
-                                            <td><a class="btn btn-danger" href="">
-                                                    Eliminar
-                                                </a>
-                                            </td>
-                                            
-                                        </tr>
+                                    @if($liquidaciones!=null)
+                                        @foreach($liquidaciones as $liquidacion)
 
-                                    @endforeach
+                                            <tr>
+                                                <td>{{$liquidacion->id}}</td>
+                                                <td>{{$liquidacion->numero}}</td>
+                                                <td>{{$liquidacion->ruta->descripcion}}</td>
+                                                <td>{{$liquidacion->precio_ref}}</td>
+                                                <td>{{$liquidacion->litros}}</td>
+                                                <td>{{$liquidacion->descuentos}}</td>
+                                                <td>
+                                                    <a class="btn btn-warning" href="{{URL::route('getViewEditLiquidacion',$liquidacion->id)}}">
+                                                        editar
+                                                    </a>
+                                                </td>
+                                                <td><button class="btn btn-danger" onclick="modalDelete('{{$liquidacion->id}}')" >
+                                                        Eliminar
+                                                    </button>
+                                                </td>
+
+                                            </tr>
+
+                                        @endforeach
+                                    @endif
 
                                     </tbody>
                                 </table>
@@ -135,7 +147,7 @@
                     </div><!-- /.box-body -->
                     <div class="box-footer">
                         <div  id="paginador">
-                            {!! $liquidaciones->setPath('')->render() !!}
+
                         </div>
                     </div><!-- /.box-footer -->
                 </div><!-- /.box -->
@@ -146,12 +158,49 @@
     </div>
 
 
+    <!--Modal para eliminar -->
+    <div class="modal fade" id="modalDelete">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h2 class="modal-title">Eliminar </h2>
+                </div>
+                <div class="modal-body">
+                    <p class="bg-danger">
+                        <strong>Está seguro de continuar</strong>  ?
+                        <input id="idObject" type="hidden"/>
+                    </p>
+                    <p>
+                        <button id="btnsi" onclick="deleteSi()" type="button" class="btn btn-primary btn-lg">Si</button>
+                    </p>
+
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+
 
 
 
 
 
     <script>
+
+        function modalDelete(idLiqui){
+
+            $('#idObject').val(idLiqui);
+            $('#modalDelete').modal('show');
+
+        }
+
+        function deleteSi()
+        {
+            var id = $('#idObject').val();
+            location.href='{{ URL::route('modLiquidacion') }}/deleteLiquidacion/'+id;
+
+        }
 
 
 

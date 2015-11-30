@@ -25,7 +25,9 @@ class VentaTercerosController extends Controller {
 
     public function getAllVentaTerceros()
     {
-        return view('Servicio/viewAllVentaTerceros');
+
+        $ventaTerceros = $this->ventaTerceroRep->all();
+        return view('Servicio/viewAllVentaTerceros',compact('ventaTerceros'));
 
     }
     
