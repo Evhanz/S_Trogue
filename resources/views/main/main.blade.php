@@ -192,23 +192,15 @@
     </div>
 
     <script src="{{ asset('js/plugins/angular/angular.min.js')}}"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
-
+    <script src=" {{asset('js/charts/raphael-min.js')}}"></script>
+    <script src=" {{asset('js/charts/morris.min.js')}}"></script>
 
 
 
     <script>
 
-
-
         var app = angular.module("app", []);
         app.controller("MainController",function($scope,$http,$window) {
-
-
-
-
-
 
 
             var token = $('input[name="_token"]').attr('value');

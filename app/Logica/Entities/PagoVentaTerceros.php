@@ -13,4 +13,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class PagoVentaTerceros extends Model{
 
+    public function venta_tercero(){
+        //$this->belongsTo('entitie', 'local_key', 'parent_key');
+        return $this->belongsTo('trogue\Entities\VentaTerceros','venta_terceros_id','id');
+    }
+
 }

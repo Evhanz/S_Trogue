@@ -209,6 +209,9 @@
 
 
 
+<!-- funciones main -->
+<script src="{{ asset('js/main.js')}}" type="text/javascript"></script>
+
 <!-- Bootstrap -->
 <script src="{{ asset('js/bootstrap.min.js')}}" type="text/javascript"></script>
 <!-- AdminLTE App -->

@@ -2565,11 +2565,15 @@ Component: timeline
 */
 /* skin-black navbar */
 .skin-black .navbar {
-  background-color: #ffffff;
+  background-color: #20252B;
+
+  /*Se cambio el color para actualizar el template */
+  /*background-color: #ffffff;*/
   border-bottom: 1px solid #eee;
 }
 .skin-black .navbar .nav a {
-  color: #333333;
+  /*color: #333333;*/
+  color:white;
 }
 .skin-black .navbar .nav > li > a:hover,
 .skin-black .navbar .nav > li > a:active,
@@ -2584,7 +2588,9 @@ Component: timeline
   margin-right: 10px;
 }
 .skin-black .navbar .sidebar-toggle .icon-bar {
-  background: #333333;
+  /*Cambio */
+  /*background: #333333;*/
+  background: #FFFFFF;
 }
 .skin-black .navbar .sidebar-toggle:hover .icon-bar {
   background: #999999 !important;
@@ -2592,7 +2598,7 @@ Component: timeline
 /* skin-black logo */
 .skin-black .logo {
   /*se cambio el color*/
-  background-color: #00A65A;
+  background-color: #608F94;
   color: #f9f9f9;
 }
 .skin-black .logo > a {
@@ -2635,12 +2641,12 @@ Component: timeline
 .skin-black .sidebar > .sidebar-menu > li.active > a {
   color: #f6f6f6;
   background: #191d22;
-  border-left: 2px solid #ff503f;
+  border-left: 3px solid #3c8dbc;;
 }
 .skin-black .sidebar > .sidebar-menu > li > .treeview-menu {
   margin: 0 1px;
   background: #252b33;
-  border-left: 2px solid #ff503f;
+ /* border-left: 2px solid #ff503f;*/
 }
 .skin-black .left-side {
   background: #20252b;

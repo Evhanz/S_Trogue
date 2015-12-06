@@ -132,7 +132,7 @@ Route::get('prestamos/getViewNewPrestamo',['as'=>'getViewNewPrestamo','uses'=>'P
 Route::post('prestamos/regPrestamo',['as'=>'regPrestamo','uses'=>'PrestamosController@regPrestamo']);
 Route::post('prestamos/getPrestamosByParams',['as'=>'getPrestamosByParams','uses'=>'PrestamosController@getPrestamosByParams']);
 Route::get('prestamos/getViewUpPrestamo/{id}',['as'=>'getViewUpPrestamo','uses'=>'PrestamosController@getViewUpPrestamo']);
-Route::post('prestamos/getPrestamoById',['as'=>'getPrestamoById','uses'=>'PrestamosController@getPrestamoById']);
+Route::get('prestamos/getPrestamoById/{id}',['as'=>'getPrestamoById','uses'=>'PrestamosController@getPrestamoById']);
 Route::post('prestamos/updatePrestamo',['as'=>'updatePrestamo','uses'=>'PrestamosController@updatePrestamo']);
 Route::get('prestamos/deletePrestamo/{id}',['as'=>'deletePrestamo','uses'=>'PrestamosController@deletePrestamo']);
 
@@ -162,6 +162,13 @@ Route::get('pagos',['as'=>'ModPagos']);
 Route::get('pagos/viewAllPagos',['as'=>'viewAllPagos','uses'=>'PagoController@viewAllPagos']);
 Route::get('pagos/viewNewPago',['as'=>'viewNewPago','uses'=>'PagoController@viewNewPago']);
 Route::post('pagos/RegPago',['as'=>'RegPago','uses'=>'PagoController@RegPago']);
+Route::post('pagos/getPagosByParametros',['as'=>'getPagosByParametros','uses'=>'PagoController@getPagosByParametros']);
+Route::get('pagos/viewUpPago/{id}',['as'=>'viewUpPago','uses'=>'PagoController@viewUpPago']);
+Route::get('pagos/getPagoById/{id}',['as'=>'getPagoById','uses'=>'PagoController@getPagoById']);
+Route::post('pagos/UpdatePago',['as'=>'UpdatePago','uses'=>'PagoController@UpdatePago']);
+Route::get('pagos/getByFechas',['as'=>'getByFechas','uses'=>'PagoController@getByFechas']);
+Route::get('pagos/deletePago/{id}',['as'=>'deletePago','uses'=>'PagoController@deletePago']);
+
 
 
 /*Api*/
@@ -173,3 +180,14 @@ Route::get('api/helper/getDataCore',['as'=>'getDataCore','uses'=>'HelperControll
 
 /*solo apra pruebas*/
 Route::post('sync/reqDataSyncPesoBalanza',['as'=>'reqDataSyncPesoBalanza','uses'=>'HelperController@reqDataSyncPesoBalanza']);
+
+
+/*Reportes*/
+
+Route::get('Reportes',['as'=>'modReporte']);
+
+Route::get('Reportes/pruebas',['as'=>'repPruebas','uses'=>'ReportesController@repPruebas']);
+
+Route::get('Reportes/acopio/{idProveedor}/{f_inicio}/{f_fin}',['as'=>'repAcopioByFechas','uses'=>'ReportesController@repAcopioByFechas']);
+
+Route::get('Reportes/getPrestamoById/{id}',['as'=>'getPrestamoById','uses'=>'ReportesController@getPrestamoById']);

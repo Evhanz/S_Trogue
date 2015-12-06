@@ -81,7 +81,7 @@
                                                     <i class="fa fa-search"></i>
                                                     Buscar
                                                 </button>
-                                                <a href="{{URL::route('getViewNewPrestamo') }}" class="btn btn-success" id="btnNuevo">
+                                                <a href="{{URL::route('viewNewPago') }}" class="btn btn-success" id="btnNuevo">
                                                     <i class="fa fa-plus-circle"></i>
                                                     Nuevo Pago
                                                 </a>
@@ -98,17 +98,37 @@
 
                         <div class="row" style="padding: 15px;">
                             <div class="table-responsive">
-                                <table class="table table-hover" id="tableReq">
+                                <table class="table table-hover table-bordered" id="tableReq" data-tabl="modControlCalidad">
                                     <thead>
                                     <tr>
                                         <th>Id</th>
-                                        <th>Nombre y Apellidos</th>
-                                        <th>Anexo</th>
-                                        <th>Ruta</th>
+                                        <th>Proveedor</th>
+                                        <th>Fecha Inicio</th>
+                                        <th>Fecha Fin</th>
+                                        <th>P. Litro</th>
                                         <th colspan="2">Opciones</th>
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    @foreach($pagos as $pago)
+                                        <tr>
+                                            <td>{{$pago->id}}</td>
+                                            <td>{{$pago->proveedor->fullname}}</td>
+                                            <td>{{$pago->fecha_inicio}}</td>
+                                            <td>{{$pago->fecha_fin}}</td>
+                                            <td>
+                                                {{$pago->precio_litro}}
+                                            </td>
+
+                                            <td>
+                                                <a href="{{ URL::route('viewUpPago',$pago->id) }}" class="btn btn-warning">editar</a>
+                                                <button class="btn btn-danger" onclick="modalDelete('{{$pago->id}}')">
+                                                    Eliminar<i class="remove icon"></i>
+                                                </button>
+                                            </td>
+
+                                        </tr>
+                                    @endforeach
 
                                     </tbody>
                                 </table>
@@ -124,6 +144,51 @@
             </div>
         </div>
     </div><!-- /.content-->
+
+
+    <!--Modal para eliminar -->
+    <div class="modal fade" id="modalDelete">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h2 class="modal-title">Eliminar </h2>
+                </div>
+                <div class="modal-body">
+                    <p class="bg-danger">
+                        <strong>Está seguro de continuar</strong>  ?
+                        <input id="idObject" type="hidden"/>
+                    </p>
+                    <p>
+                        <button id="btnsi" onclick="deleteSi()" type="button" class="btn btn-primary btn-lg">Si</button>
+                    </p>
+
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+
+    <script>
+
+        function modalDelete(idPrestamo){
+
+            $('#idObject').val(idPrestamo);
+            $('#modalDelete').modal('show');
+
+        }
+
+        function deleteSi()
+        {
+            var id = $('#idObject').val();
+            location.href='{{ URL::route('ModPagos') }}/deletePago/'+id;
+
+        }
+
+
+    </script>
+
+
 
 
 @stop

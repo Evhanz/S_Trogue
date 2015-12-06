@@ -143,7 +143,9 @@ class AcopioController extends Controller{
         $fecha_inicio = $data['fecha_inicio'];
         $fecha_fin=$data['fecha_fin'];
 
+
         $acopios = $this->acopioRep->getAcopioByProveedorAndFechas($id,$fecha_inicio, $fecha_fin);
+
 
         $suma = 0 ;
 
@@ -156,6 +158,7 @@ class AcopioController extends Controller{
 
 
         return \Response::json($suma);
+
     }
 
 

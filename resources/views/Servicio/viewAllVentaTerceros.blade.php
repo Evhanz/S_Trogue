@@ -33,7 +33,7 @@
     <div class="content">
         <div class="row">
             <div class="col-lg-12">
-                <div class="box box-danger" >
+                <div class="box box-primary" >
                     <div class="box-header">
                         <!-- tools box -->
                         <div class="pull-right box-tools">
@@ -54,31 +54,35 @@
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <form class="form-inline">
-                                            <div class="form-group">
+                                            <div class="col-lg-2">
                                                 <label>DNI</label>
                                                 <input id="txtDNI"  class="form-control" type="number" placeholder="DNI"  pattern="[0-9]{13,16}">
                                             </div>
-                                            <div class="form-group">
-                                                <label>Estado</label>
-                                                <input id="txtDNI"  class="form-control" type="text" >
+                                            <div class="col-lg-2">
+                                                <label>Estado</label><br/>
+                                                <select class="form-control" name="estado" required="">
+                                                    <option value="deuda">deuda</option>
+                                                    <option value="pagada">pagada</option>
+                                                </select>
                                             </div>
-                                            <div class="form-group">
+                                            <div class="col-lg-2">
                                                 <label>Fecha Inicio</label>
-                                                <input name="fecha_inicio" class="form-control" type="date" >
+                                                <input name="fecha_inicio" class="form-control" type="date" required>
                                             </div>
-                                            <div class="form-group">
+                                            <div class="col-lg-2">
                                                 <label>Fecha Fin</label>
-                                                <input name="fecha_fin"  class="form-control" type="date" >
+                                                <input name="fecha_fin"  class="form-control" type="date" required>
                                             </div>
 
-                                            <div class="form-group">
+                                            <div class="col-lg-4">
+                                                <br/>
                                                 <button  class="btn btn-info" id="btnBuscar">
                                                     <i class="fa fa-search"></i>
                                                     Buscar
                                                 </button>
                                                 <a href="{{URL::route('getViewNewVentaTerceros')}}" class="btn btn-success" id="btnNuevo">
                                                     <i class="fa fa-plus-circle"></i>
-                                                    Nueva Venta a Terceros
+                                                     V. Terceros
                                                 </a>
                                             </div>
                                         </form>
@@ -113,6 +117,16 @@
                                             @else
                                                <td><span class="label label-danger">deuda</span></td>
                                             @endif
+
+                                            <td>
+
+                                                <a class="btn btn-warning" href="{{ URL::route('getViewNewVentaTerceros') }}">
+                                                    Editar
+                                                </a>
+
+                                                <button class="btn btn-danger" > Eliminar</button>
+
+                                            </td>
 
                                         </tr>
 

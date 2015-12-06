@@ -90,7 +90,10 @@ class LiquidacionController extends Controller
 
         if (strlen($data['numero']) > 0) {
 
-            $liquidaciones = $this->liquidacionRep->getLiquidacionByNumero($data['numero']);
+            $liquidaciones = array();
+            $liqui = $this->liquidacionRep->getLiquidacionByNumero($data['numero']);
+
+            array_push($liquidaciones,$liqui);
 
         } else if (strlen($data['numero']) == 0 && strlen($data['fecha_inicio']) == 0 && strlen($data['fecha_fin']) == 0) {
             $liquidaciones = $this->liquidacionRep->getAllLiquidacion();

@@ -61,18 +61,18 @@
                                             </div>
                                             <div class="form-group">
                                                 <label>Estado</label><br/>
-                                                <select class="form-control" name="estado">
+                                                <select class="form-control" name="estado" required="">
                                                    <option value="deuda">deuda</option>
                                                    <option value="pagada">pagada</option>
                                                 </select>
                                             </div>
                                             <div class="form-group">
                                                 <label>Fecha Inicio</label>
-                                                <input name="fecha_inicio"  class="form-control" type="date" >
+                                                <input name="fecha_inicio"  class="form-control" type="date" required="">
                                             </div>
                                             <div class="form-group">
                                                 <label>Fecha Fin</label>
-                                                <input name="fecha_fin"   class="form-control" type="date" >
+                                                <input name="fecha_fin"   class="form-control" type="date" required="">
                                             </div>
 
 
@@ -109,7 +109,7 @@
                                         <th>Fecha</th>
                                         <th>estado</th>
                                         <th></th>
-                                        <th colspan="2">Opciones</th>
+                                        <th colspan="3">Opciones</th>
 
                                     </tr>
                                     </thead>
@@ -146,6 +146,13 @@
                                                 <button class="btn btn-danger" onclick="modalDelete('{{$prestamo->id}}')">
                                                     Eliminar
                                                 </button>
+                                            </td>
+
+                                            <td>
+                                                <button class="btn btn-default" onclick="imprimirCalendario('{{$prestamo->id}}');">
+                                                    <i class="fa fa-print"></i>
+                                                </button>
+
                                             </td>
 
                                         </tr>
@@ -205,6 +212,16 @@
         {
             var id = $('#idObject').val();
             location.href='{{ URL::route('modPrestamos') }}/deletePrestamo/'+id;
+
+        }
+
+        function imprimirCalendario(id){
+
+            var url ='{{ URL::route('modReporte') }}/getPrestamoById/'+id;
+
+            var n =window.open(url);
+            n.print();
+
 
         }
 

@@ -115,6 +115,7 @@ class AcopioRep {
     }
 
 
+    /*esto es para saber la suma del acopio de un dia especifico*/
     public function getAcopioByDay($day)
     {
 

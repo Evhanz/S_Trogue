@@ -13,4 +13,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class PagoLetra extends Model{
 
+    public function letra(){
+        //$this->belongsTo('entitie', 'local_key', 'parent_key');
+        return $this->belongsTo('trogue\Entities\Letra','letra_id','id');
+    }
+
+    public function pago(){
+        //$this->belongsTo('entitie', 'local_key', 'parent_key');
+        return $this->belongsTo('trogue\Entities\Ruta','ruta_id','id');
+    }
+
 }

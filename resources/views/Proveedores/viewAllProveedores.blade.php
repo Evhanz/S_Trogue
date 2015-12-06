@@ -82,6 +82,7 @@
                                         <tr>
                                             <th>Id</th>
                                             <th>Nombre y Apellidos</th>
+                                            <th>DNI</th>
                                             <th>Anexo</th>
                                             <th>Ruta</th>
                                             <th colspan="2">Opciones</th>
@@ -93,6 +94,7 @@
                                         <tr>
                                             <td>{{ $proveedor->id }}</td>
                                             <td>{{ $proveedor->fullname }}</td>
+                                            <td>{{ $proveedor->dni }}</td>
                                             <td>{{ $proveedor->anexo->descripcion }}</td>
                                             <td>{{ $proveedor->anexo->ruta->descripcion }}</td>
                                             <td>

@@ -105,11 +105,11 @@ class PrestamosController extends Controller{
 
     }
 
-    public function getPrestamoById()
+    public function getPrestamoById($id)
     {
-        $data = \Input::all();
 
-        $prestamos = $this->prestamoRep->getPrestamoById($data['id']);
+
+        $prestamos = $this->prestamoRep->getPrestamoById($id);
 
         return \Response::json($prestamos);
     }

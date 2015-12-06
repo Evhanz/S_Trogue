@@ -66,16 +66,23 @@
                                             <input type="hidden" name="id" value="{{ $proveedor->id}}" />
                                             <div class="col-lg-2">
                                                 <label for="">Fecha Inicio</label>
-                                                <input value="{{{$data['fecha_inicio'] or ''}}}" name="fecha_inicio" class="form-control" type="date" required/>
+                                                <input value="{{{$data['fecha_inicio'] or ''}}}" name="fecha_inicio" class="form-control" id="fecha_inicio" type="date" required/>
                                             </div>
                                             <div class="col-lg-2">
                                                 <label for="">Fecha Fin</label>
-                                                <input value="{{{$data['fecha_fin'] or ''}}}" name="fecha_fin" class="form-control" type="date" required/>
+                                                <input value="{{{$data['fecha_fin'] or ''}}}" name="fecha_fin" class="form-control" type="date" id="fecha_fin" required/>
                                             </div>
-                                            <div>
+                                            <div class=" col-lg-1">
                                                 <label for=""></label><br/>
                                                 <button class="btn btn-success" >Buscar</button>
+
                                             </div>
+
+                                            <div class="col-lg-1">
+                                                <label for=""></label><br/>
+                                                <button class="btn btn-default" ng-click="printAcopio()" > <i class="fa fa-print"></i> Imprimir</button>
+                                            </div>
+
                                         </form>
                                     </div>
 
@@ -102,8 +109,10 @@
                                         </tr>
                                         </thead>
                                         <tbody>
+                                        <?php $s =0; ?>
                                         @foreach ($acopios as $acopio)
                                             <tr>
+                                                <?php $s+=$acopio->cantidad_total?>
                                                 <td >{{ $acopio->id }}</td>
                                                 <td>{{ $acopio->cantidad }}</td>
                                                 <td>{{ $acopio->cantidad_total }}</td>
@@ -217,6 +226,8 @@
                             </div><!-- /.row - inside box -->
                         </div><!-- /.box-body -->
                         <div class="box-footer">
+
+                            <h3>Suma <?php echo $s; ?></h3>
                             <div  id="paginador">
 
                             </div>
@@ -678,6 +689,24 @@
                 }
 
                return bandera;
+            }
+
+
+            $scope.printAcopio = function(){
+                var idProveedor = '{{ $proveedor->id }}';
+                var f_inicio = $('#fecha_inicio').val();
+                var f_fin = $('#fecha_fin').val();
+
+
+
+                var url ='{{ URL::route('modReporte') }}/acopio/'+idProveedor+"/"+f_inicio+"/"+f_fin;
+
+                var n =window.open(url);
+                n.print();
+
+
+
+
             }
 
 

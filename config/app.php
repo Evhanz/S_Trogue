@@ -39,7 +39,7 @@ return [
 	|
 	*/
 
-	'timezone' => 'UTC',
+	'timezone' => 'America/Lima',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -135,6 +135,7 @@ return [
 		'Illuminate\Translation\TranslationServiceProvider',
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
+        'Barryvdh\DomPDF\ServiceProvider',
 
 		/*
 		 * Application Service Providers...
@@ -200,7 +201,10 @@ return [
 
 		/*Aliases Form & HTML*/
 		'Form'		=>	'Illuminate\Html\FormFacade',
-		'HTML'		=>	'Illuminate\Html\HtmlFacade'
+		'HTML'		=>	'Illuminate\Html\HtmlFacade',
+
+        /*para el pdf*/
+        'PDF' => 'Barryvdh\DomPDF\Facade'
 
 	],
 

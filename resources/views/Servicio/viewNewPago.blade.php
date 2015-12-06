@@ -96,7 +96,7 @@
                                             <div class="row">
                                                 <div class="col-lg-4">
                                                     <label for="">Valor Pago x Litro</label><br/>
-                                                    <input id="pago_litro" ng-change="calcPago()" ng-model="Liquidacion.precio_ref" name="pago_litro" type="number" required disabled/>
+                                                    <input step="any" min="0.1" max="2" id="pago_litro" ng-change="calcPago()" ng-model="Liquidacion.precio_ref" name="pago_litro" type="number" required disabled/>
                                                 </div>
                                                 <div class="col-lg-1">
                                                     <br/>
@@ -297,7 +297,7 @@
                             dni:$scope.dniProveedor
                         })
                         .success(function(data){
-                            if(data.id !=1 || data.id ==null){
+                            if(data.id <1 || data.id ==null){
                                 alert('No existe Proveedor con ese DNI');
 
                             }else{
@@ -436,19 +436,29 @@
                 var fecha_i = new Date($scope.fecha_inicio);
                 var fecha_f = new Date($scope.fecha_fin);
 
+
+
                 if(fecha_i>fecha_f) {
                     alert('Las fecha de inicio no puede ser mayor');
                 }else{
+
+
+
+                    var f_ini = convertDateToString(fecha_i);
+
+                    var f_fin = convertDateToString(fecha_f);
+
                     $http.post('{{ URL::route('getSumaAcopioByProveedorAndFechas') }}',
                             {_token : token,
                                 id:$scope.Proveedor.id,
-                                fecha_inicio:fecha_i,
-                                fecha_fin:fecha_f
+                                fecha_inicio:f_ini,
+                                fecha_fin:f_fin
                             })
                             .success(function(data){
 
                                 $scope.acopio_Total = data;
                                 $scope.calcPago();
+
 
                             }).error(function(data) {
                                 console.log(data);
@@ -461,66 +471,66 @@
             $scope.changePrecioPorLitro = function (){
 
 
-
-
-
-                /*
-
-
-                var p =  parseFloat( $scope.acopio_Total) * parseFloat($scope.Liquidacion.precio_ref);
-                $scope.pago_neto = p;
-
-                console.log($scope.pago_neto);*/
+                $("#pago_litro").removeAttr('disabled');
 
             };
 
-
-
-
-
             $scope.enviarData = function(){
-                $('#btnGuardar').attr("disabled", true);
-                var token = $('input[name="_token"]').attr('value');
 
-                var pago_proveedor = {
 
-                    fecha_inicio:$scope.fecha_inicio,
-                    fecha_fin:$scope.fecha_fin,
-                    precio_litro:$scope.Liquidacion.precio_ref,
-                    total_descontado:$scope.descuento_total,
-                    pago_total:$scope.pago_total,
-                    liquidacion_id:$scope.Liquidacion.id,
-                    proveedor_id:$scope.Proveedor.id
+                if($scope.pago_total<0){
+                    alert('El Pago no puede ser negativo , verifique las fechas y/o Descuentos')
+                }else{
 
-                };
+                    $('#btnGuardar').attr("disabled", true);
+                    var token = $('input[name="_token"]').attr('value');
 
-                $http.post('{{ URL::route('RegPago') }}',
-                        {_token : token,
-                            pago_proveedor:pago_proveedor,
-                            pago_letras: $scope.pagos_letras,
-                            pago_venta_terceros:$scope.pagos_venta_terceros
-                        })
-                        .success(function(data){
+                    var pago_proveedor = {
 
-                            if(data.message=='correcto'){
-                                alert('Prestamo Registrado Correctamente');
-                                $('#btnGuardar').attr("disabled", false);
-                                $window.location.href = '{{ URL::route('home') }}';
+                        fecha_inicio:$scope.fecha_inicio,
+                        fecha_fin:$scope.fecha_fin,
+                        precio_litro:$scope.Liquidacion.precio_ref,
+                        total_descontado:$scope.descuento_total,
+                        pago_total:$scope.pago_total,
+                        liquidacion_id:$scope.Liquidacion.id,
+                        proveedor_id:$scope.Proveedor.id
 
-                            }else{
-                                alert('Se encuentra Errores en el envio , revisar la consola ');
-                                $('#btnGuardar').attr("disabled", false);
+                    };
+
+                    $http.post('{{ URL::route('RegPago') }}',
+                            {_token : token,
+                                pago_proveedor:pago_proveedor,
+                                pago_letras: $scope.pagos_letras,
+                                pago_venta_terceros:$scope.pagos_venta_terceros
+                            })
+                            .success(function(data){
+
+                                if(data.message=='correcto'){
+                                    alert('Prestamo Registrado Correctamente');
+                                    $('#btnGuardar').attr("disabled", false);
+                                    $window.location.href = '{{ URL::route('viewAllPagos') }}';
+
+                                }else if(data.message=='incorrecto'){
+                                    alert(data.body);
+                                    $('#btnGuardar').attr("disabled", false);
+                                    console.log(data.pagos);
+
+                                }
+                                else{
+                                    alert('Se encuentra Errores en el envio , revisar la consola ');
+                                    $('#btnGuardar').attr("disabled", false);
+                                    console.log(data);
+
+                                }
+                                //console.log(data);
+
+                            }).error(function(data) {
                                 console.log(data);
+                                alert('Error revise la consola');
+                                $('#btnGuardar').attr("disabled", false);
 
-                            }
-                            //console.log(data);
-
-                        }).error(function(data) {
-                            console.log(data);
-                            alert('Error revise la consola');
-                            $('#btnGuardar').attr("disabled", false);
-
-                        });
+                            });
+                }
             }
 
 
