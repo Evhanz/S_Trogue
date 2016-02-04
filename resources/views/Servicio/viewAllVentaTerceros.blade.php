@@ -114,19 +114,29 @@
                                             <td>{{$venta->proveedor->fullname}}</td>
                                             @if($venta->estado == 1)
                                                <td><span class="label label-success">pagado</span></td>
+                                                <td>
+                                                    <button  class="btn btn-warning" disabled>
+                                                        Editar
+                                                    </button>
+
+                                                    <button class="btn btn-danger" disabled> Eliminar</button>
+
+                                                </td>
                                             @else
                                                <td><span class="label label-danger">deuda</span></td>
+                                               <td>
+                                                    <a class="btn btn-warning" href="{{ URL::route('getViewUpVentaTercero',$venta->id) }}">
+                                                        Editar
+                                                    </a>
+
+                                                    <button class="btn btn-danger" onclick="modalDelete('{{$venta->id}}')">
+                                                        Eliminar
+                                                    </button>
+
+                                                </td>
                                             @endif
 
-                                            <td>
 
-                                                <a class="btn btn-warning" href="{{ URL::route('getViewNewVentaTerceros') }}">
-                                                    Editar
-                                                </a>
-
-                                                <button class="btn btn-danger" > Eliminar</button>
-
-                                            </td>
 
                                         </tr>
 
@@ -146,6 +156,45 @@
             </div>
         </div>
     </div><!-- /.content-->
+
+    <!--Modal para eliminar -->
+    <div class="modal fade" id="modalDelete">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h2 class="modal-title">Eliminar </h2>
+                </div>
+                <div class="modal-body">
+                    <p class="bg-danger">
+                        <strong>Está seguro de continuar</strong>  ?
+                        <input id="idObject" type="hidden"/>
+                    </p>
+                    <p>
+                        <button id="btnsi" onclick="deleteSi()" type="button" class="btn btn-primary btn-lg">Si</button>
+                    </p>
+
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <script>
+        function modalDelete(id){
+
+            $('#idObject').val(id);
+            $('#modalDelete').modal('show');
+
+        }
+
+        function deleteSi()
+        {
+            var id = $('#idObject').val();
+            location.href='{{ URL::route('modVentasTerceros') }}/delete/'+id;
+
+        }
+
+    </script>
 
 
 @stop

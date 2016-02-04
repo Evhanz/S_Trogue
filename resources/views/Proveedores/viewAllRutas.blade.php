@@ -54,7 +54,7 @@
 
                         <div class="row" style="padding: 15px;">
                             <div class="table-responsive">
-                                <table class="table  table-bordered table-hover" data-tabl="modProveedor" id="tableReq">
+                                <table class="table  table-bordered table-hover" data-tabl="modServicio" id="tableReq">
                                     <thead>
                                         <tr>
                                             <th>Id</th>

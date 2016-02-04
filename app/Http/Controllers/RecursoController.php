@@ -36,6 +36,22 @@ class RecursoController extends Controller{
 
     }
 
+    public function upRecursos()
+    {
+        $data = \Input::all();
+
+        $this->recursoRep->upRecurso($data);
+
+        return \Redirect::route('getvieModRecursos')->with(array('confirm' => 'Recurso actualizado'));
+
+
+    }
+
+    public function deleteRecurso($id)
+    {
+
+    }
+
 
 
 }

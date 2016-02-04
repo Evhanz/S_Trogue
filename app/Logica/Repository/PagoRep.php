@@ -268,6 +268,26 @@ class PagoRep {
 
     }
 
+    public function getPagoByFechasAndProveedor($id,$f_ini,$f_fin){
+
+
+        $pagos = PagoProveedor::where('proveedor_id','=',$id)
+        ->where(function($query) use ($f_ini){
+            return $query
+                ->where('fecha_inicio','<=',$f_ini)
+                ->where('fecha_fin', '>=', $f_ini);
+        })->orWhere(function($query) use ($f_fin){
+            return $query
+                ->where('fecha_inicio','<=',$f_fin)
+                ->where('fecha_fin', '>=', $f_fin);
+        })->get();
+
+
+        return $pagos;
+
+
+    }
+
 
     public function deletePagoProveedor($id)
     {
@@ -285,6 +305,14 @@ class PagoRep {
 
     }
 
+
+    public function getPagoForReport($idPago)
+    {
+        return PagoProveedor::where('id','=',$idPago)
+            ->with('pago_letra.letra','pago_venta_tercero.venta_tercero.origen','proveedor','liquidacion')
+            ->first();
+
+    }
 
 
 }

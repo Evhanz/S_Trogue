@@ -63,7 +63,7 @@ class PagoController extends Controller{
         //primero traemos si existe un pago con las fechas dadas
 
 
-        $pagos = $this->pagoRep->getPagoByFechas($fecha_inicio,$fecha_fin);
+        $pagos = $this->pagoRep->getPagoByFechasAndProveedor($pago['proveedor_id'],$fecha_inicio,$fecha_fin);
 
         if(count($pagos)>=1){
 
@@ -102,7 +102,7 @@ class PagoController extends Controller{
         //primero traemos si existe un pago con las fechas dadas
 
 
-        $pagos = $this->pagoRep->getPagoByFechas($fecha_inicio,$fecha_fin);
+        $pagos = $this->pagoRep->getPagoByFechasAndProveedor($pago['proveedor_id'],$fecha_inicio,$fecha_fin);
 
         if(count($pagos)>1){
 

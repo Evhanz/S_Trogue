@@ -75,7 +75,7 @@
                                     <div class="row">
                                         <div class="col-lg-4">
                                             <label for="">Valor de Pago x Litro:</label>
-                                            <input min="0" step="any" class="form-control" type="number"  ng-model="valor_litro" name="valor_litro" required>
+                                            <input min="0" step="0.0001" class="form-control" type="number"  ng-model="valor_litro" name="valor_litro" required>
                                         </div>
                                         <div class="col-lg-4">
                                             <label for="">Ruta</label>
@@ -182,22 +182,30 @@
                                     <h2>Resultado</h2>
                                 </div>
 
-                                <div class="col-lg-3">
+                                <div class="col-lg-2">
                                     Cantidad de Acopio <br/>
 
                                     <input type="text" ng-model="total_acopio" name="total_acopio" readonly/>
                                 </div>
 
-                                <div class="col-lg-3">
+                                <div class="col-lg-2">
                                     Pago Neto <br/>
 
                                     <input type="text" name="pago_neto" ng-model="pago_neto" readonly/>
                                 </div>
-                                <div class="col-lg-3">
+
+                                <div class="col-lg-2">
+                                    IGV <br/>
+                                    <input type="text" name="igv" ng-model="igv" readonly/>
+                                </div>
+
+                                <div class="col-lg-2">
                                     Descuento Total <br/>
                                     <input type="text" name="descuento_total" ng-model="descuento_total" readonly/>
                                 </div>
-                                <div class="col-lg-3">
+
+
+                                <div class="col-lg-2">
                                     Pago Total <br/>
                                     <input type="text" name="pago_total" ng-model="pago_total" readonly/>
                                 </div>
@@ -250,16 +258,12 @@
             });
 
             $scope.$watch('pago_neto',function(){
-                var pago = $scope.pago_neto-$scope.descuento_total;
-
-                $scope.pago_total = pago.toFixed(2);
+                calcMonto();
 
             });
             $scope.$watch('descuento_total',function(){
 
-                var pago = $scope.pago_neto-$scope.descuento_total;
-
-                $scope.pago_total = pago.toFixed(2);
+                calcMonto();
 
             });
 
@@ -292,10 +296,16 @@
                 $scope.total_acopio = suma;
 
                 $scope.pago_neto = $scope.valor_litro*suma;
+
+
+                $scope.igv = $scope.pago_neto *0.18;
+
                 $scope.pago_neto = $scope.pago_neto.toFixed(2);
 
-            };
 
+
+
+            };
 
             $scope.changeDescuento = function (){
 
@@ -350,10 +360,6 @@
 
             };
 
-
-            /*inicio*/
-
-
             /*funciones*/
 
             function validarfechas(){
@@ -407,6 +413,12 @@
 
                 }
 
+            }
+
+            function calcMonto(){
+                var pago = ( parseFloat( $scope.pago_neto)+parseFloat($scope.igv))-parseFloat($scope.descuento_total);
+
+                $scope.pago_total = pago.toFixed(2);
             }
 
 

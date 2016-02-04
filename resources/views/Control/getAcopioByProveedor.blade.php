@@ -449,7 +449,7 @@
     </style>
 
 
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.js"></script>
+    <script src="{{ asset('js/plugins/angular/angular.min.js')}}"></script>
     <script>
         var app = angular.module("app", []);
         app.controller("MainController", function($scope,$http,$window) {
@@ -606,9 +606,6 @@
 
             };
 
-
-
-
             $scope.deleteSi =function(){
 
                 var id = $('#idObject').val();
@@ -655,9 +652,6 @@
                 // alert('Hola'+id);
             };
 
-
-
-
             function validarUpdate(){
 
 
@@ -698,11 +692,22 @@
                 var f_fin = $('#fecha_fin').val();
 
 
+                /*
 
-                var url ='{{ URL::route('modReporte') }}/acopio/'+idProveedor+"/"+f_inicio+"/"+f_fin;
 
-                var n =window.open(url);
-                n.print();
+
+
+                 */
+                if(f_inicio.length<1 || f_fin.length<1){
+                    alert('Debe ingresar primero una fecha para mostrar reporte');
+
+                }else{
+                    var url ='{{ URL::route('modReporte') }}/acopio/'+idProveedor+"/"+f_inicio+"/"+f_fin;
+
+                    var n =window.open(url);
+                }
+
+
 
 
 

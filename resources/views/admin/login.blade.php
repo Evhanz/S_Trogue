@@ -2,7 +2,7 @@
 <html class="bg-black">
 <head>
     <meta charset="UTF-8">
-    <title>Trogue | Log in</title>
+    <title>Troge | Log in</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- bootstrap 3.0.2 -->
     <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
@@ -26,7 +26,7 @@
 <body class="bg-black">
 
 <div class="form-box" id="login-box">
-    <div class="header">Bienvenidos a Trogue System</div>
+    <div class="header">Bienvenidos a Troge System</div>
     <form action="{{ URL::route('loginUser') }}" method="post">
 
         <input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
@@ -78,4 +78,23 @@
 <script src="{{ asset('js/bootstrap.min.js')}}" type="text/javascript"></script>
 
 </body>
+
+
+<style>
+
+    .bg-black {
+
+        background-size: 1500px 900px;
+        background-image: url("{{ asset('img/background-login.jpg')}}");
+        background-color: #cccccc;
+        background-repeat: no-repeat;
+
+    }
+
+
+
+
+</style>
+
+
 </html>

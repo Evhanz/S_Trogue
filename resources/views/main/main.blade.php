@@ -82,6 +82,7 @@
                                     <table class="table table-bordered" id="tableReq" data-tabl="detailAcopio">
                                         <thead >
                                         <tr>
+                                            <th>Número</th>
                                             <th>Fecha Inicio</th>
                                             <th>Fecha Fin</th>
                                             <th>P. Ref.</th>
@@ -91,13 +92,13 @@
                                         </thead>
                                         <tbody>
                                         <tr ng-repeat="liqui in Liquidaciones">
+                                            <td>@{{liqui.numero}}</td>
                                             <td>@{{liqui.fecha_inicio}}</td>
                                             <td>@{{liqui.fecha_fin}}</td>
                                             <td>@{{liqui.precio_ref}}</td>
                                             <td>@{{liqui.litros}}</td>
                                             <td>@{{liqui.solidos}}</td>
                                         </tr>
-
                                         </tbody>
                                     </table>
                                 </div>
@@ -167,7 +168,7 @@
                         <div class="box-header">
                             <!-- tools box -->
                             <div class="pull-right box-tools">
-                                <button class="btn btn-danger btn-sm refresh-btn" data-toggle="tooltip" title="Reload"><i class="fa fa-refresh"></i></button>
+                                <button id="refreshAcopios" class="btn btn-danger btn-sm refresh-btn" data-toggle="tooltip" title="Reload"><i class="fa fa-refresh"></i></button>
                                 <button class="btn btn-danger btn-sm" data-widget='collapse' data-toggle="tooltip" title="Collapse"><i class="fa fa-minus"></i></button>
                                 <button class="btn btn-danger btn-sm" data-widget='remove' data-toggle="tooltip" title="Remove"><i class="fa fa-times"></i></button>
                             </div><!-- /. tools -->
@@ -214,6 +215,11 @@
 
             getInsidencias();
             getUltimosACopios();
+
+
+            $('#refreshAcopios').click(function(){
+                getUltimosACopios();
+            });
 
 
 
@@ -303,7 +309,9 @@
                 $http.get('{{ URL::route('getUltimosACopios') }}')
                         .success(function (data) {
 
-                          //  console.log(data);
+                            console.log(data);
+
+
 
 
                             new Morris.Line({

@@ -33,7 +33,7 @@
     <div class="content">
         <div class="row">
             <div class="col-lg-12">
-                <div class="box box-danger" >
+                <div class="box box-primary" >
                     <div class="box-header">
                         <!-- tools box -->
                         <div class="pull-right box-tools">
@@ -60,22 +60,13 @@
                                                 <input name="dni" id="txtDNI" min="1"  class="form-control" type="number" placeholder="DNI"  pattern="[0-9]{13,16}">
                                             </div>
                                             <div class="form-group">
-                                                <label>Estado</label><br/>
-                                                <select class="form-control" name="estado">
-                                                    <option value="deuda">deuda</option>
-                                                    <option value="pagada">pagada</option>
-                                                </select>
-                                            </div>
-                                            <div class="form-group">
                                                 <label>Fecha Inicio</label>
-                                                <input name="fecha_inicio"  class="form-control" type="date" >
+                                                <input name="fecha_inicio"  class="form-control" type="date" required="">
                                             </div>
                                             <div class="form-group">
                                                 <label>Fecha Fin</label>
-                                                <input name="fecha_fin"   class="form-control" type="date" >
+                                                <input name="fecha_fin"   class="form-control" type="date" required="">
                                             </div>
-
-
                                             <div class="form-group">
                                                 <button  class="btn btn-info" id="btnBuscar">
                                                     <i class="fa fa-search"></i>
@@ -124,6 +115,10 @@
                                                 <a href="{{ URL::route('viewUpPago',$pago->id) }}" class="btn btn-warning">editar</a>
                                                 <button class="btn btn-danger" onclick="modalDelete('{{$pago->id}}')">
                                                     Eliminar<i class="remove icon"></i>
+                                                </button>
+
+                                                <button class="btn btn-default" onclick="imprimir('{{$pago->id}}');">
+                                                    <i class="fa fa-print"></i>
                                                 </button>
                                             </td>
 
@@ -182,6 +177,16 @@
         {
             var id = $('#idObject').val();
             location.href='{{ URL::route('ModPagos') }}/deletePago/'+id;
+
+        }
+
+        function imprimir(id){
+
+            var url ='{{ URL::route('modReporte') }}/repPagoById/'+id;
+
+            var n =window.open(url);
+            n.print();
+
 
         }
 

@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>el Trogue</title>
+    <title>el Troge</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <link href="{{asset('css/pure-min.css')}}" rel="stylesheet" type="text/css" />
 
@@ -59,70 +59,7 @@
         margin-bottom: 5px;
     }
 
-    /*Pagination*/
 
-    #pagination > ul{
-
-        display: inline-block;
-        padding-left: 0px;
-        margin: 20px 0px;
-        border-radius: 4px;
-
-    }
-
-    #pagination >ul >li{
-        display: inline;
-
-    }
-
-    #pagination > ul > li:first-child > a, .pagination > li:first-child > span {
-        margin-left: 0px;
-        border-top-left-radius: 4px;
-        border-bottom-left-radius: 4px;
-    }
-    #pagination > ul > li > a,
-    #pagination > ul > li > span {
-        cursor: pointer;
-        position: relative;
-        float: left;
-        padding: 6px 12px;
-        margin-left: -1px;
-        line-height: 1.42857;
-        color: #337AB7;
-        text-decoration: none;
-        background-color: #FFF;
-        border: 1px solid #DDD;
-    }
-
-    #pagination > ul > .disabled > a,
-    #pagination > ul > .disabled > a:focus,
-    #pagination > ul > .disabled > a:hover,
-    #pagination > ul > .disabled > span,
-    #pagination > ul > .disabled > span:focus,
-    #pagination > ul > .disabled > span:hover {
-        color: #777;
-        cursor: not-allowed;
-        background-color: #FFF;
-        border-color: #DDD;
-    }
-
-    #pagination > ul > .active > a,
-    #pagination > ul> .active > a:focus,
-    #pagination > ul > .active > a:hover,
-    #pagination > ul > .active > span,
-    #pagination > ul > .active > span:focus,
-    #pagination > ul > .active > span:hover {
-        z-index: 2;
-        color: #FFF;
-        cursor: default;
-        background-color: #337AB7;
-        border-color: #337AB7;
-    }
-
-
-
-
-    /*End - Pagination*/
 
     /*Modificacion del framework css*/
 
@@ -137,46 +74,6 @@
 
 
 
-    .pagination {
-        display: inline-block;
-        padding-left: 0;
-        margin: 20px 0;
-        border-radius: 4px;
-    }
-    .pagination>li {
-        display: inline;
-    }
-
-    .pagination>li:first-child>a, .pagination>li:first-child>span {
-        margin-left: 0;
-        border-bottom-left-radius: 4px;
-        border-top-left-radius: 4px;
-    }
-    .pagination>.disabled>span, .pagination>.disabled>span:hover, .pagination>.disabled>span:focus, .pagination>.disabled>a, .pagination>.disabled>a:hover, .pagination>.disabled>a:focus {
-        color: #999;
-        cursor: not-allowed;
-        background-color: #fff;
-        border-color: #ddd;
-    }
-    .pagination>li>a, .pagination>li>span {
-        position: relative;
-        float: left;
-        padding: 6px 12px;
-        margin-left: -1px;
-        line-height: 1.428571429;
-        text-decoration: none;
-        background-color: #fff;
-        border: 1px solid #ddd;
-    }
-
-    .pagination>.active>a, .pagination>.active>span, .pagination>.active>a:hover, .pagination>.active>span:hover,
-    .pagination>.active>a:focus, .pagination>.active>span:focus {
-        z-index: 2;
-        color: #fff;
-        cursor: default;
-        background-color: #428bca;
-        border-color: #428bca;
-    }
 
 
     .panel-modControlCalidad {
@@ -269,8 +166,149 @@
     }
 
     #tablaAcopio>table>tbody>tr>td{
-        font-size: 8px;
+
+        width: 70px;
+        padding: 10px;
+
+
     }
+
+    #tablaAcopio>table>tbody>tr>td>.results{
+
+        position: relative;
+    }
+
+    #tablaAcopio>table>tbody>tr>td>.results>.fecha{
+
+        margin: 0;
+        padding: 0;
+        position: absolute;
+        top: -5px;
+        left: 0px;
+        font-size: 10px;
+
+    }
+
+    #tablaAcopio>table>tbody>tr>td>.results>.cantidad{
+
+        margin: 0;
+        padding: 0;
+        font-size: 15px;
+        position: absolute;
+        top: 5px;
+        right:20px;
+        text-align: right;
+    }
+
+    #tablaAcopio{
+        width: 100%;
+    }
+
+
+
+    .resultado{
+
+        display:inline-block;
+
+    }
+
+    .resultado>input{
+        width: 70px;
+        text-align: center;
+        margin-right: 1em;
+
+    }
+
+    .titulo-pago{
+
+    }
+
+    .detalle-pago{
+        font-size: 12px;
+
+
+    }
+    .detalle-pago > .proveedor{
+       font-style: italic;
+       display: inline-block;
+    }
+    .detalle-pago > .fecha-pago{
+        font-style: italic;
+        display: inline-block;
+        margin-left: -220px;
+    }
+
+    .detail-descuento {
+        border-collapse: collapse;
+    }
+
+    .detail-descuento > thead>tr>td {
+        background-color: teal;
+    }
+
+    .computable > .descuentos{
+
+        display: inline-block;
+        width: 450px;
+    }
+
+    .computable > .neto{
+
+        display:inline-block;
+        width: 200px;
+
+        padding-top: 50px;
+
+    }
+
+    #neto-pagar{
+        margin-top: 80px;
+        border: 1px solid #335d7e;
+        padding: 20px;
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+
+
+    #detail-descuento>thead>tr>th:nth-child(1){
+
+        background-color: teal;
+        color: #ffffff;
+        border: 4px solid #808080;
+        padding: 3px;
+        width: 300px;
+        font-size: 14px;
+    }
+    #detail-descuento>thead>tr>th:nth-child(2){
+
+        background-color: teal;
+        color: #ffffff;
+        border: 4px solid #808080;
+        padding: 3px;
+        width: 80px;
+        font-size: 14px;
+    }
+
+    #detail-descuento>tbody>tr>td{
+
+        border: 1px solid #808080;
+        text-align: center;
+        padding: 3px;
+        font-size: 13px;
+
+    }
+
+    #detail-descuento>tbody>tr:last-child>td{
+
+        border: 1px solid #808080;
+        text-align: center;
+        padding: 3px;
+        font-size: 15px;
+        border-top: 2px dashed;
+        font-weight: bold;
+    }
+
 
 
 

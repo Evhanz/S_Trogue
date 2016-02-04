@@ -387,7 +387,6 @@
 
             };
 
-
             $scope.deletePagosLetras = function (index){
 
                 $scope.pagos_letras.splice(index,1);
@@ -401,7 +400,6 @@
 
                 $scope.calcPago();
             };
-
 
             $scope.calcPago = function (){
 
@@ -429,7 +427,6 @@
                 $scope.pago_total = parseFloat($scope.pago_total).toFixed(2);
 
             };
-
 
             $scope.getAcopioByFechas = function (){
 
@@ -466,7 +463,6 @@
                 }
 
             };
-
 
             $scope.changePrecioPorLitro = function (){
 

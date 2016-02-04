@@ -29,4 +29,12 @@ class RecursoRep {
 
     }
 
+    public function upRecurso($data)
+    {
+        $recurso = Recurso::find($data['id']);
+        $recurso->descripcion = $data['descripcion'];
+        $recurso->save();
+
+    }
+
 }

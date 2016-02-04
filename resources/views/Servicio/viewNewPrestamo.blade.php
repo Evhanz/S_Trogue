@@ -60,7 +60,7 @@
                                             <label for="dniProveedor">DNI Proveedor</label><br/>
                                             <input  style="height: 34px;"  type="number" id="dniProveedor" name="dniProveedor" ng-model="dniProveedor" ng-change="nameProveedor = ''" required>
                                             <a id="searchDNI" class="btn btn-info" ng-click="searchDNI()">:::</a>
-                                            <input value="a" style="height: 34px;width: 350px" ng-model="nameProveedor" type="text" id="nameProveedor" name="nameProveedor" disabled>
+                                            <input value="a" style="height: 34px;width: 300px" ng-model="nameProveedor" type="text" id="nameProveedor" name="nameProveedor" disabled>
                                         </div>
                                         <div class="col-lg-3">
                                             <label>Promedio Quincenal:</label>

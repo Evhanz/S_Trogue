@@ -38,6 +38,12 @@ class VentaTercerosController extends Controller {
         return view('Servicio/viewNewVentaATerceros',compact('recursos'));
     }
 
+    public function getViewUpVentaTercero($id)
+    {
+        $recursos = $this->recursoRep->all();
+        return view('Servicio/viewUpVentaATerceros',compact('recursos','id'));
+    }
+
 
     public function RegVentaTerceros(){
 
@@ -53,6 +59,44 @@ class VentaTercerosController extends Controller {
             return  redirect()->back()->withInput()->withErrors($bandera);
         }
 
+    }
+
+    public function updateVentaTerceros(){
+        $data = \Input::all();
+
+        $bandera = $this->ventaTerceroRep->updateVentaTerceros($data);
+
+        if($bandera ===1){
+
+            return \Redirect::route('getAllVentaTerceros')->with(array('confirm' => 'Venta actualizada'));
+
+        }else{
+            return  redirect()->back()->withInput()->withErrors($bandera);
+        }
+    }
+
+    public function getVentaTercero($id){
+
+        $venta = $this->ventaTerceroRep->find($id);
+
+        return \Response::json($venta);
+
+    }
+
+    public function deleteVentaTercero($id)
+    {
+
+        try{
+
+            $this->ventaTerceroRep->deleteVentaTercero($id);
+            return \Redirect::route('getAllVentaTerceros')->with(array('confirm' => 'Venta  Eliminada'));
+
+        }catch (\Exception $e){
+
+            return \Redirect::route('getAllVentaTerceros')->
+            with(array('fail' => 'La Venta no puede eliminarse,puede tener datos asociados'));
+
+        }
 
     }
 

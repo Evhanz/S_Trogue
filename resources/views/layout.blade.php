@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>el Trogue</title>
+    <title>El Troge</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- bootstrap 3.0.2 -->
     <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
@@ -30,7 +30,7 @@
 <header class="header">
     <a href="{{ URL::route('home')}}" class="logo">
         <!-- Add the class icon to your logo image or logo icon to add the margining -->
-        El Trogue
+        El Troge
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top" role="navigation">
@@ -154,8 +154,17 @@
                             <li><a href="{{ URL::route('viewAllPagos') }}"><i class="fa fa-angle-double-right"></i> Pagos</a></li>
                         </ul>
                     </li>
+                    <li style="padding: 15px;color: white" class="hidden-xs">
+                        <label for="">N° Quincena</label>
+                        <input class="form-control" type="text"/>
+                        <label for="">Mes</label>
+                        <input class="form-control" type="text"/>
+                    </li>
 
                 @endif
+
+
+                <!--
 
                 <li class="treeview">
                     <a href="#">
@@ -171,7 +180,7 @@
                         <li><a href=""><i class="fa fa-angle-double-right"></i> Pagos</a></li>
                     </ul>
                 </li>
-
+                -->
             </ul>
         </section>
         <!-- /.sidebar -->
@@ -181,29 +190,7 @@
     <aside class="right-side">
         @yield('content-header')
         @yield('content')
-        <!-- Content Header (Page header) -->
-        <!--
-        <section class="content-header">
-            <h1>
-                Blank page
-                <small>it all starts here</small>
-            </h1>
-            <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li><a href="#">Examples</a></li>
-                <li class="active">Blank page</li>
-            </ol>
-        </section>
-        -->
-        <!-- Main content -->
-        <!--
-        <section class="content">
-            <div class="row">
-                <h2>Hola</h2>
-            </div>
-        </section>
-        -->
-        <!-- /.content -->
+
     </aside><!-- /.right-side -->
 </div><!-- ./wrapper -->
 
@@ -477,10 +464,7 @@
 </style>
 <script>
 
-    
 
-
-    
     $("div[data-rol='aviso']").show(2000);
     //$("div[data-rol='aviso']").hide();
 

@@ -149,13 +149,18 @@ Route::get('venta_terceros',['as'=>'modVentasTerceros']);
 Route::get('venta_terceros/getViewNewVentaTerceros',['as'=>'getViewNewVentaTerceros','uses'=>'VentaTercerosController@getViewNewVentaTerceros']);
 Route::post('venta_terceros/regVentaTerceros',['as'=>'RegVentaTerceros','uses'=>'VentaTercerosController@RegVentaTerceros']);
 Route::get('venta_terceros/getAllVentaTerceros',['as'=>'getAllVentaTerceros','uses'=>'VentaTercerosController@getAllVentaTerceros']);
-
+Route::get('venta_terceros/getViewUpVentaTercero/{id}',['as'=>'getViewUpVentaTercero','uses'=>'VentaTercerosController@getViewUpVentaTercero']);
+Route::get('venta_terceros/getVentaTercero/{id}',['as'=>'getVentaTercero','uses'=>'VentaTercerosController@getVentaTercero']);
+Route::post('venta_terceros/updateVentaTerceros',['as'=>'updateVentaTerceros','uses'=>'VentaTercerosController@updateVentaTerceros']);
+Route::get('venta_terceros/delete/{id}',['as'=>'delete','uses'=>'VentaTercerosController@deleteVentaTercero']);
 
 
 //Modulo de Recursos
 Route::get('recursos',['as'=>'modRecursos']);
 Route::get('recursos/vieModRecursos',['as'=>'getvieModRecursos','uses'=>'RecursoController@getvieModRecursos']);
 Route::post('recursos/regRecursos',['as'=>'regRecurso','uses'=>'RecursoController@regRecurso']);
+Route::post('recursos/upRecursos',['as'=>'upRecursos','uses'=>'RecursoController@upRecursos']);
+Route::get('recursos/delete/{id}',['as'=>'delete','uses'=>'RecursoController@deleteRecurso']);
 
 //modulo de pagos
 Route::get('pagos',['as'=>'ModPagos']);
@@ -179,7 +184,10 @@ Route::get('api/helper/getDataCore',['as'=>'getDataCore','uses'=>'HelperControll
 
 
 /*solo apra pruebas*/
+
+/*sincronizacion*/
 Route::post('sync/reqDataSyncPesoBalanza',['as'=>'reqDataSyncPesoBalanza','uses'=>'HelperController@reqDataSyncPesoBalanza']);
+Route::post('sync/reqDataSyncAcopios',['as'=>'reqDataSyncAcopios','uses'=>'HelperController@reqDataSyncAcopios']);
 
 
 /*Reportes*/
@@ -191,3 +199,4 @@ Route::get('Reportes/pruebas',['as'=>'repPruebas','uses'=>'ReportesController@re
 Route::get('Reportes/acopio/{idProveedor}/{f_inicio}/{f_fin}',['as'=>'repAcopioByFechas','uses'=>'ReportesController@repAcopioByFechas']);
 
 Route::get('Reportes/getPrestamoById/{id}',['as'=>'getPrestamoById','uses'=>'ReportesController@getPrestamoById']);
+Route::get('Reportes/repPagoById/{id}',['as'=>'repPagoById','uses'=>'ReportesController@repPagoById']);

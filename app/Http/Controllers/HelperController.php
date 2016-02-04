@@ -90,31 +90,37 @@ class HelperController extends Controller{
     }
 
 
-    public function regDataAcopio()
+    public function reqDataSyncAcopios()
     {
 
         $data = \Input::all();
 
         $fecha =$data['fecha'];
         $cantidad =$data['cantidad'];
-        $id_proveedor = $data['$id_proveedor'];
+        $id_proveedor = $data['idProveedor'];
+        $id = $data['id'];
 
 
-        $peso = Acopio::where('fecha','=',$fecha)->first();
+        $acopio = Acopio::where('feha','=',$fecha)->where('proveedor_id','=',$id_proveedor)->first();
 
 
-        if(count($peso)==0){
+        if(count($acopio)==0){
             $a = new Acopio();
 
-            $a->fecha = $fecha;
+            $a->feha = $fecha;
             $a->cantidad = $cantidad;
-            $a->id_proveedor = $id_proveedor;
+            $a->proveedor_id = $id_proveedor;
+            $a->cantidad_total = $cantidad;
             $a->save();
 
-            return "1";
+            $mensaje = ['id' => $id];
+
+            return \Response::json($mensaje);
 
         }else{
-            return "0";
+            $mensaje = ['id' => $id];
+
+            return \Response::json($mensaje);
         }
 
 

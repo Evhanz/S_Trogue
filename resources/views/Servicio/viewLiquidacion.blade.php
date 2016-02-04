@@ -181,11 +181,6 @@
     </div><!-- /.modal -->
 
 
-
-
-
-
-
     <script>
 
         function modalDelete(idLiqui){
